@@ -1,9 +1,39 @@
 #include <iostream>
 #include <Windows.h>
+#include <string>
+
+using namespace std;
+
+int total;
+void exec(string command);
 
 int main()
 {
     SetConsoleOutputCP(65001);
+
+    string standardReparatur[] = {
+        "defrag C: /O /H",
+        "sfc /scannow",
+        "\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 1\"",
+        "Dism /Online /Cleanup-Image /ScanHealth",
+        "sfc /scannow",
+        "Dism /Online /Cleanup-Image /RestoreHealth",
+        "sfc /scannow",
+        "defrag C: /O /H"
+    };
+    string erweiterteReparatur[] = {
+        "defrag C: /O /H",
+        "sfc /scannow",
+        "\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 2\"",
+        "Dism /Online /Cleanup-Image /ScanHealth",
+        "sfc /scannow",
+        "Dism /Online /Cleanup-Image /RestoreHealth",
+        "sfc /scannow",
+        "defrag C: /O /H",
+        "chkdsk C: /f /r /x /b < bestaetigung.txt"
+    };
+
+
     while (true) {
         int auswahl = 0;
         std::wcout << " System-Reparaturmodus wählen:" << std::endl << std::endl;
@@ -20,23 +50,29 @@ int main()
         if (auswahl != 1 && auswahl != 2) {
             return 1;
         }
-        int total = 4 + auswahl;
 
-        std::cout << std::endl << " Prozess 1 von " << total << " gestartet";
-        system("sfc /scannow > nul 2>&1");
-        std::cout << "\r" << " Prozess 1 von " << total << " abgeschlossen";
-        system("Dism /Online /Cleanup-Image /ScanHealth > nul 2>&1");
-        std::cout << "\r" << " Prozess 2 von " << total << " abgeschlossen";
-        system("sfc /scannow > nul 2>&1");
-        std::cout << "\r" << " Prozess 3 von " << total << " abgeschlossen";
-        system("Dism /Online /Cleanup-Image /RestoreHealth > nul 2>&1");
-        std::cout << "\r" << " Prozess 4 von " << total << " abgeschlossen";
-        system("sfc /scannow > nul 2>&1");
-        std::cout << "\r" << " Prozess 5 von " << total << " abgeschlossen";
+        if (auswahl == 1) {
+            total = sizeof(standardReparatur) / sizeof(string);
+        }
+        else {
+            total = sizeof(erweiterteReparatur) / sizeof(string);
+        }
+        
+        std::cout << std::endl << " Prozess " << 1 << " von " << total << " gestartet";
+        for (int i = 0; i < total; i++)
+        {
+            if (auswahl == 1)
+            {
+                exec(standardReparatur[i]);
+            }
+            else
+            {
+                exec(erweiterteReparatur[i]);
+            }
+        }
         if (2 == auswahl) {
-            system("chkdsk C: /f /r /x /b < bestaetigung.txt > nul 2>&1");
-            std::cout << "\r" << " Prozess 6 von " << total << " abgeschlossen" << std::endl<<std::endl;
-            std::cout << " Um die Reparatur abzuschließen ist ein Systemneustart erforderlich, Jetzt Neustarten? (J/N)";
+            //system("chkdsk C: /f /r /x /b < bestaetigung.txt > nul 2>&1");
+            std::cout << std::endl<<std::endl<< " Um die Reparatur abzuschließen ist ein Systemneustart erforderlich, Jetzt Neustarten? (J/N)";
             std::cin.get(input, 3);
             std::cin.ignore(INT16_MAX, '\n');
             if (0==input[1] && ('J' == input[0] || 'j' == input[0])) {
@@ -46,4 +82,11 @@ int main()
         }
         std::cout << std::endl << std::endl << std::endl;
     }
+}
+
+void exec(string command) {
+    static int count = 1;
+    string  line = command + " > nul 2>&1";
+    system(line.c_str());
+    std::cout << "\r" << " Prozess " << count++ << " von " << total << " abgeschlossen";
 }
