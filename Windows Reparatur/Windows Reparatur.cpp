@@ -56,8 +56,8 @@ int main()
     while (true) {
         int auswahl = 0;
         std::wcout << " System-Reparaturmodus wählen:" << std::endl << std::endl;
-        std::cout << " 1. Standard Reparatur (Dauert wenige Minuten, kein Neustart erforderlich.)" << std::endl;
-        std::cout << " 2. Erweiterte Reparatur (Kann mehrere Stunden dauern, Neustart erforderlich.)" << std::endl;
+        std::cout << " 1. Standard Reparatur    (Dauert wenige Minuten, kein Neustart erforderlich.)" << std::endl;
+        std::cout << " 2. Erweiterte Reparatur  (Kann mehrere Stunden dauern, Neustart erforderlich.)" << std::endl;
         std::wcout << std::endl << " Beliebige Eingabe tätigen, um das Programm zu beenden." << std::endl<<" ";
         
         char input[3];
