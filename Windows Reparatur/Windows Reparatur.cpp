@@ -42,17 +42,38 @@ int main()
 
     HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
-        cerr << "Das Programm wird bereits ausgeführt und kann nur einmal aufgerufen werden.\n";
+        cerr << "Das Programm wird bereits ausgeführt und kann nur einmal aufgerufen werden." << endl;
         cin.get();
         return -1;
     }
+    cout << endl;
 
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    int columns;
+
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+
+    string header_warning = "Es wird empfohlen nebenbei keine aufwendigen Prozesse laufen zu lassen.";
+    string header_centralline = "|     " + header_warning + "     |";
+    string header_topline = "+" + string(header_centralline.size() - 2, '-') + "+";
+    string header_padline = "|" + string(header_centralline.size() - 2, ' ') + "|";
+
+    size_t startpoint = (columns - header_centralline.size())/2;
+
+    cout << string(startpoint, ' ') << header_topline << endl;
+    cout << string(startpoint, ' ') << header_padline << endl;
+    cout << string(startpoint, ' ') << header_centralline << endl;
+    cout << string(startpoint, ' ') << header_padline << endl;
+    cout << string(startpoint, ' ') << header_topline << endl;
+    cout << endl << endl << endl;
     while (true) {
         int auswahl = 0;
         std::wcout << " System-Reparaturmodus wählen:" << std::endl << std::endl;
         std::cout << " 1. Standard Reparatur" << std::endl;
-        std::cout << " 2. Erweiterte Reparatur (Neustart erforderlich)" << std::endl;
+        std::cout << " 2. Erweiterte Reparatur (Kann mehrere Stunden dauern, Neustart erforderlich.)" << std::endl;
         std::wcout << std::endl << " Beliebige Eingabe tätigen, um das Programm zu beenden." << std::endl<<" ";
+        
         char input[3];
         std::cin.get(input,3);
         if (input[1] == 0) {
@@ -63,6 +84,8 @@ int main()
         if (auswahl != 1 && auswahl != 2) {
             break;
         }
+
+        cout << endl << " Reparatur wird durchgeführt. Bitte nicht das Programm beenden oder den Computer ausschalten." << endl;
 
         if (auswahl == 1) {
             total = sizeof(standardReparatur) / sizeof(string);
