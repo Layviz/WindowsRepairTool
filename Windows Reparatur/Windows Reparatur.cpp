@@ -5,6 +5,7 @@
 using namespace std;
 
 int total;
+int counter;
 void exec(string command);
 
 int main()
@@ -57,6 +58,7 @@ int main()
         else {
             total = sizeof(erweiterteReparatur) / sizeof(string);
         }
+        counter = 1;
         
         std::cout << std::endl << " Prozess " << 1 << " von " << total << " gestartet";
         for (int i = 0; i < total; i++)
@@ -85,8 +87,7 @@ int main()
 }
 
 void exec(string command) {
-    static int count = 1;
     string  line = command + " > nul 2>&1";
     system(line.c_str());
-    std::cout << "\r" << " Prozess " << count++ << " von " << total << " abgeschlossen";
+    std::cout << "\r" << " Prozess " << counter++ << " von " << total << " abgeschlossen";
 }
