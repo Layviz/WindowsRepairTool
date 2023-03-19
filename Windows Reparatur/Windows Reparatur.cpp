@@ -34,6 +34,12 @@ int main()
         "chkdsk C: /f /r /x /b < bestaetigung.txt"
     };
 
+    HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
+    if (GetLastError() == ERROR_ALREADY_EXISTS) {
+        cerr << "Das Programm wird bereits ausgeführt und kann nur einmal aufgerufen werden.\n";
+        cin.get();
+        return -1;
+    }
 
     while (true) {
         int auswahl = 0;
@@ -49,7 +55,7 @@ int main()
         }
 
         if (auswahl != 1 && auswahl != 2) {
-            return 1;
+            break;
         }
 
         if (auswahl == 1) {
@@ -84,6 +90,7 @@ int main()
         }
         std::cout << std::endl << std::endl << std::endl;
     }
+    return 0;
 }
 
 void exec(string command) {
