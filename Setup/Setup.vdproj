@@ -33,6 +33,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_19BD7F01267136B49CC1C4869BC7BFA5"
+        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3A75F3B7E6A416D6041BB28019DFB704"
         "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
         "MsmSig" = "8:_UNDEFINED"
@@ -63,7 +69,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A46593549B23BAAC5733439CDE23AD97"
+        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DCD84F64C5334C128524FFCC6E0C8081"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -220,6 +238,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_19BD7F01267136B49CC1C4869BC7BFA5"
+            {
+            "SourcePath" = "8:api-ms-win-crt-time-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-time-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A75F3B7E6A416D6041BB28019DFB704"
             {
             "SourcePath" = "8:MSVCP140.dll"
@@ -320,6 +358,46 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A46593549B23BAAC5733439CDE23AD97"
+            {
+            "SourcePath" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCD84F64C5334C128524FFCC6E0C8081"
+            {
+            "SourcePath" = "8:..\\Windows Reparatur\\bestaetigung.txt"
+            "TargetName" = "8:bestaetigung.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F8E68A90AD945BC69B8BB12E76F9D665"
             {
             "SourcePath" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
@@ -396,15 +474,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Windows Reparatur Tool"
-        "ProductCode" = "8:{B5FF0F05-72C2-452B-B8D7-D9D2226B959E}"
-        "PackageCode" = "8:{230C011C-DD32-4DA8-B20C-6D2E0369DEBA}"
+        "ProductCode" = "8:{4FB2AEFA-91D0-437A-9F09-FD740D7A61DB}"
+        "PackageCode" = "8:{A43D79F6-840E-44AE-9B96-20B0771D6DC1}"
         "UpgradeCode" = "8:{8D3699D3-4446-4F6B-8C17-60450715FD92}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.2.3"
+        "ProductVersion" = "8:1.2.4"
         "Manufacturer" = "8:Layviz"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
