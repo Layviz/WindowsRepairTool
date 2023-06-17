@@ -11,3 +11,7 @@ Das "Windows Reparatur Tool" (WRT) ist für eine erleichterte Bedienung gedacht,
 - chkdsk C: /f /r /x /b
 
 Zu beachten ist, dass die System-Partition den Laufwerksbuchstaben "C:" haben muss. Sonst ist das Programm nicht kompatibel.
+
+Download Link zum Tool:
+
+https://github.com/Layviz/WindowsReparaturTool/releases/download/v1.2.3/WRT_Installer-Version1.2.3.msi
