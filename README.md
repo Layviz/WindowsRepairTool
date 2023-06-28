@@ -14,4 +14,4 @@ Zu beachten ist, dass die System-Partition den Laufwerksbuchstaben "C:" haben mu
 
 Download Link zum Tool:
 
-https://github.com/Layviz/WindowsReparaturTool/releases/download/v1.2.3/WRT_Installer-Version1.2.3.msi
+[Neuste WRT Version](https://github.com/Layviz/WindowsReparaturTool/releases/download/v1.2.4/WRT_Installer-Version1.2.4.msi)
