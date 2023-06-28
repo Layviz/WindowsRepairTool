@@ -12,6 +12,6 @@ Das "Windows Reparatur Tool" (WRT) ist für eine erleichterte Bedienung gedacht,
 
 Zu beachten ist, dass die System-Partition den Laufwerksbuchstaben "C:" haben muss. Sonst ist das Programm nicht kompatibel.
 
-Download Link zum Tool:
+## Download Link zum Tool:
 
 [Neuste WRT Version](https://github.com/Layviz/WindowsReparaturTool/releases/download/v1.2.4/WRT_Installer-Version1.2.4.msi)
