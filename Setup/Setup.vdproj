@@ -15,80 +15,128 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0CD3A9ADBA74E0DC2DFFE36830CBC416"
-        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "MsmKey" = "8:_069AB6CC237342D98F3E4C3C46B5811E"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_120200F487C4BA56BAF476F7F27DEC66"
-        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "MsmKey" = "8:_0CD3A9ADBA74E0DC2DFFE36830CBC416"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0CD3A9ADBA74E0DC2DFFE36830CBC416"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_1965ED765B41E9B518E49BD4C348B557"
-        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_19BD7F01267136B49CC1C4869BC7BFA5"
-        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "MsmKey" = "8:_1965ED765B41E9B518E49BD4C348B557"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_3A75F3B7E6A416D6041BB28019DFB704"
-        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3A75F3B7E6A416D6041BB28019DFB704"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_425D8AFFD28E2F1F31873B6A68F2968F"
-        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_515F5E61208E436EBA08D49DE0D0D7E5"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_425D8AFFD28E2F1F31873B6A68F2968F"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_599330EEEDFAFA74706AD892857C6326"
-        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_985D526E36F7FA8F74EB82127625933E"
-        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "MsmKey" = "8:_599330EEEDFAFA74706AD892857C6326"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A46593549B23BAAC5733439CDE23AD97"
-        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "MsmKey" = "8:_6600ED98B4A348508AF1E603A3F83BAB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_DCD84F64C5334C128524FFCC6E0C8081"
+        "MsmKey" = "8:_829067F4333BF896FA363C50E078650E"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_985D526E36F7FA8F74EB82127625933E"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_985D526E36F7FA8F74EB82127625933E"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A4126A0BFF027D55FD229648C3A68342"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A46593549B23BAAC5733439CDE23AD97"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F8E68A90AD945BC69B8BB12E76F9D665"
-        "OwnerKey" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F8E68A90AD945BC69B8BB12E76F9D665"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -178,6 +226,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_069AB6CC237342D98F3E4C3C46B5811E"
+            {
+            "SourcePath" = "8:..\\Windows Reparatur\\schraubenschlussel.ico"
+            "TargetName" = "8:schraubenschlussel.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0CD3A9ADBA74E0DC2DFFE36830CBC416"
             {
             "SourcePath" = "8:api-ms-win-crt-locale-l1-1-0.dll"
@@ -198,50 +266,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_120200F487C4BA56BAF476F7F27DEC66"
-            {
-            "SourcePath" = "8:VCRUNTIME140_1.dll"
-            "TargetName" = "8:VCRUNTIME140_1.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1965ED765B41E9B518E49BD4C348B557"
             {
             "SourcePath" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
             "TargetName" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_19BD7F01267136B49CC1C4869BC7BFA5"
-            {
-            "SourcePath" = "8:api-ms-win-crt-time-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-time-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
@@ -298,10 +326,30 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_515F5E61208E436EBA08D49DE0D0D7E5"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_599330EEEDFAFA74706AD892857C6326"
             {
-            "SourcePath" = "8:..\\Windows Reparatur\\schraubenschlussel.ico"
-            "TargetName" = "8:schraubenschlussel.ico"
+            "SourcePath" = "8:VCRUNTIME140.dll"
+            "TargetName" = "8:VCRUNTIME140.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6600ED98B4A348508AF1E603A3F83BAB"
+            {
+            "SourcePath" = "8:..\\Windows Reparatur\\bestaetigung.txt"
+            "TargetName" = "8:bestaetigung.txt"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
@@ -318,10 +366,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_599330EEEDFAFA74706AD892857C6326"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_829067F4333BF896FA363C50E078650E"
             {
-            "SourcePath" = "8:VCRUNTIME140.dll"
-            "TargetName" = "8:VCRUNTIME140.dll"
+            "SourcePath" = "8:api-ms-win-crt-convert-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-convert-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
@@ -358,6 +406,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A4126A0BFF027D55FD229648C3A68342"
+            {
+            "SourcePath" = "8:WINHTTP.dll"
+            "TargetName" = "8:WINHTTP.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A46593549B23BAAC5733439CDE23AD97"
             {
             "SourcePath" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
@@ -376,26 +444,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCD84F64C5334C128524FFCC6E0C8081"
-            {
-            "SourcePath" = "8:..\\Windows Reparatur\\bestaetigung.txt"
-            "TargetName" = "8:bestaetigung.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F8E68A90AD945BC69B8BB12E76F9D665"
@@ -474,15 +522,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Windows Reparatur Tool"
-        "ProductCode" = "8:{4FB2AEFA-91D0-437A-9F09-FD740D7A61DB}"
-        "PackageCode" = "8:{A43D79F6-840E-44AE-9B96-20B0771D6DC1}"
+        "ProductCode" = "8:{C912C290-3EDF-4959-A58B-BFCED9F58113}"
+        "PackageCode" = "8:{AE7ADA7F-764A-4268-8451-8AB5557D558E}"
         "UpgradeCode" = "8:{8D3699D3-4446-4F6B-8C17-60450715FD92}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.2.4"
+        "ProductVersion" = "8:1.2.5"
         "Manufacturer" = "8:Layviz"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -595,32 +643,32 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2AC985E3E8B040ADAE232755C8417433"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_226A2DC4D1864D48930AA4D000C1FAE9"
             {
-            "Name" = "8:Windows Reparatur Tool"
+            "Name" = "8:Windows Reperatur Tool"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
-            "Folder" = "8:_D4F5D23323AE4A9783320EFF6FC6EECC"
-            "WorkingFolder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Icon" = "8:_515F5E61208E436EBA08D49DE0D0D7E5"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_697F1836C27649A9966F2598E9D9AD3F"
-            {
-            "Name" = "8:Windows Reparatur Tool"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+            "Target" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
             "Folder" = "8:_65434660D6EA46B3A0AE4903EA406BC0"
             "WorkingFolder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Icon" = "8:_515F5E61208E436EBA08D49DE0D0D7E5"
+            "Icon" = "8:_069AB6CC237342D98F3E4C3C46B5811E"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4FE7B7563DB14AD6A2E743FD7063C8F6"
+            {
+            "Name" = "8:Windows Reperatur Tool"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+            "Folder" = "8:_D4F5D23323AE4A9783320EFF6FC6EECC"
+            "WorkingFolder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Icon" = "8:_069AB6CC237342D98F3E4C3C46B5811E"
             "Feature" = "8:"
             }
         }
@@ -758,8 +806,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1202"
+                            "Setting" = "3:2"
+                            "Value" = "8:"
                             "DefaultValue" = "8:#1202"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -903,8 +951,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1202"
+                            "Setting" = "3:2"
+                            "Value" = "8:"
                             "DefaultValue" = "8:#1202"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -1022,9 +1070,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B45AFFFCA65541CAA0C85BDC7E0E47C8"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A3FB229D44084467B181BE7AAAC7EBBD"
             {
-            "SourcePath" = "8:..\\x64\\Release\\Windows Reparatur Tool.exe"
+            "SourcePath" = "8:..\\Release\\WRTLauncher.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
@@ -1042,7 +1090,35 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:Release|x64"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{85DF52F4-EAA7-42FE-847E-89C167189FD9}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F3121B2D6D9D4E509FB39DFC989DD93F"
+            {
+            "SourcePath" = "8:..\\Release\\WRT.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{C924781B-5D84-4ED7-87CE-A846706D8767}"
             "ShowKeyOutput" = "11:TRUE"

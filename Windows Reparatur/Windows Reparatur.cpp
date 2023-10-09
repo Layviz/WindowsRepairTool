@@ -71,6 +71,7 @@ int main()
             break;
         }
 
+        const clock_t start_time = clock();
         cout << endl << " Reparatur wird durchgeführt. Bitte nicht das Programm beenden oder den Computer ausschalten." << endl;
 
         if (auswahl == 1) {
@@ -103,13 +104,14 @@ int main()
             }
             std::cout << std::endl << " Beim nächsten Start des Systems wird die Reparatur abgeschlossen.";
         }
+        std::cout << " Diese Ausführung dauerte " << clock() - start_time << " Ticks." << endl;
         std::cout << std::endl << std::endl << std::endl;
     }
     return 0;
 }
 
 void exec(string command) {
-    string  line = command + " > nul 2>&1";
+    string  line = command;// +" > nul 2>&1";
     system(line.c_str());
     std::cout << "\r" << " Prozess " << counter++ << " von " << total << " abgeschlossen";
 }

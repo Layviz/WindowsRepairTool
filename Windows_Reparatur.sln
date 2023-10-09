@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Windows Reparatur Tool", "W
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{791578EF-5473-4C5B-A416-EFADDD40E6B3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WRTLauncher", "WRTLauncher\WRTLauncher.vcxproj", "{85DF52F4-EAA7-42FE-847E-89C167189FD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,18 @@ Global
 		{791578EF-5473-4C5B-A416-EFADDD40E6B3}.Release|Any CPU.Build.0 = Release
 		{791578EF-5473-4C5B-A416-EFADDD40E6B3}.Release|x64.ActiveCfg = Release
 		{791578EF-5473-4C5B-A416-EFADDD40E6B3}.Release|x86.ActiveCfg = Release
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Debug|Any CPU.Build.0 = Debug|x64
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Debug|x64.ActiveCfg = Debug|x64
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Debug|x64.Build.0 = Debug|x64
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Debug|x86.ActiveCfg = Debug|Win32
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Debug|x86.Build.0 = Debug|Win32
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Release|Any CPU.ActiveCfg = Release|x64
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Release|Any CPU.Build.0 = Release|x64
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Release|x64.ActiveCfg = Release|x64
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Release|x64.Build.0 = Release|x64
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Release|x86.ActiveCfg = Release|Win32
+		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
