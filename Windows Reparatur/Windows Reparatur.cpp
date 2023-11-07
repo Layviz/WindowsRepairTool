@@ -19,10 +19,9 @@ int main()
         "\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 1\"",
         "sfc /scannow",
         "dism /online /cleanup-image /CheckHealth",
-        "sfc /scannow",
         "Dism /Online /Cleanup-Image /ScanHealth",
-        "sfc /scannow",
         "Dism /Online /Cleanup-Image /RestoreHealth",
+        "chkdsk C: /scan /perf /i",
         "sfc /scannow",
         "defrag C: /O /H"
     };
@@ -32,13 +31,17 @@ int main()
         "\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 2\"",
         "sfc /scannow",
         "dism /online /cleanup-image /CheckHealth",
-        "sfc /scannow",
         "Dism /Online /Cleanup-Image /ScanHealth",
-        "sfc /scannow",
         "Dism /Online /Cleanup-Image /RestoreHealth",
         "sfc /scannow",
         "defrag C: /O /H",
-        "chkdsk C: /f /r /x /b < bestaetigung.txt"
+        "chkdsk C: /scan /perf /f /r /x /b < bestaetigung.txt"
+    };
+
+    string zusatzReperatur[] = {
+        "defrag /c /o /h /m",
+        "sfc /scannow",
+        "chkdsk C: /f /x /spotfix /sdcleanup < bestaetigung.txt"
     };
 
     HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
@@ -49,6 +52,18 @@ int main()
     }
     cout << endl;
 
+    char input[3];
+    // test for pending.xml
+    GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml");
+    if (INVALID_FILE_ATTRIBUTES != GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml") && GetLastError() != ERROR_FILE_NOT_FOUND) {
+        // fragen ob man trotzdem reparieren will
+        cout << " Es steht noch ein Systemneustart aus. Die Reparatur kann ohne Neustart nicht vollständig abgeschlossen werden." << endl;
+        cout << " 1.neustart " << endl;
+        cout << " 2. beenden" << endl;
+        cout << " 3. trotzdem ausführen" << endl;
+    }
+
+
     string header_warning = "Es wird empfohlen nebenbei keine aufwendigen Prozesse laufen zu lassen.";
     printWarning(header_warning);
 
@@ -56,29 +71,35 @@ int main()
     while (true) {
         int auswahl = 0;
         std::wcout << " System-Reparaturmodus wählen:" << std::endl << std::endl;
-        std::cout << " 1. Standard Reparatur    (Dauert wenige Minuten, kein Neustart erforderlich.)" << std::endl;
-        std::cout << " 2. Erweiterte Reparatur  (Kann mehrere Stunden dauern, Neustart erforderlich.)" << std::endl;
-        std::wcout << std::endl << " Beliebige Eingabe tätigen, um das Programm zu beenden." << std::endl<<" ";
-        
-        char input[3];
-        std::cin.get(input,3);
+        std::cout << " 1. Einfache Reparatur    (Dauert wenige Minuten, kein Neustart erforderlich.)" << std::endl;
+        std::cout << " 2. Standard Reparatur    (Kann mehrere Stunden dauern, Neustart erforderlich.)" << std::endl;
+        std::cout << " 3. Erweiterte Reparatur  (Zusätzliche Reparaturen, falls die Standard Reparatur nicht ausreichend war, Neustart erforderlich.)" << std::endl;
+        std::wcout << std::endl << " Beliebige Eingabe tätigen, um das Programm zu beenden." << std::endl << " ";
+
+        std::cin.get(input, 3);
         if (input[1] == 0) {
             std::cin.ignore(INT16_MAX, '\n');
             auswahl = input[0] - 48;
         }
 
-        if (auswahl != 1 && auswahl != 2) {
+        if (auswahl != 1 && auswahl != 2 && auswahl != 3) {
             break;
         }
 
+#ifdef DEBUG
         const clock_t start_time = clock();
+#endif // DEBUG
+
         cout << endl << " Reparatur wird durchgeführt. Bitte nicht das Programm beenden oder den Computer ausschalten." << endl;
 
         if (auswahl == 1) {
             total = sizeof(standardReparatur) / sizeof(string);
         }
-        else {
+        else if (auswahl == 2) {
             total = sizeof(erweiterteReparatur) / sizeof(string);
+        }
+        else {
+            total = sizeof(zusatzReperatur) / sizeof(string);
         }
         counter = 1;
         
@@ -89,13 +110,16 @@ int main()
             {
                 exec(standardReparatur[i]);
             }
-            else
+            else if (auswahl == 2)
             {
                 exec(erweiterteReparatur[i]);
             }
+            else
+            {
+                exec(zusatzReperatur[i]);
+            }
         }
-        if (2 == auswahl) {
-            //system("chkdsk C: /f /r /x /b < bestaetigung.txt > nul 2>&1");
+        if (2 == auswahl || 3 == auswahl) {
             std::cout << std::endl<<std::endl<< " Um die Reparatur abzuschließen ist ein Systemneustart erforderlich, Jetzt Neustarten? (J/N)";
             std::cin.get(input, 3);
             std::cin.ignore(INT16_MAX, '\n');
@@ -104,14 +128,19 @@ int main()
             }
             std::cout << std::endl << " Beim nächsten Start des Systems wird die Reparatur abgeschlossen.";
         }
+#ifdef DEBUG
         std::cout << " Diese Ausführung dauerte " << clock() - start_time << " Ticks." << endl;
+#endif // DEBUG
         std::cout << std::endl << std::endl << std::endl;
     }
     return 0;
 }
 
 void exec(string command) {
-    string  line = command;// +" > nul 2>&1";
+    string  line = command + " > process_" + to_string(counter) + ".txt 2>&1";
+#ifdef DEBUG
+    std::cout  << std::endl << "Command: " << line << endl;
+#endif // DEBUG
     system(line.c_str());
     std::cout << "\r" << " Prozess " << counter++ << " von " << total << " abgeschlossen";
 }
