@@ -58,9 +58,9 @@ int main()
     if (INVALID_FILE_ATTRIBUTES != GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml") && GetLastError() != ERROR_FILE_NOT_FOUND) {
         // fragen ob man trotzdem reparieren will
         cout << " Es steht noch ein Systemneustart aus. Die Reparatur kann ohne Neustart nicht vollständig abgeschlossen werden." << endl;
-        cout << " 1.neustart " << endl;
-        cout << " 2. beenden" << endl;
-        cout << " 3. trotzdem ausführen" << endl;
+        cout << " 1. Neustart " << endl;
+        cout << " 2. Beenden" << endl;
+        cout << " 3. Trotzdem ausführen" << endl;
     }
 
 
