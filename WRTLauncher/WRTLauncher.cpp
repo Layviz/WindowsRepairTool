@@ -8,6 +8,8 @@
 #include <fstream>
 #include <errno.h>
 #include <string.h>
+#include <locale> 
+#include <codecvt>
 
 #pragma comment(lib, "winhttp.lib")
 
@@ -157,9 +159,8 @@ int check_for_updates() {
  * @brief Lädt den Installer für die aktuellste Verion herunter und startet den Installer
  * @return -1 bei Fehlern, 0 wenn der Installer gestartet wurde.
 */
-int download_installer() {
+int download_installer(string *downloaded_file) {
     HINTERNET session = 0, connection = 0, request = 0;
-
     DWORD size = 0, read = 0, total = 0;
 
     session = WinHttpOpen(L"WRT 1.3.0", WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY, WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, NULL);
@@ -235,33 +236,62 @@ int download_installer() {
             }
             file.write(buffer, read);
             total += read;
-            cout << " " << total << "bytes heruntergeladen               \r";
+            std::cout << " " << total << "bytes heruntergeladen               \r";
             delete[] buffer;
             WinHttpQueryDataAvailable(request, &size);
         }
         file.close();
-        string cmd = "";
-        cmd.append(file_name);
-        cmd.append(" /passive");
-        cout << endl << " Starte Installer: " << file_name << endl;
-        system(cmd.c_str());
+
+        *downloaded_file = file_name;
         return 0;
     }
 }
 
-int main()
-{
+string get_exe_dir() {
+    TCHAR buffer[MAX_PATH] = { 0 };
+    GetModuleFileName(NULL, buffer, MAX_PATH);
+    std::wstring::size_type pos = std::wstring(buffer).find_last_of(L"\\/");
+    wstring temp = std::wstring(buffer).substr(0, pos);
 
+    using convert_typeX = std::codecvt_utf8<wchar_t>;
+    std::wstring_convert<convert_typeX, wchar_t> converterX;
+
+    return converterX.to_bytes(temp);
+}
+
+int installation(string installer_file) {
+    string install_dir = get_exe_dir();
+    
+    string cmd = "start \"WRT Update\" cmd /C \"C:\\Windows\\System32\\msiexec.exe /x ";
+    cmd.append(PRODUCT_CODE);
+    cmd.append(" /passive");
+
+    cmd.append(" & ");
+
+    cmd.append(installer_file);
+    cmd.append(" TARGETDIR=\"");
+    cmd.append(install_dir);
+    cmd.append("\" /passive");
+    cmd.append(" && start \"\" \"");
+    cmd.append(install_dir);
+    cmd.append("\\WRTLauncher.exe\"\"");
+    std::cout << endl << " Deinstalliere alte Version und installiere neue Version " << endl;
+
+    system(cmd.c_str());
+    return 0;
+}
+
+int main(){
     SetConsoleOutputCP(65001);
     int update_available = check_for_updates();
     // abfragen, ob man jetzt updaten, später oder beenden
     if (update_available > 0) {
         
         while (1) {
-            cout << " Update jetzt installieren?" << endl;
-            cout << " 1. Jetzt installieren." << endl;
-            cout << " 2. Nächtes Mal erneut fragen." << endl;
-            cout << " 3. Windows Reperatur Tool beenden." << endl << " ";
+            std::cout << " Update jetzt installieren?" << endl;
+            std::cout << " 1. Jetzt installieren." << endl;
+            std::cout << " 2. Nächtes Mal erneut fragen." << endl;
+            std::cout << " 3. Windows Reperatur Tool beenden." << endl << " ";
 
             int auswahl = 0;
             char input[3];
@@ -271,8 +301,18 @@ int main()
                 auswahl = input[0] - 48;
             }
             if (1 == auswahl) {
-                download_installer();
-                break;
+                string* installer=new string;
+                download_installer(installer);
+                if (installer) {
+                    installation(*installer);
+                    return 0;
+                }
+                else {
+                    std:cout << " Konnte Update nicht herunterladen." << endl;
+                    char input[3];
+                    std::cin.get(input, 3);
+                    return -1;
+                }
             }
             else if (2 == auswahl) {
                 break;
