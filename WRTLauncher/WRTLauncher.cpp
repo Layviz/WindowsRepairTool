@@ -288,7 +288,7 @@ int main(){
     if (update_available > 0) {
         
         while (1) {
-            std::cout << " Update jetzt installieren?" << endl;
+            std::cout << endl << " Update jetzt installieren?" << endl << endl;
             std::cout << " 1. Jetzt installieren." << endl;
             std::cout << " 2. Nächtes Mal erneut fragen." << endl;
             std::cout << " 3. Windows Reperatur Tool beenden." << endl << " ";
@@ -317,7 +317,7 @@ int main(){
             else if (2 == auswahl) {
                 break;
             }
-            else if (3 == auswahl) {
+            else {
                 return 0;
             }
         }
