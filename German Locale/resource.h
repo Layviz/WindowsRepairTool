@@ -1,11 +1,10 @@
 //{{NO_DEPENDENCIES}}
 // Von Microsoft Visual C++ generierte Includedatei.
-// Verwendet durch Windows Reparatur.rc
+// Verwendet durch German Locale.rc
 //
 #define TEST_STRING                     101
 #define MUTEX_WARN                      102
 #define PENDING_RESTART_QUERY           103
-#define IDI_ICON1                       104
 #define PENDING_RESTART_OPTION1         104
 #define PENDING_RESTART_OPTION2         105
 #define PENDING_RESTART_OPTION3         106
@@ -27,7 +26,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        120
+#define _APS_NEXT_RESOURCE_VALUE        102
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101

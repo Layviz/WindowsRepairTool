@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Windows.h>
 #include <string>
+#include "resource.h"
 
 using namespace std;
 
@@ -9,9 +10,51 @@ int counter;
 void exec(string command);
 void printWarning(string warn);
 
+// localized strings
+#define MAX_LOCALIZED_STRING_SIZE 512
+wchar_t mutex_warn[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t pending_query[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t pending_option1[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t pending_option2[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t pending_option3[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t startup_warn[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t mode_query[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t mode_option1[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t mode_option2[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t mode_option3[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t mode_cancel[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t in_progress_note[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t progress_started_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t progress_done_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t reboot_query[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t reboot_confirms[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t reboot_planned[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t exec_time_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+
+void load_stings(HINSTANCE source) {
+    LoadString(source, MUTEX_WARN, mutex_warn, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, PENDING_RESTART_QUERY, pending_query, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, PENDING_RESTART_OPTION1, pending_option1, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, PENDING_RESTART_OPTION2, pending_option2, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, PENDING_RESTART_OPTION3, pending_option3, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, STARTUP_WARNING, startup_warn, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, MODE_QUERY, mode_query, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, MODE_OPTION1, mode_option1, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, MODE_OPTION2, mode_option2, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, MODE_OPTION3, mode_option3, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, MODE_CANCEL_INFO, mode_cancel, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, IN_PROGRESS_NOTE, in_progress_note, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, PROGRESS_STARTED_FORMAT_STRING, progress_started_fmt, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, PROGESS_DONE_FORMAT_STRING, progress_done_fmt, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, REBOOT_QUERY, reboot_query, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, REBOOT_CONFIRMS, reboot_confirms, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, REBOOT_PLANNED, reboot_planned, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, EXECUTION_TIME_FORMAT_STRING, exec_time_fmt, MAX_LOCALIZED_STRING_SIZE);
+}
+
 int main()
 {
-    SetConsoleOutputCP(65001);
+    //SetConsoleOutputCP(65001);
 
     string standardReparatur[] = {
         "defrag C: /O /H",
@@ -44,6 +87,55 @@ int main()
         "chkdsk C: /f /x /spotfix /sdcleanup < bestaetigung.txt"
     };
 
+    wchar_t locale_name[3] = {};
+    wchar_t dll_name[7] = {};
+
+    GetUserDefaultLocaleName(locale_name, 3);
+    wcout << locale_name << endl;
+    swprintf(dll_name,7,L"%s.dll",locale_name);
+    wcout << dll_name << endl;
+    // Try loading a lib with the local name
+    HMODULE locale_source = LoadLibrary(dll_name);
+    if (nullptr == locale_source) {
+        // if no locale lib exists use the default strings
+        locale_source = GetModuleHandle(nullptr);
+    }
+    
+    load_stings(locale_source);
+
+#ifdef DEBUG
+
+    wchar_t test_string[MAX_LOCALIZED_STRING_SIZE] = {};
+    LoadString(locale_source, TEST_STRING, test_string, MAX_LOCALIZED_STRING_SIZE);
+
+    wchar_t test[] = L"äüö";
+    wcout << (int)test[0] << L" " << (int)test_string[0] << endl;
+    wcout << (int)test[1] << L" " << (int)test_string[1] << endl;
+    wcout << (int)test[2] << L" " << (int)test_string[2] << endl;
+    int test_conv = (int) test;
+    wcout << L"ä as int: " << test_conv << endl;
+    wcout << "In wchar " << (int) mutex_warn[32] << endl;
+    wcout << L"Umlaute: \xc300\u00f6\u00fc" << endl ;
+    wcout << L"Loaded Strings" << endl;
+    wcout << mutex_warn << endl;
+    wcout << pending_query << endl;
+    wcout << pending_option1 << endl;
+    wcout << pending_option2 << endl;
+    wcout << pending_option3 << endl;
+    wcout << startup_warn << endl;
+    wcout << mode_option1 << endl;
+    wcout << mode_option2 << endl;
+    wcout << mode_option3 << endl;
+    wcout << mode_cancel << endl;
+    wcout << in_progress_note << endl;
+    wcout << progress_started_fmt << endl;
+    wcout << progress_done_fmt << endl;
+    wcout << reboot_query << endl;
+    wcout << reboot_confirms << endl;
+    wcout << reboot_planned << endl;
+    wcout << exec_time_fmt << endl;
+#endif // DEBUG
+
     HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
         cerr << "Das Programm wird bereits ausgeführt und kann nur einmal aufgerufen werden." << endl;
@@ -70,11 +162,11 @@ int main()
     cout << endl << endl << endl;
     while (true) {
         int auswahl = 0;
-        std::wcout << " System-Reparaturmodus wählen:" << std::endl << std::endl;
+        std::cout << " System-Reparaturmodus wählen:" << std::endl << std::endl;
         std::cout << " 1. Einfache Reparatur    (Dauert wenige Minuten, kein Neustart erforderlich.)" << std::endl;
         std::cout << " 2. Standard Reparatur    (Kann mehrere Stunden dauern, Neustart erforderlich.)" << std::endl;
-        std::cout << " 3. Erweiterte Reparatur  (Zusätzliche Reparaturen, falls die Standard Reparatur nicht ausreichend war, Neustart erforderlich.)" << std::endl;
-        std::wcout << std::endl << " Beliebige Eingabe tätigen, um das Programm zu beenden." << std::endl << " ";
+        std::cout << " 3. Erweiterte Reparatur  (Empfohlen nach der Standard Reparatur, Neustart erforderlich.)" << std::endl;
+        std::cout << std::endl << " Beliebige Eingabe tätigen, um das Programm zu beenden." << std::endl << " ";
 
         std::cin.get(input, 3);
         if (input[1] == 0) {

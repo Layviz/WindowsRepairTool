@@ -9,6 +9,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WRTLauncher", "WRTLauncher\WRTLauncher.vcxproj", "{85DF52F4-EAA7-42FE-847E-89C167189FD9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "German Locale", "German Locale\German Locale.vcxproj", "{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,18 @@ Global
 		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Release|x64.Build.0 = Release|x64
 		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Release|x86.ActiveCfg = Release|Win32
 		{85DF52F4-EAA7-42FE-847E-89C167189FD9}.Release|x86.Build.0 = Release|Win32
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Debug|Any CPU.Build.0 = Debug|x64
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Debug|x64.ActiveCfg = Debug|x64
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Debug|x64.Build.0 = Debug|x64
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Debug|x86.ActiveCfg = Debug|Win32
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Debug|x86.Build.0 = Debug|Win32
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Release|Any CPU.ActiveCfg = Release|x64
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Release|Any CPU.Build.0 = Release|x64
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Release|x64.ActiveCfg = Release|x64
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Release|x64.Build.0 = Release|x64
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Release|x86.ActiveCfg = Release|Win32
+		{D24AFCAD-FD3C-4EED-AA1B-1D3C540B47CE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
