@@ -144,7 +144,7 @@ int check_for_updates() {
                 return 0;
             }
             else {
-                std::wcout << "Verion ist aktueller als Quelle." << endl;
+                std::wcout << " Verion ist aktueller als Quelle." << endl;
                 return 0;
             }
         }
@@ -283,6 +283,15 @@ int installation(string installer_file) {
 
 int main(){
     SetConsoleOutputCP(65001);
+
+    //Check for mutex
+    HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
+    if (GetLastError() == ERROR_ALREADY_EXISTS) {
+        cerr << "Das Programm wird bereits ausgeführt und kann nur einmal aufgerufen werden." << endl;
+        cin.get();
+        return -1;
+    }
+
     int update_available = check_for_updates();
     // abfragen, ob man jetzt updaten, später oder beenden
     if (update_available > 0) {
@@ -322,6 +331,7 @@ int main(){
             }
         }
     }
+    CloseHandle(mutex);
     int wrt = system("WRT.exe");
     if (wrt < 0) {
         char errorbuffer[94];
