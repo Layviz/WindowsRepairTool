@@ -53,14 +53,33 @@ int main()
     cout << endl;
 
     char input[3];
+    int auswahl = 0;
     // test for pending.xml
     GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml");
     if (INVALID_FILE_ATTRIBUTES != GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml") && GetLastError() != ERROR_FILE_NOT_FOUND) {
         // fragen ob man trotzdem reparieren will
-        cout << " Es steht noch ein Systemneustart aus. Die Reparatur kann ohne Neustart nicht vollständig abgeschlossen werden." << endl;
+        cout << " Es steht noch ein Systemneustart aus. Die Reparatur kann ohne Neustart nicht vollständig abgeschlossen werden." << endl << endl;
         cout << " 1. Neustart " << endl;
         cout << " 2. Beenden" << endl;
-        cout << " 3. Trotzdem ausführen" << endl;
+        cout << " 3. Trotzdem ausführen" << endl << " ";
+
+        std::cin.get(input, 3);
+        if (input[1] == 0) {
+            std::cin.ignore(INT16_MAX, '\n');
+            auswahl = input[0] - 48;
+        }
+
+        switch (auswahl)
+        {
+        case 1:
+            system("shutdown /r /t 0");
+            break;
+        case 3:
+            break;
+        case 2:
+        default:
+            return 0;
+        }
     }
 
 
@@ -69,7 +88,7 @@ int main()
 
     cout << endl << endl << endl;
     while (true) {
-        int auswahl = 0;
+        auswahl = 0;
         std::wcout << " System-Reparaturmodus wählen:" << std::endl << std::endl;
         std::cout << " 1. Einfache Reparatur    (Dauert wenige Minuten, kein Neustart erforderlich.)" << std::endl;
         std::cout << " 2. Standard Reparatur    (Kann mehrere Stunden dauern, Neustart erforderlich.)" << std::endl;
@@ -81,7 +100,7 @@ int main()
             std::cin.ignore(INT16_MAX, '\n');
             auswahl = input[0] - 48;
         }
-
+        
         if (auswahl != 1 && auswahl != 2 && auswahl != 3) {
             break;
         }
