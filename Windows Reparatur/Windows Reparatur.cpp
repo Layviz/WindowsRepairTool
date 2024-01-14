@@ -169,14 +169,20 @@ int main()
             std::cin.get(input, 3);
             std::cin.ignore(INT16_MAX, '\n');
             if (0==input[1]){ 
+                int reboot = 0;
                 size_t confirm_len = wcslen(reboot_confirms);
                 for (int i = 0; i < confirm_len; i++) {
                     if (input[0] == reboot_confirms[i]) {
-                        system("shutdown /r /t 0");
+                        reboot = 1;
+                        break;
                     }
                 }
+                if (reboot) {
+                    system("shutdown /r /t 0");
+                    break;
+                }
             }
-            wcout << std::endl << L" " << reboot_planned;
+            wcout << std::endl << L" " << reboot_planned << endl;
         }
 #ifdef DEBUG
         wchar_t timing[MAX_LOCALIZED_STRING_SIZE];
