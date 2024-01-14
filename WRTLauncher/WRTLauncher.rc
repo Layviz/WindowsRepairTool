@@ -1,4 +1,4 @@
-// Microsoft Visual C++ generated resource script.
+ï»¿// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -17,6 +17,7 @@
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
 LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -51,32 +52,33 @@ END
 
 STRINGTABLE
 BEGIN
-    ERROR_SESSION           "Konnte nicht auf Updates prüfen: Session nicht erstellt."
-    ERROR_CONNECTION        "Konnte nicht auf Updates prüfen: Connection nicht erstellt."
-    ERROR_REQUEST           "Konnte nicht auf Updates prüfen: Request nicht gesendet."
-    ERROR_MEMORY            "Konnte nicht auf Updates prüfen: Kein Speicher!"
-    ERROR_READ              "Konnte nicht auf Updates prüfen: Fehler beim Lesen"
-    VERSION_FOUND_FORMAT    "Neue Version %s gefunden.\n Derzeitige Version ist %i.%i.%i"""
-    VERSION_UP_TO_DATE      "Derzeitige Version ist aktuell."
+    ERROR_SESSION           "Could not check for updates: session not created."
+    ERROR_CONNECTION        "Could not check for updates: connection not created."
+    ERROR_REQUEST           "Could not check for updates: request not send."
+    ERROR_MEMORY            "Could not check for updates: no memory!"
+    ERROR_READ              "Could not check for updates: error on read"
+    VERSION_FOUND_FORMAT    "Found new version %i.%i.%i\n Current version is %i.%i.%i"
+    VERSION_UP_TO_DATE      "Current version is up to date."
 END
 
 STRINGTABLE
 BEGIN
-    VERSION_AHEAD           "Verion ist aktueller als Quelle."
-    VERSION_UNKNOWN         "Konnte nicht auf Updates prüfen. Aktuelle Version konnte nicht ermittelt werden."
-    ERROR_DOWNLOAD_URL      "Konnte Update nicht herunterladen: Download URL nicht gefunden"
-    BYTES_READ              "bytes heruntergeladen               "
-    INSTALLER_START         "Starte Installer: "
-    INSTALL_QUERY           "Update jetzt installieren?"
-    INSTALL_MODE1           "1. Jetzt installieren."
-    INSTALL_MODE2           "2. Nächtes Mal erneut fragen."
-    INSTALL_MODE3           "3. Windows Reperatur Tool beenden."
-    ERROR_WRT               "Fehler beim Starten von WRT: "
+    VERSION_AHEAD           "Current verion is ahead of the source."
+    VERSION_UNKNOWN         "Could not check for updates. Could not determine current version."
+    ERROR_DOWNLOAD_URL      "Could not check for updates: Could not find download URL"
+    BYTES_READ              "bytes recieved               "
+    INSTALLER_START         "Removing previous version and installing new version"
+    INSTALL_QUERY           "Install update now?"
+    INSTALL_MODE1           "1. Update now."
+    INSTALL_MODE2           "2. Ask again next time."
+    INSTALL_MODE3           "3. Quit Windows Repair Tool."
+    ERROR_WRT               "Error while starting WRT: "
+    ERROR_UPDATE            "Could not download update."
 END
 
 STRINGTABLE
 BEGIN
-    CONSOLE_CODEPAGE        "1252"
+    MUTEX_WARN              "Another instance of this application is already running. Application will close."
 END
 
 #endif    // Deutsch (Deutschland) resources

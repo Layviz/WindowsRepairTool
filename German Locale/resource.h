@@ -38,6 +38,7 @@
 #define INSTALL_MODE2                   215
 #define INSTALL_MODE3                   216
 #define ERROR_WRT                       217
+#define ERROR_UPDATE                    218
 #define CONSOLE_CODEPAGE                1000
 
 // Next default values for new objects

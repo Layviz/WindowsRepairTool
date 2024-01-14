@@ -2,7 +2,8 @@
 
 // localized strings
 #define MAX_LOCALIZED_STRING_SIZE 512
-extern wchar_t error_seesion[MAX_LOCALIZED_STRING_SIZE] ;
+extern wchar_t mutex_warn[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t error_seesion[MAX_LOCALIZED_STRING_SIZE];
 extern wchar_t error_connection[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t error_request[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t error_memory[MAX_LOCALIZED_STRING_SIZE] ;
@@ -18,6 +19,7 @@ extern wchar_t install_query[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t install_mode1[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t install_mode2[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t install_mode3[MAX_LOCALIZED_STRING_SIZE] ;
-extern wchar_t error_wrt[MAX_LOCALIZED_STRING_SIZE] ;
+extern wchar_t error_wrt[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t error_update[MAX_LOCALIZED_STRING_SIZE];
 
 extern int load_localized_strings();

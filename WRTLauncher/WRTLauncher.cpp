@@ -35,7 +35,7 @@ int check_for_updates() {
         connection = WinHttpConnect(session, L"api.github.com", INTERNET_DEFAULT_HTTPS_PORT, NULL); //mit github api verbinden
     }
     else {
-        cerr << " Konnte nicht auf Updates prüfen: Session nicht erstellt.\n";
+        wcerr << L" " << error_seesion << endl;
         return -1;
     }
     if (connection) {
@@ -43,7 +43,7 @@ int check_for_updates() {
         request = WinHttpOpenRequest(connection, L"GET", L"repos/Layviz/WindowsReparaturTool/releases/latest", 0, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES, WINHTTP_FLAG_SECURE);
     }
     else {
-        cerr << " Konnte nicht auf Updates prüfen: Connection nicht erstellt.\n";
+        wcerr << L" " << error_connection << endl;
         return -1;
     }
     // request schicken
@@ -53,7 +53,7 @@ int check_for_updates() {
     }
     else
     {
-        cerr << " Konnte nicht auf Updates prüfen: Request nicht gesendet.\n";
+        wcerr << L" " << error_request << endl;
         return -1;
     }
     if (resp) {
@@ -67,11 +67,11 @@ int check_for_updates() {
             buffer = new char[size + 1];
             memset(buffer, 0, size + 1);
             if (!buffer) {
-                cerr << " Konnte nicht auf Updates prüfen: Kein Speicher!\n";
+                wcerr << L" " << error_memory << endl;
                 return -1;
             }
             if (!WinHttpReadData(request, buffer, size, &read)) {
-                cerr << " Konnte nicht auf Updates prüfen: Fehler beim Lesen\n";
+                wcerr << L" " << error_read << endl;
                 return -1;
             }
             sstr << buffer;
@@ -137,20 +137,22 @@ int check_for_updates() {
             }
             // entsprechende Antwort ausgeben
             if (1 == cmp) {
-                std::cout << " Neue Version " << version_str << " gefunden." << endl << " Derzeitige Version ist " << VERSION_MAJOR << "." << VERSION_MINOR << "." << VERSION_PATCH << endl;
+                wchar_t version_found_str[1024] = {};
+                swprintf(version_found_str, 1024, version_found_fmt, major,minor,patch, VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+                wcout << L" " << version_found_str << endl;
                 return 1;
             }
             else if (0 == cmp) {
-                //std::cout << " Derzeitige Version ist aktuell." << endl;
+                wcout << L" " << version_up_to_date << endl;
                 return 0;
             }
             else {
-                std::wcout << " Verion ist aktueller als Quelle." << endl;
+                wcout << L" " << version_ahead << endl;
                 return 0;
             }
         }
         else {
-            cerr << " Konnte nicht auf Updates prüfen. Aktuelle Version konnte nicht ermittelt werden.\n";
+            wcerr << version_unknown << endl;
         }
     }
     return -1;
@@ -169,7 +171,7 @@ int download_installer(string *downloaded_file) {
         connection = WinHttpConnect(session, L"github.com", INTERNET_DEFAULT_HTTPS_PORT, NULL);
     }
     else {
-        cerr << " Konnte Update nicht herunterladen: Session nicht erstellt." << endl;
+        wcerr << L" " << error_seesion << endl;
         return -1;
     }
     string request_path;
@@ -189,7 +191,7 @@ int download_installer(string *downloaded_file) {
         }
         else
         {
-            cerr << " Konnte Update nicht herunterladen: Download URL nicht gefunden" << endl;
+            wcerr << L" " << error_download_url << endl;
             return -1;
         }
         
@@ -205,7 +207,7 @@ int download_installer(string *downloaded_file) {
         request = WinHttpOpenRequest(connection, L"GET", temp.c_str(), 0, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES, WINHTTP_FLAG_SECURE);
     }
     else {
-        cerr << " Konnte Update nicht herunterladen: Connection nicht erstellt.\n";
+        wcerr << L" "<<error_connection<<endl;
         return -1;
     }
     BOOL resp = WinHttpSendRequest(request, WINHTTP_NO_ADDITIONAL_HEADERS, 0, WINHTTP_NO_REQUEST_DATA, 0, 0, 0);
@@ -214,7 +216,7 @@ int download_installer(string *downloaded_file) {
     }
     else
     {
-        cerr << " Konnte Update nicht herunterladen: Request nicht gesendet.\n";
+        wcerr << L" " << error_request << endl;
         return -1;
     }
     if (resp) {
@@ -228,16 +230,16 @@ int download_installer(string *downloaded_file) {
             buffer = new char[size + 1];
             memset(buffer, 0, size + 1);
             if (!buffer) {
-                cerr << " Konnte Update nicht herunterladen: Kein Speicher!" << endl;
+                wcerr << L" " << error_memory << endl;
                 return -1;
             }
             if (!WinHttpReadData(request, buffer, size, &read)) {
-                cerr << " Konnte Update nicht herunterladen: Fehler beim Lesen" << endl;
+                wcerr << L" " << error_read << endl;
                 return -1;
             }
             file.write(buffer, read);
             total += read;
-            std::cout << " " << total << "bytes heruntergeladen               \r";
+            wcout << L" " << total << bytes_read << L"\r";
             delete[] buffer;
             WinHttpQueryDataAvailable(request, &size);
         }
@@ -276,7 +278,7 @@ int installation(string installer_file) {
     cmd.append(" && start \"\" \"");
     cmd.append(install_dir);
     cmd.append("\\WRTLauncher.exe\"\"");
-    std::cout << endl << " Deinstalliere alte Version und installiere neue Version " << endl;
+    wcout << endl << L" " << installer_start << endl;
 
     system(cmd.c_str());
     return 0;
@@ -288,7 +290,7 @@ int main()
     //Check for mutex
     HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
-        cerr << "Das Programm wird bereits ausgeführt und kann nur einmal aufgerufen werden." << endl;
+        wcerr << L" " << mutex_warn << endl;
         cin.get();
         return -1;
     }
@@ -317,7 +319,7 @@ int main()
                     return 0;
                 }
                 else {
-                    std:cout << " Konnte Update nicht herunterladen." << endl;
+                    wcout << L" " << error_update << endl;
                     char input[3];
                     std::cin.get(input, 3);
                     return -1;
