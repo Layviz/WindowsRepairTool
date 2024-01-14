@@ -1,17 +1,18 @@
-#include <iostream>
+﻿#include <iostream>
 #include <Windows.h>
 #include <string>
+#include "resource.h"
+#include "localization.h"
 
 using namespace std;
 
 int total;
 int counter;
 void exec(string command);
-void printWarning(string warn);
+void printWarning(wstring warn);
 
 int main()
 {
-    SetConsoleOutputCP(65001);
 
     string standardReparatur[] = {
         "defrag C: /O /H",
@@ -44,13 +45,36 @@ int main()
         "chkdsk C: /f /x /spotfix /sdcleanup < bestaetigung.txt"
     };
 
+    load_localized_strings();
+#ifdef DEBUG
+    wcout << L"Loaded Strings" << endl;
+    wcout << mutex_warn << endl;
+    wcout << pending_query << endl;
+    wcout << pending_option1 << endl;
+    wcout << pending_option2 << endl;
+    wcout << pending_option3 << endl;
+    wcout << startup_warn << endl;
+    wcout << mode_query << endl;
+    wcout << mode_option1 << endl;
+    wcout << mode_option2 << endl;
+    wcout << mode_option3 << endl;
+    wcout << mode_cancel << endl;
+    wcout << in_progress_note << endl;
+    wcout << progress_started_fmt << endl;
+    wcout << progress_done_fmt << endl;
+    wcout << reboot_query << endl;
+    wcout << reboot_confirms << endl;
+    wcout << reboot_planned << endl;
+    wcout << exec_time_fmt << endl;
+#endif // DEBUG
+
     HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
-        cerr << "Das Programm wird bereits ausgeführt und kann nur einmal aufgerufen werden." << endl;
+        wcerr << mutex_warn << endl;
         cin.get();
         return -1;
     }
-    cout << endl;
+    wcout << endl;
 
     char input[3];
     int auswahl = 0;
@@ -58,10 +82,10 @@ int main()
     GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml");
     if (INVALID_FILE_ATTRIBUTES != GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml") && GetLastError() != ERROR_FILE_NOT_FOUND) {
         // fragen ob man trotzdem reparieren will
-        cout << " Es steht noch ein Systemneustart aus. Die Reparatur kann ohne Neustart nicht vollständig abgeschlossen werden." << endl << endl;
-        cout << " 1. Neustart " << endl;
-        cout << " 2. Beenden" << endl;
-        cout << " 3. Trotzdem ausführen" << endl << " ";
+        wcout << L" " << pending_query << endl;
+        wcout << L" " << pending_option1 << endl;
+        wcout << L" " << pending_option2 << endl;
+        wcout << L" " << pending_option3 << endl;
 
         std::cin.get(input, 3);
         if (input[1] == 0) {
@@ -83,17 +107,17 @@ int main()
     }
 
 
-    string header_warning = "Es wird empfohlen nebenbei keine aufwendigen Prozesse laufen zu lassen.";
+    wstring header_warning = startup_warn;
     printWarning(header_warning);
 
-    cout << endl << endl << endl;
+    wcout << endl << endl << endl;
     while (true) {
-        auswahl = 0;
-        std::wcout << " System-Reparaturmodus wählen:" << std::endl << std::endl;
-        std::cout << " 1. Einfache Reparatur    (Dauert wenige Minuten, kein Neustart erforderlich.)" << std::endl;
-        std::cout << " 2. Standard Reparatur    (Kann mehrere Stunden dauern, Neustart erforderlich.)" << std::endl;
-        std::cout << " 3. Erweiterte Reparatur  (Zusätzliche Reparaturen, falls die Standard Reparatur nicht ausreichend war, Neustart erforderlich.)" << std::endl;
-        std::wcout << std::endl << " Beliebige Eingabe tätigen, um das Programm zu beenden." << std::endl << " ";
+        int auswahl = 0;
+        wcout << L" " << mode_query << std::endl << std::endl;
+        wcout << L" " << mode_option1 << std::endl;
+        wcout << L" " << mode_option2 << std::endl;
+        wcout << L" " << mode_option3 << std::endl;
+        wcout << std::endl << L" " << mode_cancel << std::endl << " ";
 
         std::cin.get(input, 3);
         if (input[1] == 0) {
@@ -109,7 +133,7 @@ int main()
         const clock_t start_time = clock();
 #endif // DEBUG
 
-        cout << endl << " Reparatur wird durchgeführt. Bitte nicht das Programm beenden oder den Computer ausschalten." << endl;
+        wcout << endl << L" " << in_progress_note << endl;
 
         if (auswahl == 1) {
             total = sizeof(standardReparatur) / sizeof(string);
@@ -122,7 +146,9 @@ int main()
         }
         counter = 1;
         
-        std::cout << std::endl << " Prozess " << 1 << " von " << total << " gestartet";
+        wchar_t started[MAX_LOCALIZED_STRING_SIZE];
+        swprintf(started, MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, 1, total);
+        wcout << std::endl << L" " << started;
         for (int i = 0; i < total; i++)
         {
             if (auswahl == 1)
@@ -139,18 +165,25 @@ int main()
             }
         }
         if (2 == auswahl || 3 == auswahl) {
-            std::cout << std::endl<<std::endl<< " Um die Reparatur abzuschließen ist ein Systemneustart erforderlich, Jetzt Neustarten? (J/N)";
+            wcout << std::endl<<std::endl<< L" " << reboot_query;
             std::cin.get(input, 3);
             std::cin.ignore(INT16_MAX, '\n');
-            if (0==input[1] && ('J' == input[0] || 'j' == input[0])) {
-                system("shutdown /r /t 0");
+            if (0==input[1]){ 
+                size_t confirm_len = wcslen(reboot_confirms);
+                for (int i = 0; i < confirm_len; i++) {
+                    if (input[0] == reboot_confirms[i]) {
+                        system("shutdown /r /t 0");
+                    }
+                }
             }
-            std::cout << std::endl << " Beim nächsten Start des Systems wird die Reparatur abgeschlossen.";
+            wcout << std::endl << L" " << reboot_planned;
         }
 #ifdef DEBUG
-        std::cout << " Diese Ausführung dauerte " << clock() - start_time << " Ticks." << endl;
+        wchar_t timing[MAX_LOCALIZED_STRING_SIZE];
+        swprintf(timing, MAX_LOCALIZED_STRING_SIZE, exec_time_fmt, clock() - start_time);
+        wcout << L" " << timing << endl;
 #endif // DEBUG
-        std::cout << std::endl << std::endl << std::endl;
+        wcout << std::endl << std::endl << std::endl;
     }
     return 0;
 }
@@ -158,28 +191,31 @@ int main()
 void exec(string command) {
     string  line = command + " > process_" + to_string(counter) + ".txt 2>&1";
 #ifdef DEBUG
-    std::cout  << std::endl << "Command: " << line << endl;
+    cout << std::endl << "Command: " << line << endl;
 #endif // DEBUG
     system(line.c_str());
-    std::cout << "\r" << " Prozess " << counter++ << " von " << total << " abgeschlossen";
+
+    wchar_t done[MAX_LOCALIZED_STRING_SIZE];
+    swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++,total);
+    wcout << L"\r " << done;
 }
 
-void printWarning(string warn) {
+void printWarning(wstring warn) {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     int columns;
 
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
 
-    string header_centralline = "|     " + warn + "     |";
-    string header_topline = "+" + string(header_centralline.size() - 2, '-') + "+";
-    string header_padline = "|" + string(header_centralline.size() - 2, ' ') + "|";
+    wstring header_centralline = L"|     " + warn + L"     |";
+    wstring header_topline = L"+" + wstring(header_centralline.size() - 2, '-') + L"+";
+    wstring header_padline = L"|" + wstring(header_centralline.size() - 2, ' ') + L"|";
 
     size_t startpoint = (columns - header_centralline.size()) / 2;
 
-    cout << string(startpoint, ' ') << header_topline << endl;
-    cout << string(startpoint, ' ') << header_padline << endl;
-    cout << string(startpoint, ' ') << header_centralline << endl;
-    cout << string(startpoint, ' ') << header_padline << endl;
-    cout << string(startpoint, ' ') << header_topline << endl;
+    wcout << wstring(startpoint, ' ') << header_topline << endl;
+    wcout << wstring(startpoint, ' ') << header_padline << endl;
+    wcout << wstring(startpoint, ' ') << header_centralline << endl;
+    wcout << wstring(startpoint, ' ') << header_padline << endl;
+    wcout << wstring(startpoint, ' ') << header_topline << endl;
 }

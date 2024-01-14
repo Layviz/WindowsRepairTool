@@ -8,6 +8,7 @@
 #include <fstream>
 #include <errno.h>
 #include <string.h>
+#include "localization.h"
 #include <locale> 
 #include <codecvt>
 
@@ -281,9 +282,9 @@ int installation(string installer_file) {
     return 0;
 }
 
-int main(){
-    SetConsoleOutputCP(65001);
-
+int main()
+{
+    load_localized_strings();
     //Check for mutex
     HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
@@ -291,16 +292,15 @@ int main(){
         cin.get();
         return -1;
     }
-
     int update_available = check_for_updates();
     // abfragen, ob man jetzt updaten, später oder beenden
     if (update_available > 0) {
         
         while (1) {
-            std::cout << endl << " Update jetzt installieren?" << endl << endl;
-            std::cout << " 1. Jetzt installieren." << endl;
-            std::cout << " 2. Nächtes Mal erneut fragen." << endl;
-            std::cout << " 3. Windows Reperatur Tool beenden." << endl << " ";
+            wcout << L" " << install_query << endl;
+            wcout << L" " << install_mode1 << endl;
+            wcout << L" " << install_mode2 << endl;
+            wcout << L" " << install_mode3 << endl << " ";
 
             int auswahl = 0;
             char input[3];
@@ -336,7 +336,7 @@ int main(){
     if (wrt < 0) {
         char errorbuffer[94];
         strerror_s(errorbuffer, 0);
-        cerr << " Fehler beim Starten von WRT: " << errorbuffer << endl;
+        wcerr << L" " << error_wrt << errorbuffer << endl;
         char dummy;
         cin.get(&dummy, 1);
     }
