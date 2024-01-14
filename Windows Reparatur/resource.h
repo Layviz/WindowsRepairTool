@@ -22,6 +22,7 @@
 #define REBOOT_CONFIRMS                 117
 #define REBOOT_PLANNED                  118
 #define EXECUTION_TIME_FORMAT_STRING    119
+#define CONSOLE_CODEPAGE                1000
 
 // Next default values for new objects
 // 

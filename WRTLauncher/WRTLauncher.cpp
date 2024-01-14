@@ -8,6 +8,7 @@
 #include <fstream>
 #include <errno.h>
 #include <string.h>
+#include "localization.h"
 
 #pragma comment(lib, "winhttp.lib")
 
@@ -251,17 +252,16 @@ int download_installer() {
 
 int main()
 {
-
-    SetConsoleOutputCP(65001);
+    load_localized_strings();
     int update_available = check_for_updates();
     // abfragen, ob man jetzt updaten, später oder beenden
     if (update_available > 0) {
         
         while (1) {
-            cout << " Update jetzt installieren?" << endl;
-            cout << " 1. Jetzt installieren." << endl;
-            cout << " 2. Nächtes Mal erneut fragen." << endl;
-            cout << " 3. Windows Reperatur Tool beenden." << endl << " ";
+            wcout << L" " << install_query << endl;
+            wcout << L" " << install_mode1 << endl;
+            wcout << L" " << install_mode2 << endl;
+            wcout << L" " << install_mode3 << endl << " ";
 
             int auswahl = 0;
             char input[3];
@@ -286,7 +286,7 @@ int main()
     if (wrt < 0) {
         char errorbuffer[94];
         strerror_s(errorbuffer, 0);
-        cerr << " Fehler beim Starten von WRT: " << errorbuffer << endl;
+        wcerr << L" " << error_wrt << errorbuffer << endl;
         char dummy;
         cin.get(&dummy, 1);
     }

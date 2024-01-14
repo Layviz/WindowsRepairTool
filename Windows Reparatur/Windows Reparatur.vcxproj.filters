@@ -18,6 +18,9 @@
     <ClCompile Include="Windows Reparatur.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="localization.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="bestaetigung.txt">
@@ -29,6 +32,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="..\version.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="localization.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

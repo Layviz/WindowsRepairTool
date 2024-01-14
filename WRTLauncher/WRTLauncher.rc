@@ -51,33 +51,6 @@ END
 
 STRINGTABLE
 BEGIN
-    TEST_STRING             "äüö"
-    MUTEX_WARN              "Das Programm wird bereits ausgeführt und kann nur einmal aufgerufen werden."
-    PENDING_RESTART_QUERY   "Es steht noch ein Systemneustart aus. Die Reparatur kann ohne Neustart nicht vollständig abgeschlossen werden."
-    PENDING_RESTART_OPTION1 "1. Neustart"
-    PENDING_RESTART_OPTION2 "2. Beenden"
-    PENDING_RESTART_OPTION3 "3. Trotzdem ausführen"
-    STARTUP_WARNING         "Es wird empfohlen nebenbei keine aufwendigen Prozesse laufen zu lassen."
-    MODE_QUERY              "System-Reparaturmodus wählen:"
-    MODE_OPTION1            "1. Einfache Reparatur    (Dauert wenige Minuten, kein Neustart erforderlich.)"
-    MODE_OPTION2            "2. Standard Reparatur    (Kann mehrere Stunden dauern, Neustart erforderlich.)"
-    MODE_OPTION3            "3. Erweiterte Reparatur  (Empfohlen nach der Standard Reparatur, Neustart erforderlich.)"
-END
-
-STRINGTABLE
-BEGIN
-    MODE_CANCEL_INFO        "Beliebige Eingabe tätigen, um das Programm zu beenden."
-    IN_PROGRESS_NOTE        "Reparatur wird durchgeführt. Bitte nicht das Programm beenden oder den Computer ausschalten."
-    PROGRESS_STARTED_FORMAT_STRING "Prozess %i von %i gestartet"
-    PROGESS_DONE_FORMAT_STRING "Prozess %i von %i abgeschlossen"
-    REBOOT_QUERY            "Um die Reparatur abzuschließen ist ein Systemneustart erforderlich, Jetzt Neustarten? (J/N)"
-    REBOOT_CONFIRMS         "Jj"
-    REBOOT_PLANNED          "Beim nächsten Start des Systems wird die Reparatur abgeschlossen."
-    EXECUTION_TIME_FORMAT_STRING "Diese Ausführung dauerte %l Ticks."
-END
-
-STRINGTABLE
-BEGIN
     ERROR_SESSION           "Konnte nicht auf Updates prüfen: Session nicht erstellt."
     ERROR_CONNECTION        "Konnte nicht auf Updates prüfen: Connection nicht erstellt."
     ERROR_REQUEST           "Konnte nicht auf Updates prüfen: Request nicht gesendet."

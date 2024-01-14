@@ -131,11 +131,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="localization.cpp" />
     <ClCompile Include="WRTLauncher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\version.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="localization.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WRTLauncher.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

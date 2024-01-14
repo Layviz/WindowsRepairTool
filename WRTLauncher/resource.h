@@ -1,26 +1,7 @@
 //{{NO_DEPENDENCIES}}
 // Von Microsoft Visual C++ generierte Includedatei.
-// Verwendet durch German Locale.rc
+// Verwendet durch WRTLauncher.rc
 //
-#define TEST_STRING                     101
-#define MUTEX_WARN                      102
-#define PENDING_RESTART_QUERY           103
-#define PENDING_RESTART_OPTION1         104
-#define PENDING_RESTART_OPTION2         105
-#define PENDING_RESTART_OPTION3         106
-#define STARTUP_WARNING                 107
-#define MODE_QUERY                      108
-#define MODE_OPTION1                    109
-#define MODE_OPTION2                    110
-#define MODE_OPTION3                    111
-#define MODE_CANCEL_INFO                112
-#define IN_PROGRESS_NOTE                113
-#define PROGRESS_STARTED_FORMAT_STRING  114
-#define PROGESS_DONE_FORMAT_STRING      115
-#define REBOOT_QUERY                    116
-#define REBOOT_CONFIRMS                 117
-#define REBOOT_PLANNED                  118
-#define EXECUTION_TIME_FORMAT_STRING    119
 #define ERROR_SESSION                   201
 #define ERROR_CONNECTION                202
 #define ERROR_REQUEST                   203
