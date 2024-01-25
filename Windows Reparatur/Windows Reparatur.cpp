@@ -14,6 +14,7 @@ void printWarning(wstring warn);
 int main()
 {
 
+    load_localized_strings();
     string standardReparatur[] = {
         "defrag C: /O /H",
         "sfc /scannow",
@@ -45,7 +46,6 @@ int main()
         "chkdsk C: /f /x /spotfix /sdcleanup < bestaetigung.txt"
     };
 
-    load_localized_strings();
 #ifdef DEBUG
     wcout << L"Loaded Strings" << endl;
     wcout << mutex_warn << endl;
@@ -195,7 +195,7 @@ int main()
 }
 
 void exec(string command) {
-    string  line = command + " > process_" + to_string(counter) + ".txt 2>&1";
+    string  line = command;// +" > process_" + to_string(counter) + ".txt 2>&1"; // redirecting to output to files causes Windows Defender to detect this as Virus
 #ifdef DEBUG
     cout << std::endl << "Command: " << line << endl;
 #endif // DEBUG
