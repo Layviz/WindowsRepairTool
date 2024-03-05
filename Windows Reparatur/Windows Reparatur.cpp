@@ -190,20 +190,20 @@ int main()
                     else {
 #ifdef DEBUG
                         wcout << "error on read" << endl;
-#endif // DEBUG
-
+#endif
                     }
                     memset(buffer, 0, 512);
                 } while (success);
                 wcout << endl;
             }
-            if(input)
+         // DEBUG
+    if(input)
                 CloseHandle(input);
             if(output)
                 CloseHandle(output);
             wait_for_process(&proc_info);
             wchar_t done[MAX_LOCALIZED_STRING_SIZE];
-            swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter, total);
+            swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++, total);
             wcout << L"\r " << done;
         }
         if (2 == auswahl || 3 == auswahl) {
@@ -299,7 +299,7 @@ int start_process(wstring command, PROCESS_INFORMATION * proc_info, HANDLE * sub
     }
 
     wchar_t done[MAX_LOCALIZED_STRING_SIZE];
-    swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, counter++,total);
+    swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, counter,total);
     wcout << L"\r " << done;
     return 0;
 }
