@@ -52,12 +52,6 @@
         "Entry"
         {
         "MsmKey" = "8:_1965ED765B41E9B518E49BD4C348B557"
-        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1965ED765B41E9B518E49BD4C348B557"
         "OwnerKey" = "8:_0865DAED43C548B08A5756BDC3A6E4D7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -65,6 +59,12 @@
         {
         "MsmKey" = "8:_1965ED765B41E9B518E49BD4C348B557"
         "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1965ED765B41E9B518E49BD4C348B557"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -94,12 +94,6 @@
         "Entry"
         {
         "MsmKey" = "8:_599330EEEDFAFA74706AD892857C6326"
-        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_599330EEEDFAFA74706AD892857C6326"
         "OwnerKey" = "8:_0865DAED43C548B08A5756BDC3A6E4D7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -111,8 +105,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6600ED98B4A348508AF1E603A3F83BAB"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_599330EEEDFAFA74706AD892857C6326"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -402,26 +396,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6600ED98B4A348508AF1E603A3F83BAB"
-            {
-            "SourcePath" = "8:..\\Windows Reparatur\\bestaetigung.txt"
-            "TargetName" = "8:bestaetigung.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_829067F4333BF896FA363C50E078650E"
             {
             "SourcePath" = "8:api-ms-win-crt-convert-l1-1-0.dll"
@@ -578,15 +552,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Windows Reparatur Tool"
-        "ProductCode" = "8:{26B75F4A-8458-47A5-99DF-E83EFE5022B8}"
-        "PackageCode" = "8:{BF5BF6E2-D0CB-4A49-A8ED-1F518891F507}"
+        "ProductCode" = "8:{C4DA8B01-4175-4F0E-888B-FFEAE726598B}"
+        "PackageCode" = "8:{C034D246-4FEC-4AC1-AE36-0F7A586B6073}"
         "UpgradeCode" = "8:{8D3699D3-4446-4F6B-8C17-60450715FD92}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.3.0"
+        "ProductVersion" = "8:1.4.0"
         "Manufacturer" = "8:Layviz"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

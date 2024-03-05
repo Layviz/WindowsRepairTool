@@ -69,8 +69,8 @@ STRINGTABLE
 BEGIN
     MODE_CANCEL_INFO        "Beliebige Eingabe tätigen, um das Programm zu beenden."
     IN_PROGRESS_NOTE        "Reparatur wird durchgeführt. Bitte nicht das Programm beenden oder den Computer ausschalten."
-    PROGRESS_STARTED_FORMAT_STRING "Prozess %i von %i gestartet"
-    PROGESS_DONE_FORMAT_STRING "Prozess %i von %i abgeschlossen"
+    PROGRESS_STARTED_FORMAT_STRING "Prozess %i von %i gestartet            "
+    PROGESS_DONE_FORMAT_STRING "Prozess %i von %i abgeschlossen     "
     REBOOT_QUERY            "Um die Reparatur abzuschließen ist ein Systemneustart erforderlich, Jetzt Neustarten? (J/N)"
     REBOOT_CONFIRMS         "Jj"
     REBOOT_PLANNED          "Beim nächsten Start des Systems wird die Reparatur abgeschlossen."

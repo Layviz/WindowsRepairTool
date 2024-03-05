@@ -147,11 +147,6 @@
     <ClCompile Include="Windows Reparatur.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="bestaetigung.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </CopyFileToFolders>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\version.h" />
     <ClInclude Include="localization.h" />
     <ClInclude Include="resource.h" />

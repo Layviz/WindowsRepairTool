@@ -8,42 +8,43 @@ using namespace std;
 
 int total;
 int counter;
-void exec(string command);
+int start_process(wstring command, PROCESS_INFORMATION* proc_info,HANDLE * input,HANDLE * output);
+void wait_for_process(PROCESS_INFORMATION* proc_info);
 void printWarning(wstring warn);
 
 int main()
 {
 
     load_localized_strings();
-    string standardReparatur[] = {
-        "defrag C: /O /H",
-        "sfc /scannow",
-        "\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 1\"",
-        "sfc /scannow",
-        "dism /online /cleanup-image /CheckHealth",
-        "Dism /Online /Cleanup-Image /ScanHealth",
-        "Dism /Online /Cleanup-Image /RestoreHealth",
-        "chkdsk C: /scan /perf /i",
-        "sfc /scannow",
-        "defrag C: /O /H"
+    wstring standardReparatur[] = {
+        L"defrag C: /O /H",
+        L"sfc /scannow",
+        L"\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 1\"",
+        L"sfc /scannow",
+        L"dism /online /cleanup-image /CheckHealth",
+        L"Dism /Online /Cleanup-Image /ScanHealth",
+        L"Dism /Online /Cleanup-Image /RestoreHealth",
+        L"chkdsk C: /scan /perf /i",
+        L"sfc /scannow",
+        L"defrag C: /O /H"
     };
-    string erweiterteReparatur[] = {
-        "defrag C: /O /H",
-        "sfc /scannow",
-        "\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 2\"",
-        "sfc /scannow",
-        "dism /online /cleanup-image /CheckHealth",
-        "Dism /Online /Cleanup-Image /ScanHealth",
-        "Dism /Online /Cleanup-Image /RestoreHealth",
-        "sfc /scannow",
-        "defrag C: /O /H",
-        "chkdsk C: /scan /perf /f /r /x /b < bestaetigung.txt"
+    wstring erweiterteReparatur[] = {
+        L"defrag C: /O /H",
+        L"sfc /scannow",
+        L"\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 2\"",
+        L"sfc /scannow",
+        L"dism /online /cleanup-image /CheckHealth",
+        L"Dism /Online /Cleanup-Image /ScanHealth",
+        L"Dism /Online /Cleanup-Image /RestoreHealth",
+        L"sfc /scannow",
+        L"defrag C: /O /H",
+        L"chkdsk C: /scan /perf /f /r /x /b"
     };
 
-    string zusatzReperatur[] = {
-        "defrag /c /o /h /m",
-        "sfc /scannow",
-        "chkdsk C: /f /x /spotfix /sdcleanup < bestaetigung.txt"
+    wstring zusatzReperatur[] = {
+        L"defrag /c /o /h /m",
+        L"sfc /scannow",
+        L"chkdsk C: /f /x /spotfix /sdcleanup"
     };
 
 #ifdef DEBUG
@@ -75,6 +76,8 @@ int main()
         return -1;
     }
     wcout << endl;
+
+    BOOL print_output = FALSE;
 
     char input[3];
     int auswahl = 0;
@@ -125,7 +128,11 @@ int main()
             auswahl = input[0] - 48;
         }
         
-        if (auswahl != 1 && auswahl != 2 && auswahl != 3) {
+        if (auswahl < 1 || auswahl > 3) {
+#ifdef DEBUG
+            if (auswahl>4)
+#endif // DEBUG
+
             break;
         }
 
@@ -146,23 +153,58 @@ int main()
         }
         counter = 1;
         
-        wchar_t started[MAX_LOCALIZED_STRING_SIZE];
-        swprintf(started, MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, 1, total);
-        wcout << std::endl << L" " << started;
         for (int i = 0; i < total; i++)
         {
+            PROCESS_INFORMATION proc_info;
+            HANDLE input = NULL, output = NULL;
             if (auswahl == 1)
             {
-                exec(standardReparatur[i]);
+                start_process(standardReparatur[i],&proc_info,&input,&output);
             }
             else if (auswahl == 2)
             {
-                exec(erweiterteReparatur[i]);
+                start_process(erweiterteReparatur[i], &proc_info, &input, &output);
             }
-            else
+            else if (auswahl == 3)
             {
-                exec(zusatzReperatur[i]);
+                start_process(zusatzReperatur[i], &proc_info, &input, &output);
             }
+
+            if (i == total-1) {
+                wchar_t confirmation[] = {reboot_confirms[0],'\r','\n','\0'};
+                DWORD written = 0;
+                //wcout << L"Confirmation: " << confirmation << endl;
+                WriteFile(input, confirmation, sizeof(confirmation), &written, NULL);
+                //wcout << L"bytes written " << written << " of " << sizeof(confirmation) << endl;
+            }
+            if (print_output&&output) {
+                char buffer[512] = {};
+                DWORD read = 0;
+                BOOL success;
+                wcout << endl;
+                do {
+                    success = ReadFile(output, buffer, 512, &read, NULL);
+                    if (success) {
+                        cout << buffer;
+                    }
+                    else {
+#ifdef DEBUG
+                        wcout << "error on read" << endl;
+#endif // DEBUG
+
+                    }
+                    memset(buffer, 0, 512);
+                } while (success);
+                wcout << endl;
+            }
+            if(input)
+                CloseHandle(input);
+            if(output)
+                CloseHandle(output);
+            wait_for_process(&proc_info);
+            wchar_t done[MAX_LOCALIZED_STRING_SIZE];
+            swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter, total);
+            wcout << L"\r " << done;
         }
         if (2 == auswahl || 3 == auswahl) {
             wcout << std::endl<<std::endl<< L" " << reboot_query;
@@ -194,16 +236,78 @@ int main()
     return 0;
 }
 
-void exec(string command) {
-    string  line = command;// +" > process_" + to_string(counter) + ".txt 2>&1"; // redirecting to output to files causes Windows Defender to detect this as Virus
+int start_process(wstring command, PROCESS_INFORMATION * proc_info, HANDLE * subprocess_in_write_ptr, HANDLE * subprocess_out_read_ptr) {
 #ifdef DEBUG
-    cout << std::endl << "Command: " << line << endl;
+    wcout << std::endl << L"Command: " << command << endl;
 #endif // DEBUG
-    system(line.c_str());
+
+    // handles for communication with the created process
+    HANDLE subprocess_in_read = NULL, subprocess_out_write = NULL;
+
+    // Security attr for making the handles inheritable
+    SECURITY_ATTRIBUTES saAttr;
+    saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
+    saAttr.bInheritHandle = TRUE;
+    saAttr.lpSecurityDescriptor = NULL;
+
+    // creating pipes
+    if (!CreatePipe(subprocess_out_read_ptr, &subprocess_out_write, &saAttr, 0)) {
+        return -10;
+    }
+    if (!SetHandleInformation(*subprocess_out_read_ptr, HANDLE_FLAG_INHERIT, 0)) {
+        return -11;
+    }
+    if (!CreatePipe(&subprocess_in_read, subprocess_in_write_ptr, &saAttr, 0)) {
+        return -20;
+    }
+    if (!SetHandleInformation(*subprocess_in_write_ptr, HANDLE_FLAG_INHERIT, 0)) {
+        return -21;
+    }
+
+    // structures for creating the process
+    STARTUPINFO start_info;
+    BOOL success = FALSE;
+
+    ZeroMemory(proc_info, sizeof(PROCESS_INFORMATION));
+    ZeroMemory(&start_info, sizeof(STARTUPINFO));
+
+    // setting the previously created pipes as stdin and stdout (and stderr)
+    start_info.cb = sizeof(STARTUPINFO);
+    start_info.hStdError = subprocess_out_write;
+    start_info.hStdOutput = subprocess_out_write;
+    start_info.hStdInput = subprocess_in_read;
+    start_info.dwFlags |= STARTF_USESTDHANDLES;
+
+    success = CreateProcess(NULL,
+        (LPWSTR)command.c_str(),
+        NULL,
+        NULL,
+        TRUE,
+        0,
+        NULL,
+        NULL,
+        &start_info,
+        proc_info);
+
+    if (!success) {
+        return -1;
+    }
+    else
+    {
+        CloseHandle(subprocess_out_write);
+        CloseHandle(subprocess_in_read);
+    }
 
     wchar_t done[MAX_LOCALIZED_STRING_SIZE];
-    swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++,total);
+    swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, counter++,total);
     wcout << L"\r " << done;
+    return 0;
+}
+
+void wait_for_process(PROCESS_INFORMATION* proc_info) {
+    WaitForSingleObject(proc_info->hProcess, INFINITE);
+    CloseHandle(proc_info->hProcess);
+    CloseHandle(proc_info->hThread);
 }
 
 void printWarning(wstring warn) {
