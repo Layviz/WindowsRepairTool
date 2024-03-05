@@ -227,9 +227,10 @@ int main()
             wcout << std::endl << L" " << reboot_planned << endl;
         }
 #ifdef DEBUG
+        clock_t time_diff = clock() - start_time;
         wchar_t timing[MAX_LOCALIZED_STRING_SIZE];
-        swprintf(timing, MAX_LOCALIZED_STRING_SIZE, exec_time_fmt, clock() - start_time);
-        wcout << L" " << timing << endl;
+        swprintf(timing, MAX_LOCALIZED_STRING_SIZE, exec_time_fmt, time_diff);
+        wcout << L"\n " << timing << time_diff << endl;
 #endif // DEBUG
         wcout << std::endl << std::endl << std::endl;
     }
@@ -283,7 +284,7 @@ int start_process(wstring command, PROCESS_INFORMATION * proc_info, HANDLE * sub
         NULL,
         NULL,
         TRUE,
-        0,
+        HIGH_PRIORITY_CLASS,
         NULL,
         NULL,
         &start_info,
