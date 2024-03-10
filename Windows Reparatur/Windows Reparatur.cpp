@@ -109,6 +109,24 @@ int main()
         }
     }
 
+    if (SetConsoleCtrlHandler( NULL, TRUE)) {
+        ;
+    }
+    else {
+#ifdef DEBUG
+        printf("handler not registred\n");
+#endif
+    }
+
+    if (DeleteMenu(GetSystemMenu(GetConsoleWindow(), FALSE), SC_CLOSE, MF_BYCOMMAND)) {
+        ;
+    }
+    else {
+#ifdef DEBUG
+        printf("close button not removed\n");
+#endif
+    }
+
 
     wstring header_warning = startup_warn;
     printWarning(header_warning);
