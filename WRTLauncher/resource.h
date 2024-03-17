@@ -3,6 +3,7 @@
 // Verwendet durch WRTLauncher.rc
 //
 #define MUTEX_WARN                      102
+#define IDI_ICON1                       102
 #define ERROR_SESSION                   201
 #define ERROR_CONNECTION                202
 #define ERROR_REQUEST                   203
@@ -27,7 +28,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        102
+#define _APS_NEXT_RESOURCE_VALUE        103
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101

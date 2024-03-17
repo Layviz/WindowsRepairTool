@@ -11,6 +11,9 @@ int counter;
 int start_process(wstring command, PROCESS_INFORMATION* proc_info,HANDLE * input,HANDLE * output);
 void wait_for_process(PROCESS_INFORMATION* proc_info);
 void printWarning(wstring warn);
+wstring blank_line(80, L' '); //80 spaces should be enough to overwrite everthing
+bool verbose = false;   //verbose for all runs
+bool verbose_current = false; //verbose for the next run
 
 int main()
 {
@@ -77,9 +80,8 @@ int main()
     }
     wcout << endl;
 
-    BOOL print_output = FALSE;
 
-    char input[3];
+    char input[4];
     int auswahl = 0;
     // test for pending.xml
     GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml");
@@ -140,13 +142,29 @@ int main()
         wcout << L" " << mode_option3 << std::endl;
         wcout << std::endl << L" " << mode_cancel << std::endl << " ";
 
-        std::cin.get(input, 3);
-        if (input[1] == 0) {
+        std::cin.get(input, 4);
+        if ((input[1] == 0) || (input[1] == '+' && input[2] == 0)) {
             std::cin.ignore(INT16_MAX, '\n');
+            if (input[0] == '+') {
+                verbose = true;
+                wcout << std::endl << std::endl << std::endl;
+                continue;
+            }
+            else if (input[0] == '-') {
+                verbose = false;
+                wcout << std::endl << std::endl << std::endl;
+                continue;
+            }
             auswahl = input[0] - 48;
+            if (input[1] == '+') {
+                verbose_current = true;
+            }
+            
         }
-        
-        if (auswahl < 1 || auswahl > 3) {
+        if (verbose)
+            verbose_current = true;
+
+        if ((auswahl < 1 || auswahl > 3) && auswahl != -5 && auswahl != -3) {
 #ifdef DEBUG
             if (auswahl>4)
 #endif // DEBUG
@@ -195,14 +213,17 @@ int main()
                 WriteFile(input, confirmation, sizeof(confirmation), &written, NULL);
                 //wcout << L"bytes written " << written << " of " << sizeof(confirmation) << endl;
             }
-            if (print_output&&output) {
+            if (verbose_current && output) {
                 char buffer[512] = {};
                 DWORD read = 0;
                 BOOL success;
-                wcout << endl;
+                wcout << endl << endl << endl;
                 do {
                     success = ReadFile(output, buffer, 512, &read, NULL);
                     if (success) {
+                        if (read < 512) {
+                            cout << " ";
+                        }
                         cout << buffer;
                     }
                     else {
@@ -212,17 +233,16 @@ int main()
                     }
                     memset(buffer, 0, 512);
                 } while (success);
-                wcout << endl;
+                wcout << endl << endl;
             }
-         // DEBUG
-    if(input)
+            if(input)
                 CloseHandle(input);
             if(output)
                 CloseHandle(output);
             wait_for_process(&proc_info);
             wchar_t done[MAX_LOCALIZED_STRING_SIZE];
             swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++, total);
-            wcout << L"\r " << done;
+            wcout << L"\r " << blank_line << L"\r " << done;
         }
         if (2 == auswahl || 3 == auswahl) {
             wcout << std::endl<<std::endl<< L" " << reboot_query;
@@ -251,6 +271,7 @@ int main()
         wcout << L"\n " << timing << time_diff << endl;
 #endif // DEBUG
         wcout << std::endl << std::endl << std::endl;
+        verbose_current = false;
     }
     return 0;
 }
@@ -319,7 +340,7 @@ int start_process(wstring command, PROCESS_INFORMATION * proc_info, HANDLE * sub
 
     wchar_t done[MAX_LOCALIZED_STRING_SIZE];
     swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, counter,total);
-    wcout << L"\r " << done;
+    wcout << L"\r " << blank_line << L"\r " << done;
     return 0;
 }
 

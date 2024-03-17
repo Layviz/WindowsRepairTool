@@ -21,6 +21,12 @@
     <ClCompile Include="localization.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DesktopNotificationManagerCompat.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="notification.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -30,6 +36,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="localization.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DesktopNotificationManagerCompat.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="notification.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

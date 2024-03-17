@@ -1,5 +1,7 @@
-﻿// Microsoft Visual C++ generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
+#pragma code_page(65001)
+
 #include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
@@ -17,7 +19,6 @@
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
 LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
-#pragma code_page(1252)
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -47,6 +48,16 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "F:\\cpp\\WindowsReparaturTool\\Windows Reparatur\\schraubenschlussel.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
@@ -66,7 +77,7 @@ BEGIN
     VERSION_AHEAD           "Current verion is ahead of the source."
     VERSION_UNKNOWN         "Could not check for updates. Could not determine current version."
     ERROR_DOWNLOAD_URL      "Could not check for updates: Could not find download URL"
-    BYTES_READ              "bytes recieved               "
+    BYTES_READ              "bytes recieved"
     INSTALLER_START         "Removing previous version and installing new version"
     INSTALL_QUERY           "Install update now?"
     INSTALL_MODE1           "1. Update now."

@@ -21,6 +21,7 @@ using json = nlohmann::json;
  * @brief Globale Varibale für Informationen über die aktuellste Version.
 */
 json latest_verion_info;
+wstring blank_line(80, L' ');//80 spaces should be enough to overwrite everthing
 
 /**
  * @brief Prüft ob auf Github eine neuere Version des WRT verfügbar ist. Speichert Infos in latest_version_info.
@@ -239,7 +240,7 @@ int download_installer(string *downloaded_file) {
             }
             file.write(buffer, read);
             total += read;
-            wcout << L" " << total << bytes_read << L"\r";
+            wcout << blank_line << L"\r " << total << bytes_read << L"\r";
             delete[] buffer;
             WinHttpQueryDataAvailable(request, &size);
         }
