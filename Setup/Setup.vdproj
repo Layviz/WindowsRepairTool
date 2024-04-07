@@ -69,6 +69,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2DB4FE056BC14E4AA8E1CBA179FD62E0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3A75F3B7E6A416D6041BB28019DFB704"
         "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
@@ -123,6 +129,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_90B71890D78549B19E78038AB05FE9A2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_985D526E36F7FA8F74EB82127625933E"
         "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
@@ -149,6 +161,12 @@
         {
         "MsmKey" = "8:_A46593549B23BAAC5733439CDE23AD97"
         "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E398497A5C064730A1CECF2A07A2E6F0"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -336,6 +354,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2DB4FE056BC14E4AA8E1CBA179FD62E0"
+            {
+            "SourcePath" = "8:..\\Batch scripts\\Simple repair.bat"
+            "TargetName" = "8:Simple repair.bat"
+            "Tag" = "8:"
+            "Folder" = "8:_C091BDC930BD468ABA5BBFBCD624B476"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A75F3B7E6A416D6041BB28019DFB704"
             {
             "SourcePath" = "8:MSVCP140.dll"
@@ -416,6 +454,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_90B71890D78549B19E78038AB05FE9A2"
+            {
+            "SourcePath" = "8:..\\Batch scripts\\Default repair.bat"
+            "TargetName" = "8:Default repair.bat"
+            "Tag" = "8:"
+            "Folder" = "8:_C091BDC930BD468ABA5BBFBCD624B476"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_985D526E36F7FA8F74EB82127625933E"
             {
             "SourcePath" = "8:api-ms-win-crt-math-l1-1-0.dll"
@@ -476,6 +534,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E398497A5C064730A1CECF2A07A2E6F0"
+            {
+            "SourcePath" = "8:..\\Batch scripts\\Extended repair.bat"
+            "TargetName" = "8:Extended repair.bat"
+            "Tag" = "8:"
+            "Folder" = "8:_C091BDC930BD468ABA5BBFBCD624B476"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F8E68A90AD945BC69B8BB12E76F9D665"
             {
             "SourcePath" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
@@ -512,6 +590,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_C091BDC930BD468ABA5BBFBCD624B476"
+                    {
+                    "Name" = "8:Batch scripts"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_450369F1B52E43EEB3A91E90FB732DF3"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_65434660D6EA46B3A0AE4903EA406BC0"
@@ -553,7 +642,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Windows Reparatur Tool"
         "ProductCode" = "8:{C4DA8B01-4175-4F0E-888B-FFEAE726598B}"
-        "PackageCode" = "8:{C034D246-4FEC-4AC1-AE36-0F7A586B6073}"
+        "PackageCode" = "8:{910BF0F8-6A01-4A8C-B2CD-CBD3010B4E2D}"
         "UpgradeCode" = "8:{8D3699D3-4446-4F6B-8C17-60450715FD92}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
