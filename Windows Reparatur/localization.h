@@ -1,7 +1,7 @@
 #pragma once
 
 // localized strings
-#define MAX_LOCALIZED_STRING_SIZE 512
+#define MAX_LOCALIZED_STRING_SIZE 2048
 extern wchar_t mutex_warn[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t pending_query[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t pending_option1[MAX_LOCALIZED_STRING_SIZE] ;
@@ -19,6 +19,8 @@ extern wchar_t progress_done_fmt[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t reboot_query[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t reboot_confirms[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t reboot_planned[MAX_LOCALIZED_STRING_SIZE] ;
-extern wchar_t exec_time_fmt[MAX_LOCALIZED_STRING_SIZE] ;
+extern wchar_t exec_time_fmt[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t help_text_fmt[MAX_LOCALIZED_STRING_SIZE];
+
 
 extern int load_localized_strings();

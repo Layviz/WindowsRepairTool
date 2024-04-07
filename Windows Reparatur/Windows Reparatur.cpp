@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <Windows.h>
+#include <PathCch.h>
 #include <string>
 #include "resource.h"
 #include "localization.h"
@@ -11,6 +12,7 @@ int counter;
 int start_process(wstring command, PROCESS_INFORMATION* proc_info,HANDLE * input,HANDLE * output);
 void wait_for_process(PROCESS_INFORMATION* proc_info);
 void printWarning(wstring warn);
+void print_help();
 wstring blank_line(80, L' '); //80 spaces should be enough to overwrite everthing
 bool verbose = false;   //verbose for all runs
 bool verbose_current = false; //verbose for the next run
@@ -20,7 +22,7 @@ int main()
 
     load_localized_strings();
     wstring standardReparatur[] = {
-        L"defrag C: /O /H",
+        L"defrag C: /o /h",
         L"sfc /scannow",
         L"\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 1\"",
         L"sfc /scannow",
@@ -29,10 +31,10 @@ int main()
         L"Dism /Online /Cleanup-Image /RestoreHealth",
         L"chkdsk C: /scan /perf /i",
         L"sfc /scannow",
-        L"defrag C: /O /H"
+        L"defrag C: /o /h"
     };
     wstring erweiterteReparatur[] = {
-        L"defrag C: /O /H",
+        L"defrag C: /o /h",
         L"sfc /scannow",
         L"\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 2\"",
         L"sfc /scannow",
@@ -40,12 +42,12 @@ int main()
         L"Dism /Online /Cleanup-Image /ScanHealth",
         L"Dism /Online /Cleanup-Image /RestoreHealth",
         L"sfc /scannow",
-        L"defrag C: /O /H",
+        L"defrag /c /o /h /m",
         L"chkdsk C: /scan /perf /f /r /x /b"
     };
 
     wstring zusatzReperatur[] = {
-        L"defrag /c /o /h /m",
+        L"defrag C: /o /h",
         L"sfc /scannow",
         L"chkdsk C: /f /x /spotfix /sdcleanup"
     };
@@ -145,7 +147,11 @@ int main()
         std::cin.get(input, 4);
         if ((input[1] == 0) || (input[1] == '+' && input[2] == 0)) {
             std::cin.ignore(INT16_MAX, '\n');
-            if (input[0] == '+') {
+            if (input[0] == 'h' || input[0] == '?') {
+                print_help();
+                continue;
+            }
+            else if (input[0] == '+') {
                 verbose = true;
                 wcout << std::endl << std::endl << std::endl;
                 continue;
@@ -368,4 +374,29 @@ void printWarning(wstring warn) {
     wcout << wstring(startpoint, ' ') << header_centralline << endl;
     wcout << wstring(startpoint, ' ') << header_padline << endl;
     wcout << wstring(startpoint, ' ') << header_topline << endl;
+}
+
+
+
+void print_help() {
+    wstring batch_path;
+    wchar_t wrt_path[MAX_PATH];
+    if (0 == GetModuleFileName(NULL, wrt_path, MAX_PATH)) {
+        batch_path = L"NOT FOUND";// unlikely but just in case
+    }
+    else if (S_OK == PathCchRemoveFileSpec(wrt_path, MAX_PATH)) {
+        wchar_t batch_dir[] = L"Batch scripts";
+        if (S_OK == PathCchAppend(wrt_path, MAX_PATH, batch_dir)) {
+            batch_path = wstring(wrt_path);
+        }
+        else {
+            batch_path = L"NOT FOUND";// unlikely but just in case
+        }
+    }
+    else {
+        batch_path = L"NOT FOUND";// unlikely but just in case
+    }
+    wchar_t help_text[MAX_LOCALIZED_STRING_SIZE];
+    swprintf(help_text, MAX_LOCALIZED_STRING_SIZE, help_text_fmt, batch_path.c_str());
+    wcout << endl << help_text << endl << endl;
 }

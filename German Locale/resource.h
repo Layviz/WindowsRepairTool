@@ -21,6 +21,8 @@
 #define REBOOT_CONFIRMS                 117
 #define REBOOT_PLANNED                  118
 #define EXECUTION_TIME_FORMAT_STRING    119
+#define HELP_TEXT                       120
+#define HELP_TEXT_FMT                   120
 #define ERROR_SESSION                   201
 #define ERROR_CONNECTION                202
 #define ERROR_REQUEST                   203

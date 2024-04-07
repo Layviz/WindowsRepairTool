@@ -3,7 +3,7 @@
 #include "resource.h"
 
 // localized strings
-#define MAX_LOCALIZED_STRING_SIZE 512
+#define MAX_LOCALIZED_STRING_SIZE 2048
 wchar_t mutex_warn[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t pending_query[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t pending_option1[MAX_LOCALIZED_STRING_SIZE] = {};
@@ -22,6 +22,7 @@ wchar_t reboot_query[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t reboot_confirms[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t reboot_planned[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t exec_time_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t help_text_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
 
 void load_stings(HINSTANCE source) {
     LoadString(source, MUTEX_WARN, mutex_warn, MAX_LOCALIZED_STRING_SIZE);
@@ -42,6 +43,7 @@ void load_stings(HINSTANCE source) {
     LoadString(source, REBOOT_CONFIRMS, reboot_confirms, MAX_LOCALIZED_STRING_SIZE);
     LoadString(source, REBOOT_PLANNED, reboot_planned, MAX_LOCALIZED_STRING_SIZE);
     LoadString(source, EXECUTION_TIME_FORMAT_STRING, exec_time_fmt, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, HELP_TEXT_FMT, help_text_fmt, MAX_LOCALIZED_STRING_SIZE);
 }
 
 int load_localized_strings() {
