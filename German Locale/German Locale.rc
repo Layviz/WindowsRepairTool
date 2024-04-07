@@ -67,7 +67,7 @@ END
 
 STRINGTABLE
 BEGIN
-    MODE_CANCEL_INFO        "Beliebige Eingabe tätigen, um das Programm zu beenden."
+    MODE_CANCEL_INFO        "Beliebige Eingabe tätigen, um das Programm zu beenden, oder ""h"" um Hilfe anzuzeigen."
     IN_PROGRESS_NOTE        "Reparatur wird durchgeführt. Bitte nicht das Programm beenden oder den Computer ausschalten."
     PROGRESS_STARTED_FORMAT_STRING "Prozess %i von %i gestartet"
     PROGESS_DONE_FORMAT_STRING "Prozess %i von %i abgeschlossen"
