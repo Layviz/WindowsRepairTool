@@ -96,6 +96,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <AdditionalDependencies>runtimeobject.lib;Pathcch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Version>
+      </Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -114,6 +116,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <AdditionalDependencies>runtimeobject.lib;Pathcch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Version>
+      </Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -128,6 +132,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <AdditionalDependencies>runtimeobject.lib;Pathcch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Version>
+      </Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,6 +153,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <AdditionalDependencies>runtimeobject.lib;Pathcch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Version>
+      </Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

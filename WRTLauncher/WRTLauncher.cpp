@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Windows.h>
+#include <PathCch.h>
 #include <winhttp.h>
 #include "json.hpp"
 #include <sstream> 
@@ -220,35 +221,34 @@ int download_installer(string *downloaded_file) {
         wcerr << L" " << error_request << endl;
         return -1;
     }
-    if (resp) {
         
-        ofstream file;
-        file.open(file_name, ios::out | ios::binary | ios::trunc);
+    ofstream file;
+    file.open(file_name, ios::out | ios::binary | ios::trunc);
 
-        WinHttpQueryDataAvailable(request, &size);
-        while (size > 0) {
-            char* buffer = 0;
-            buffer = new char[size + 1];
-            memset(buffer, 0, size + 1);
-            if (!buffer) {
-                wcerr << L" " << error_memory << endl;
-                return -1;
-            }
-            if (!WinHttpReadData(request, buffer, size, &read)) {
-                wcerr << L" " << error_read << endl;
-                return -1;
-            }
-            file.write(buffer, read);
-            total += read;
-            wcout << blank_line << L"\r " << total << bytes_read << L"\r";
-            delete[] buffer;
-            WinHttpQueryDataAvailable(request, &size);
+    WinHttpQueryDataAvailable(request, &size);
+    while (size > 0) {
+        char* buffer = 0;
+        buffer = new char[size + 1];
+        memset(buffer, 0, size + 1);
+        if (!buffer) {
+            wcerr << L" " << error_memory << endl;
+            return -1;
         }
-        file.close();
-
-        *downloaded_file = file_name;
-        return 0;
+        if (!WinHttpReadData(request, buffer, size, &read)) {
+            wcerr << L" " << error_read << endl;
+            return -1;
+        }
+        file.write(buffer, read);
+        total += read;
+        wcout << blank_line << L"\r " << total << bytes_read << L"\r";
+        delete[] buffer;
+        WinHttpQueryDataAvailable(request, &size);
     }
+    file.close();
+
+    *downloaded_file = file_name;
+    return 0;
+    
 }
 
 string get_exe_dir() {
@@ -285,8 +285,27 @@ int installation(string installer_file) {
     return 0;
 }
 
+wstring get_lib_path() {
+    wchar_t wrt_path[MAX_PATH];
+    if (0 == GetModuleFileName(NULL, wrt_path, MAX_PATH)) {
+        return L"";
+    }
+    else if (S_OK == PathCchRemoveFileSpec(wrt_path, MAX_PATH)) {
+        wchar_t batch_dir[] = L"lib";
+        if (S_OK == PathCchAppend(wrt_path, MAX_PATH, batch_dir)) {
+            return wstring(wrt_path);
+        }
+    }
+    return L"";
+}
+
 int main()
 {
+    wstring lib_dir = get_lib_path();
+    if (!lib_dir.empty()) {
+        wcout << L"Lib dir is "<<lib_dir<<endl;
+        SetDllDirectory(lib_dir.c_str());
+    }
     load_localized_strings();
     //Check for mutex
     HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
@@ -334,7 +353,8 @@ int main()
             }
         }
     }
-    CloseHandle(mutex);
+    if (mutex!=0)
+        CloseHandle(mutex);
     int wrt = system("WRT.exe");
     if (wrt < 0) {
         char errorbuffer[94];
