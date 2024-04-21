@@ -24,7 +24,7 @@ int main()
     wstring standardReparatur[] = {
         L"defrag C: /o /h",
         L"sfc /scannow",
-        L"\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 1\"",
+        L"mpcmdrun.exe -Scan -ScanType 1",
         L"sfc /scannow",
         L"dism /online /cleanup-image /CheckHealth",
         L"Dism /Online /Cleanup-Image /ScanHealth",
@@ -36,7 +36,7 @@ int main()
     wstring erweiterteReparatur[] = {
         L"defrag C: /o /h",
         L"sfc /scannow",
-        L"\"\"%ProgramFiles%\\Windows Defender\\mpcmdrun.exe\" -Scan -ScanType 2\"",
+        L"mpcmdrun.exe -Scan -ScanType 2",
         L"sfc /scannow",
         L"dism /online /cleanup-image /CheckHealth",
         L"Dism /Online /Cleanup-Image /ScanHealth",
@@ -104,7 +104,7 @@ int main()
         {
         case 1:
             system("shutdown /r /t 0");
-            break;
+            return 0;
         case 3:
             break;
         case 2:
@@ -178,6 +178,22 @@ int main()
             break;
         }
 
+        // set the path env var to windows defender path
+        // system32 is searched by default so no need to include in path
+
+        wchar_t wd_path[MAX_PATH];
+        BOOL env_rv = GetEnvironmentVariable(L"ProgramFiles", wd_path, MAX_PATH);
+        if (!env_rv)  {
+             wcscpy_s(wd_path, L"C:\\Program Files");
+        }
+        wcscat_s(wd_path, L"\\Windows Defender");
+        env_rv = SetEnvironmentVariable(L"Path", wd_path);
+        if (!env_rv) {
+            wcout << "ERROR: Failed to set Path variable" << endl;
+        }
+        
+
+
 #ifdef DEBUG
         const clock_t start_time = clock();
 #endif // DEBUG
@@ -199,19 +215,28 @@ int main()
         {
             PROCESS_INFORMATION proc_info;
             HANDLE input = NULL, output = NULL;
+            int rv = 0;
             if (auswahl == 1)
             {
-                start_process(standardReparatur[i],&proc_info,&input,&output);
+                rv = start_process(standardReparatur[i],&proc_info,&input,&output);
             }
             else if (auswahl == 2)
             {
-                start_process(erweiterteReparatur[i], &proc_info, &input, &output);
+                rv = start_process(erweiterteReparatur[i], &proc_info, &input, &output);
             }
             else if (auswahl == 3)
             {
-                start_process(zusatzReperatur[i], &proc_info, &input, &output);
+                rv = start_process(zusatzReperatur[i], &proc_info, &input, &output);
             }
-
+            if (rv <= -10) {
+                wcout << endl << L"ERROR on creating pipes for subprocess" << endl;
+            }
+            else if (rv < 0) {
+                wcout << endl << L"ERROR on creating subprocess" << endl;
+                wchar_t error_buffer[1024];
+                FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), error_buffer, 1024, NULL);
+                wcout << L"Error: " << error_buffer<<endl;
+            }
             if (i == total-1) {
                 wchar_t confirmation[] = {reboot_confirms[0],'\r','\n','\0'};
                 DWORD written = 0;
@@ -219,7 +244,7 @@ int main()
                 WriteFile(input, confirmation, sizeof(confirmation), &written, NULL);
                 //wcout << L"bytes written " << written << " of " << sizeof(confirmation) << endl;
             }
-            if (verbose_current && output) {
+            if (verbose_current && output && rv == 0) {
                 char buffer[512] = {};
                 DWORD read = 0;
                 BOOL success;
@@ -398,5 +423,7 @@ void print_help() {
     }
     wchar_t help_text[MAX_LOCALIZED_STRING_SIZE];
     swprintf(help_text, MAX_LOCALIZED_STRING_SIZE, help_text_fmt, batch_path.c_str());
-    wcout << endl << help_text << endl << endl;
+    wcout << endl << help_text << L" ";
+    cin.get(); // wait for input before returning
+    wcout << endl << endl;
 }
