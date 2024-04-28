@@ -19,6 +19,9 @@ bool verbose_current = false; //verbose for the next run
 
 int main()
 {
+    if (!SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS)) {
+        // ignore this, not much to do about it
+    }
 
     load_localized_strings();
     wstring standardReparatur[] = {
