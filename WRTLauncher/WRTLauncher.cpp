@@ -148,12 +148,12 @@ int check_for_updates() {
                 return 0;
             }
             else {
-                wcout << L" " << version_ahead << endl;
+                wcout << L" " << version_ahead << endl << endl;
                 return 0;
             }
         }
         else {
-            wcerr << version_unknown << endl;
+            wcerr << version_unknown << endl << endl;
         }
     }
     return -1;
@@ -287,6 +287,10 @@ int installation(string installer_file) {
 
 int main()
 {
+    if (!SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS)) {
+        // ignore this, not much to do about it
+    }
+
     load_localized_strings();
     //Check for mutex
     HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
