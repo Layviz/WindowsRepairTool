@@ -54,10 +54,10 @@ STRINGTABLE
 BEGIN
     TEST_STRING             """test"""
     MUTEX_WARN              "Das Programm wird bereits ausgeführt und kann nur einmal aufgerufen werden."
-    PENDING_RESTART_QUERY   "Es steht noch ein Systemneustart aus. Die Reparatur kann ohne Neustart nicht vollständig abgeschlossen werden."
-    PENDING_RESTART_OPTION1 "1. Neustart"
-    PENDING_RESTART_OPTION2 "2. Beenden"
-    PENDING_RESTART_OPTION3 "3. Trotzdem ausführen"
+    PENDING_RESTART_QUERY   "Es steht noch ein System Neustart aus. Die Reparatur kann ohne Neustart nicht vollständig abgeschlossen werden."
+    PENDING_RESTART_OPTION1 "1. System neustarten   (Ermöglicht vollen Funktionsumfang.)"
+    PENDING_RESTART_OPTION2 "2. Trotzdem ausführen  (Startet mit eingeschränktem Funktionsumfang.)"
+    PENDING_RESTART_OPTION3 " "
     STARTUP_WARNING         "Es wird empfohlen nebenbei keine aufwendigen Prozesse laufen zu lassen."
     MODE_QUERY              "System-Reparaturmodus wählen:"
     MODE_OPTION1            "1. Einfache Reparatur    (Dauert wenige Minuten, kein Neustart erforderlich.)"
@@ -71,11 +71,12 @@ BEGIN
     IN_PROGRESS_NOTE        "Reparatur wird durchgeführt. Bitte nicht das Programm beenden oder den Computer ausschalten."
     PROGRESS_STARTED_FORMAT_STRING "Prozess %i von %i gestartet"
     PROGESS_DONE_FORMAT_STRING "Prozess %i von %i abgeschlossen"
-    REBOOT_QUERY            "Um die Reparatur abzuschließen ist ein Systemneustart erforderlich, Jetzt Neustarten? (J/N)"
+    REBOOT_QUERY            "Um die Reparatur abzuschließen ist ein System Neustart erforderlich. Jetzt neustarten? (J/N)"
     REBOOT_CONFIRMS         "Jj"
     REBOOT_PLANNED          "Beim nächsten Start des Systems wird die Reparatur abgeschlossen."
     EXECUTION_TIME_FORMAT_STRING "Diese Ausführung dauerte %l Ticks."
-    HELP_TEXT_FMT           " ""Einfache Reparatur""\n\n Die Einfache Reparatur braucht wenige Minuten und ist in den meisten Fällen ausreichend um Fehler zu beheben.\n\n ""Standard Reparatur""\n Die Standard Reparatur ist ausführlicher und braucht mehrere Stunden, sie prüft das ganze System auf Viren\n und prüft nach dem System Neustart die System - Partition vollständig auf Fehler und versucht diese zu beheben.\n\n ""Erweiterte Reparatur""\n\n Die Erweiterte Reparatur ist nach der Standard Reparatur empfehlenswert,\n da diese noch auf andere Weise versucht Beschädigungen der System - Partiton zu erkennen und zu beheben.\n\n\n Für erweiterte Prozessausgabe ""+"" an den gewählten Modus anhängen(z.B. ""1+"").\n Für dauerhaftes Einschalten der Prozessausgabe nur ""+"" ohne Modus eingeben.\n Zum deaktivieren der Prozessausgabe nur ""-"" ohne Modus eingeben.\n (Die Prozessausgabe ist Standardmäßig deaktiviert.)\n\n\n Es liegen in ""%s"" Batch Dateien,\n die ausgeführt werden können, um manuell Reparatur Modi auszuführen ohne das WRT starten zu müssen.\n (Das WRT führt die Reparatur Modi effizenter und schneller aus.)\n"
+    HELP_TEXT_FMT           " Reparaturmodi\n\n   ""Einfache Reparatur""\n    \n      Die Einfache Reparatur braucht wenige Minuten und ist in den meisten Fällen ausreichend um Fehler zu beheben.\n    \n   ""Standard Reparatur""\n    \n      Die Standard Reparatur ist ausführlicher und braucht mehrere Stunden, sie prüft das ganze System auf Viren\n      und prüft nach dem System Neustart die System-Partition vollständig auf Fehler und versucht diese zu beheben.\n    \n   ""Erweiterte Reparatur""\n    \n      Die Erweiterte Reparatur ist nach der Standard Reparatur empfehlenswert,\n      da diese noch auf andere Weise versucht Beschädigungen der System-Partiton zu erkennen und zu beheben.\n    \n Prozessausgabe\n\n     Für erweiterte Prozessausgabe ""+"" an den gewählten Modus anhängen (z.B. ""1+"").\n     Für dauerhaftes Einschalten der Prozessausgabe nur ""+"" ohne Modus eingeben.\n\n     Zum deaktivieren der Prozessausgabe nur ""-"" ohne Modus eingeben.\n     (Die Prozessausgabe ist Standardmäßig deaktiviert.)\n\n\n Es liegen in ""%s"" Batch Dateien,\n die ausgeführt werden können, um manuell Reparatur Modi auszuführen ohne das ""WRT"" starten zu müssen.\n (Das ""WRT"" führt die Reparatur Modi effizenter und schneller aus.)\n"
+    PENDING_HELP_TEXT       " Es steht ein System Neustart für die Installation von Updates aus.\n\n\n Optionen\n\n   ""System neustarten""\n\n     Nach dem Neustart können Reparaturen vollständig durchgeführt werden.\n\n   ""Trotzdem ausführen""\n\n     WRT führt ohne System Neustart nur eine verkürzte Reparatur durch.\n"
 END
 
 STRINGTABLE

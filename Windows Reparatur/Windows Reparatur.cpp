@@ -56,25 +56,25 @@ int main()
     };
 
 #ifdef DEBUG
-    wcout << L"Loaded Strings" << endl;
-    wcout << mutex_warn << endl;
-    wcout << pending_query << endl;
-    wcout << pending_option1 << endl;
-    wcout << pending_option2 << endl;
-    wcout << pending_option3 << endl;
-    wcout << startup_warn << endl;
-    wcout << mode_query << endl;
-    wcout << mode_option1 << endl;
-    wcout << mode_option2 << endl;
-    wcout << mode_option3 << endl;
-    wcout << mode_cancel << endl;
-    wcout << in_progress_note << endl;
-    wcout << progress_started_fmt << endl;
-    wcout << progress_done_fmt << endl;
-    wcout << reboot_query << endl;
-    wcout << reboot_confirms << endl;
-    wcout << reboot_planned << endl;
-    wcout << exec_time_fmt << endl;
+    std::wcout << L"Loaded Strings" << endl;
+    std::wcout << mutex_warn << endl;
+    std::wcout << pending_query << endl;
+    std::wcout << pending_option1 << endl;
+    std::wcout << pending_option2 << endl;
+    std::wcout << pending_option3 << endl;
+    std::wcout << startup_warn << endl;
+    std::wcout << mode_query << endl;
+    std::wcout << mode_option1 << endl;
+    std::wcout << mode_option2 << endl;
+    std::wcout << mode_option3 << endl;
+    std::wcout << mode_cancel << endl;
+    std::wcout << in_progress_note << endl;
+    std::wcout << progress_started_fmt << endl;
+    std::wcout << progress_done_fmt << endl;
+    std::wcout << reboot_query << endl;
+    std::wcout << reboot_confirms << endl;
+    std::wcout << reboot_planned << endl;
+    std::wcout << exec_time_fmt << endl;
 #endif // DEBUG
 
     HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
@@ -83,34 +83,40 @@ int main()
         cin.get();
         return -1;
     }
-    wcout << endl;
+    std::wcout << endl;
 
 
-    char input[4];
+    char input[4] = {};
     int auswahl = 0;
     // test for pending.xml
     GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml");
     if (INVALID_FILE_ATTRIBUTES != GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml") && GetLastError() != ERROR_FILE_NOT_FOUND) {
         // fragen ob man trotzdem reparieren will
-        wcout << L" " << pending_query << endl;
-        wcout << L" " << pending_option1 << endl;
-        wcout << L" " << pending_option2 << endl;
-        wcout << L" " << pending_option3 << endl;
+        std::wcout << L" " << pending_query << endl << endl;
+        std::wcout << L" " << pending_option1 << endl;
+        std::wcout << L" " << pending_option2 << endl;
 
-        std::cin.get(input, 3);
-        if (input[1] == 0) {
-            std::cin.ignore(INT16_MAX, '\n');
-            auswahl = input[0] - 48;
-        }
+        do {
+        std::wcout << std::endl << L" " << mode_cancel << std::endl << L" ";
+            std::cin.get(input, 3);
+            if (input[1] == 0) {
+                std::cin.ignore(INT16_MAX, '\n');
+                auswahl = input[0] - 48;
+            }
+            if ('h' == input[0]) {
+                std::wcout << endl << pending_help_text;
+            
+            }
+
+        } while ('h' == input[0]);
 
         switch (auswahl)
         {
         case 1:
             system("shutdown /r /t 0");
             return 0;
-        case 3:
-            break;
         case 2:
+            break;
         default:
             return 0;
         }
@@ -138,16 +144,16 @@ int main()
     wstring header_warning = startup_warn;
     printWarning(header_warning);
 
-    wcout << endl << endl << endl;
+    std::wcout << endl << endl << endl;
     while (true) {
         int auswahl = 0;
-        wcout << L" " << mode_query << std::endl << std::endl;
-        wcout << L" " << mode_option1 << std::endl;
-        wcout << L" " << mode_option2 << std::endl;
-        wcout << L" " << mode_option3 << std::endl;
-        wcout << std::endl << L" " << mode_cancel << std::endl << " ";
+        std::wcout << L" " << mode_query << std::endl << std::endl;
+        std::wcout << L" " << mode_option1 << std::endl;
+        std::wcout << L" " << mode_option2 << std::endl;
+        std::wcout << L" " << mode_option3 << std::endl;
+        std::wcout << std::endl << L" " << mode_cancel << std::endl << L" ";
 
-        std::cin.get(input, 4);
+        std::cin.get(input, 3);
         if ((input[1] == 0) || (input[1] == '+' && input[2] == 0)) {
             std::cin.ignore(INT16_MAX, '\n');
             if (input[0] == 'h' || input[0] == '?') {
@@ -156,12 +162,12 @@ int main()
             }
             else if (input[0] == '+') {
                 verbose = true;
-                wcout << std::endl << std::endl << std::endl;
+                std::wcout << std::endl << std::endl << std::endl;
                 continue;
             }
             else if (input[0] == '-') {
                 verbose = false;
-                wcout << std::endl << std::endl << std::endl;
+                std::wcout << std::endl << std::endl << std::endl;
                 continue;
             }
             auswahl = input[0] - 48;
@@ -192,7 +198,7 @@ int main()
         wcscat_s(wd_path, L"\\Windows Defender");
         env_rv = SetEnvironmentVariable(L"Path", wd_path);
         if (!env_rv) {
-            wcout << "ERROR: Failed to set Path variable" << endl;
+            std::wcout << "ERROR: Failed to set Path variable" << endl;
         }
         
 
@@ -201,7 +207,7 @@ int main()
         const clock_t start_time = clock();
 #endif // DEBUG
 
-        wcout << endl << L" " << in_progress_note << endl;
+        std::wcout << endl << L" " << in_progress_note << endl;
 
         if (auswahl == 1) {
             total = sizeof(standardReparatur) / sizeof(string);
@@ -232,26 +238,26 @@ int main()
                 rv = start_process(zusatzReperatur[i], &proc_info, &input, &output);
             }
             if (rv <= -10) {
-                wcout << endl << L"ERROR on creating pipes for subprocess" << endl;
+                std::wcout << endl << L"ERROR on creating pipes for subprocess" << endl;
             }
             else if (rv < 0) {
-                wcout << endl << L"ERROR on creating subprocess" << endl;
+                std::wcout << endl << L"ERROR on creating subprocess" << endl;
                 wchar_t error_buffer[1024];
                 FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), error_buffer, 1024, NULL);
-                wcout << L"Error: " << error_buffer<<endl;
+                std::wcout << L"Error: " << error_buffer<<endl;
             }
             if (i == total-1) {
                 wchar_t confirmation[] = {reboot_confirms[0],'\r','\n','\0'};
                 DWORD written = 0;
-                //wcout << L"Confirmation: " << confirmation << endl;
+                //std::wcout << L"Confirmation: " << confirmation << endl;
                 WriteFile(input, confirmation, sizeof(confirmation), &written, NULL);
-                //wcout << L"bytes written " << written << " of " << sizeof(confirmation) << endl;
+                //std::wcout << L"bytes written " << written << " of " << sizeof(confirmation) << endl;
             }
             if (verbose_current && output && rv == 0) {
                 char buffer[512] = {};
                 DWORD read = 0;
                 BOOL success;
-                wcout << endl << endl << endl;
+                std::wcout << endl << endl << endl;
                 do {
                     success = ReadFile(output, buffer, 512, &read, NULL);
                     if (success) {
@@ -262,12 +268,12 @@ int main()
                     }
                     else {
 #ifdef DEBUG
-                        wcout << "error on read" << endl;
+                        std::wcout << "error on read" << endl;
 #endif
                     }
                     memset(buffer, 0, 512);
                 } while (success);
-                wcout << endl << endl;
+                std::wcout << endl << endl;
             }
             if(input)
                 CloseHandle(input);
@@ -276,10 +282,10 @@ int main()
             wait_for_process(&proc_info);
             wchar_t done[MAX_LOCALIZED_STRING_SIZE];
             swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++, total);
-            wcout << L"\r " << blank_line << L"\r " << done;
+            std::wcout << L"\r " << blank_line << L"\r " << done;
         }
         if (2 == auswahl || 3 == auswahl) {
-            wcout << std::endl<<std::endl<< L" " << reboot_query;
+            std::wcout << std::endl<<std::endl<< L" " << reboot_query;
             std::cin.get(input, 3);
             std::cin.ignore(INT16_MAX, '\n');
             if (0==input[1]){ 
@@ -296,15 +302,15 @@ int main()
                     break;
                 }
             }
-            wcout << std::endl << L" " << reboot_planned << endl;
+            std::wcout << std::endl << L" " << reboot_planned << endl;
         }
 #ifdef DEBUG
         clock_t time_diff = clock() - start_time;
         wchar_t timing[MAX_LOCALIZED_STRING_SIZE];
         swprintf(timing, MAX_LOCALIZED_STRING_SIZE, exec_time_fmt, time_diff);
-        wcout << L"\n " << timing << time_diff << endl;
+        std::wcout << L"\n " << timing << time_diff << endl;
 #endif // DEBUG
-        wcout << std::endl << std::endl << std::endl;
+        std::wcout << std::endl << std::endl << std::endl;
         verbose_current = false;
     }
     return 0;
@@ -312,7 +318,7 @@ int main()
 
 int start_process(wstring command, PROCESS_INFORMATION * proc_info, HANDLE * subprocess_in_write_ptr, HANDLE * subprocess_out_read_ptr) {
 #ifdef DEBUG
-    wcout << std::endl << L"Command: " << command << endl;
+    std::wcout << std::endl << L"Command: " << command << endl;
 #endif // DEBUG
 
     // handles for communication with the created process
@@ -374,7 +380,7 @@ int start_process(wstring command, PROCESS_INFORMATION * proc_info, HANDLE * sub
 
     wchar_t done[MAX_LOCALIZED_STRING_SIZE];
     swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, counter,total);
-    wcout << L"\r " << blank_line << L"\r " << done;
+    std::wcout << L"\r " << blank_line << L"\r " << done;
     return 0;
 }
 
@@ -397,11 +403,11 @@ void printWarning(wstring warn) {
 
     size_t startpoint = (columns - header_centralline.size()) / 2;
 
-    wcout << wstring(startpoint, ' ') << header_topline << endl;
-    wcout << wstring(startpoint, ' ') << header_padline << endl;
-    wcout << wstring(startpoint, ' ') << header_centralline << endl;
-    wcout << wstring(startpoint, ' ') << header_padline << endl;
-    wcout << wstring(startpoint, ' ') << header_topline << endl;
+    std::wcout << wstring(startpoint, ' ') << header_topline << endl;
+    std::wcout << wstring(startpoint, ' ') << header_padline << endl;
+    std::wcout << wstring(startpoint, ' ') << header_centralline << endl;
+    std::wcout << wstring(startpoint, ' ') << header_padline << endl;
+    std::wcout << wstring(startpoint, ' ') << header_topline << endl;
 }
 
 
@@ -426,7 +432,7 @@ void print_help() {
     }
     wchar_t help_text[MAX_LOCALIZED_STRING_SIZE];
     swprintf(help_text, MAX_LOCALIZED_STRING_SIZE, help_text_fmt, batch_path.c_str());
-    wcout << endl << help_text << L" ";
+    std::wcout << endl << endl << help_text << L" ";
     cin.get(); // wait for input before returning
-    wcout << endl << endl;
+    std::wcout << endl << endl;
 }

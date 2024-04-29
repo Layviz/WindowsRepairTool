@@ -23,6 +23,7 @@
 #define REBOOT_PLANNED                  118
 #define EXECUTION_TIME_FORMAT_STRING    119
 #define HELP_TEXT_FMT                   120
+#define PENDING_HELP_TEXT               121
 #define CONSOLE_CODEPAGE                1000
 
 // Next default values for new objects
