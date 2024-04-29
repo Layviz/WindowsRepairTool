@@ -49,12 +49,18 @@ void load_stings(HINSTANCE source) {
 int load_localized_strings() {
     wchar_t locale_name[3] = {};
     wchar_t dll_name[7] = {};
+    wchar_t locale_dir_dll[15] = {};
     int ret;
 
     GetUserDefaultLocaleName(locale_name, 3);
     swprintf(dll_name, 7, L"%s.dll", locale_name);
-    // Try loading a lib with the local name
-    HMODULE locale_source = LoadLibrary(dll_name);
+    swprintf(locale_dir_dll, 15, L"locale\\%s.dll", locale_name);
+    // try loading from locale dir
+    HMODULE locale_source = LoadLibrary(locale_dir_dll);
+    if (nullptr == locale_source) {
+        // Try loading a lib with the local name
+        HMODULE locale_source = LoadLibrary(dll_name);
+    }
     UINT codepage;
     if (nullptr == locale_source) {
         // if no locale lib exists use the default strings

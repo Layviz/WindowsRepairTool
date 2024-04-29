@@ -627,6 +627,17 @@
                         {
                         }
                     }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_DF9D0ECBA7504F45941B698B0341E9B6"
+                    {
+                    "Name" = "8:locale"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_F5772FEDA2AE445E96153753E46954D3"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_65434660D6EA46B3A0AE4903EA406BC0"
@@ -1220,7 +1231,7 @@
             "SourcePath" = "8:..\\x64\\Release\\de.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Folder" = "8:_DF9D0ECBA7504F45941B698B0341E9B6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
