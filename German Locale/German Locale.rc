@@ -54,7 +54,7 @@ STRINGTABLE
 BEGIN
     TEST_STRING             """test"""
     MUTEX_WARN              "Das Programm wird bereits ausgeführt und kann nur einmal aufgerufen werden."
-    PENDING_RESTART_QUERY   "Es steht noch ein System Neustart aus. Die Reparatur kann ohne Neustart nicht vollständig abgeschlossen werden."
+    PENDING_RESTART_QUERY   "Es steht noch ein System Neustart aus. Ohne Neustart kann nur eine verkürzte Repartur durchgeführt werden."
     PENDING_RESTART_OPTION1 "1. System neustarten   (Ermöglicht vollen Funktionsumfang.)"
     PENDING_RESTART_OPTION2 "2. Trotzdem ausführen  (Startet mit eingeschränktem Funktionsumfang.)"
     PENDING_RESTART_OPTION3 " "

@@ -91,7 +91,7 @@ int main()
     // test for pending.xml
     GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml");
     if (INVALID_FILE_ATTRIBUTES != GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml") && GetLastError() != ERROR_FILE_NOT_FOUND) {
-        // fragen ob man trotzdem reparieren will
+    // fragen ob man trotzdem reparieren will
         std::wcout << L" " << pending_query << endl << endl;
         std::wcout << L" " << pending_option1 << endl;
         std::wcout << L" " << pending_option2 << endl;
