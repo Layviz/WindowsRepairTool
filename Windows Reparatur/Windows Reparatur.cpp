@@ -7,15 +7,36 @@
 
 using namespace std;
 
+typedef enum {
+    NO_OP = 0,
+    SIMPLE_REPAIR = 1,
+    DEFAULT_REPAIR = 2,
+    EXT_REPAIR = 3,
+    HELP = 4,
+    VERBOSE_ON = 5,
+    VERBOSE_OFF = 6,
+}OPTION;
+
+typedef enum {
+    DEFAULT,
+    VERBOSE,
+    SILENT
+}VEROBOSITY;
+
+typedef struct {
+    OPTION mode;
+    VEROBOSITY verbose;
+}OPERATION;
+
 int total;
 int counter;
 int start_process(wstring command, PROCESS_INFORMATION* proc_info,HANDLE * input,HANDLE * output);
 void wait_for_process(PROCESS_INFORMATION* proc_info);
 void printWarning(wstring warn);
 void print_help();
+bool read_user_intput(OPERATION* op);
 wstring blank_line(80, L' '); //80 spaces should be enough to overwrite everthing
 bool verbose = false;   //verbose for all runs
-bool verbose_current = false; //verbose for the next run
 
 int main()
 {
@@ -24,7 +45,7 @@ int main()
     }
 
     load_localized_strings();
-    wstring standardReparatur[] = {
+    wstring simpleRepair[] = {
         L"defrag C: /o /h",
         L"sfc /scannow",
         L"mpcmdrun.exe -Scan -ScanType 1",
@@ -36,7 +57,7 @@ int main()
         L"sfc /scannow",
         L"defrag C: /o /h"
     };
-    wstring erweiterteReparatur[] = {
+    wstring defaultRepair[] = {
         L"defrag C: /o /h",
         L"sfc /scannow",
         L"mpcmdrun.exe -Scan -ScanType 2",
@@ -49,7 +70,7 @@ int main()
         L"chkdsk C: /scan /perf /f /r /x /b"
     };
 
-    wstring zusatzReperatur[] = {
+    wstring extendedRepair[] = {
         L"defrag C: /o /h",
         L"sfc /scannow",
         L"chkdsk C: /f /x /spotfix /sdcleanup"
@@ -140,102 +161,136 @@ int main()
 #endif
     }
 
+    // set the path env var to windows defender path
+    // system32 is searched by default so no need to include in path
+
+    wchar_t wd_path[MAX_PATH];
+    BOOL env_rv = GetEnvironmentVariable(L"ProgramFiles", wd_path, MAX_PATH);
+    if (!env_rv) {
+        wcscpy_s(wd_path, L"C:\\Program Files");
+    }
+    wcscat_s(wd_path, L"\\Windows Defender");
+    env_rv = SetEnvironmentVariable(L"Path", wd_path);
+    if (!env_rv) {
+        std::wcout << "ERROR: Failed to set Path variable" << endl;
+    }
+
 
     wstring header_warning = startup_warn;
     printWarning(header_warning);
 
     std::wcout << endl << endl << endl;
+    /*-------------
+    *             *
+    *  MAIN LOOP  *
+    *             *
+    *-------------*/
     while (true) {
-        int auswahl = 0;
+        OPERATION op = {};
+        bool r;
+
+        bool verbose_current = false; //verbose for the next run
+
         std::wcout << L" " << mode_query << std::endl << std::endl;
         std::wcout << L" " << mode_option1 << std::endl;
         std::wcout << L" " << mode_option2 << std::endl;
         std::wcout << L" " << mode_option3 << std::endl;
         std::wcout << std::endl << L" " << mode_cancel << std::endl << L" ";
 
-        std::cin.get(input, 3);
-        if ((input[1] == 0) || (input[1] == '+' && input[2] == 0)) {
-            std::cin.ignore(INT16_MAX, '\n');
-            if (input[0] == 'h' || input[0] == '?') {
-                print_help();
-                continue;
-            }
-            else if (input[0] == '+') {
-                verbose = true;
-                std::wcout << std::endl << std::endl << std::endl;
-                continue;
-            }
-            else if (input[0] == '-') {
-                verbose = false;
-                std::wcout << std::endl << std::endl << std::endl;
-                continue;
-            }
-            auswahl = input[0] - 48;
-            if (input[1] == '+') {
-                verbose_current = true;
-            }
-            
+        r = read_user_intput(&op);
+        if (!r) {
+            return 0;
         }
-        if (verbose)
-            verbose_current = true;
-
-        if ((auswahl < 1 || auswahl > 3) && auswahl != -5 && auswahl != -3) {
-#ifdef DEBUG
-            if (auswahl>4)
-#endif // DEBUG
-
+        switch (op.mode) {
+        case SIMPLE_REPAIR:
+        case DEFAULT_REPAIR:
+        case EXT_REPAIR:
+            break;
+        case HELP:
+            while (op.mode == HELP) {
+                print_help();
+                r = read_user_intput(&op);
+                if (!r) {
+                    break;
+                }
+                switch (op.mode)
+                {
+                case SIMPLE_REPAIR:
+                case DEFAULT_REPAIR:
+                case EXT_REPAIR:
+                case NO_OP:
+                case HELP:
+                    break;
+                case VERBOSE_ON:
+                    verbose = true;
+                    break;
+                case VERBOSE_OFF:
+                    verbose = false;
+                    break;
+                }
+            }
+            break;
+        case VERBOSE_ON:
+            verbose = true;
+            break;
+        case VERBOSE_OFF:
+            verbose = false;
+            break;
+        case NO_OP:
+            return 0;
             break;
         }
 
-        // set the path env var to windows defender path
-        // system32 is searched by default so no need to include in path
-
-        wchar_t wd_path[MAX_PATH];
-        BOOL env_rv = GetEnvironmentVariable(L"ProgramFiles", wd_path, MAX_PATH);
-        if (!env_rv)  {
-             wcscpy_s(wd_path, L"C:\\Program Files");
+        switch (op.verbose) {
+        case VERBOSE:
+            verbose_current = true;
+            break;
+        case SILENT:
+            verbose_current = false;
+        default:
+            verbose_current = verbose;
         }
-        wcscat_s(wd_path, L"\\Windows Defender");
-        env_rv = SetEnvironmentVariable(L"Path", wd_path);
-        if (!env_rv) {
-            std::wcout << "ERROR: Failed to set Path variable" << endl;
-        }
-        
-
 
 #ifdef DEBUG
         const clock_t start_time = clock();
 #endif // DEBUG
 
-        std::wcout << endl << L" " << in_progress_note << endl;
 
-        if (auswahl == 1) {
-            total = sizeof(standardReparatur) / sizeof(string);
-        }
-        else if (auswahl == 2) {
-            total = sizeof(erweiterteReparatur) / sizeof(string);
-        }
-        else {
-            total = sizeof(zusatzReperatur) / sizeof(string);
+        switch (op.mode)
+        {
+        case SIMPLE_REPAIR:
+            total = sizeof(simpleRepair) / sizeof(wstring);
+            break;
+        case DEFAULT_REPAIR:
+            total = sizeof(defaultRepair) / sizeof(wstring);
+            break;
+        case EXT_REPAIR:
+            total = sizeof(extendedRepair) / sizeof(wstring);
+            break;
+        default:
+            total = 0;
+            break;
         }
         counter = 1;
-        
         for (int i = 0; i < total; i++)
         {
+            if (0 == i) {
+                std::wcout << endl << L" " << in_progress_note << endl;
+            }
             PROCESS_INFORMATION proc_info;
             HANDLE input = NULL, output = NULL;
             int rv = 0;
-            if (auswahl == 1)
+            if (SIMPLE_REPAIR == op.mode)
             {
-                rv = start_process(standardReparatur[i],&proc_info,&input,&output);
+                rv = start_process(simpleRepair[i],&proc_info,&input,&output);
             }
-            else if (auswahl == 2)
+            else if (DEFAULT_REPAIR == op.mode)
             {
-                rv = start_process(erweiterteReparatur[i], &proc_info, &input, &output);
+                rv = start_process(defaultRepair[i], &proc_info, &input, &output);
             }
-            else if (auswahl == 3)
+            else if (EXT_REPAIR == op.mode)
             {
-                rv = start_process(zusatzReperatur[i], &proc_info, &input, &output);
+                rv = start_process(extendedRepair[i], &proc_info, &input, &output);
             }
             if (rv <= -10) {
                 std::wcout << endl << L"ERROR on creating pipes for subprocess" << endl;
@@ -284,7 +339,7 @@ int main()
             swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++, total);
             std::wcout << L"\r " << blank_line << L"\r " << done;
         }
-        if (2 == auswahl || 3 == auswahl) {
+        if (DEFAULT_REPAIR == op.mode || EXT_REPAIR == op.mode) {
             std::wcout << std::endl<<std::endl<< L" " << reboot_query;
             std::cin.get(input, 3);
             std::cin.ignore(INT16_MAX, '\n');
@@ -298,7 +353,7 @@ int main()
                     }
                 }
                 if (reboot) {
-                    system("shutdown /r /t 0");
+                    system("C:\\Windows\\System32\\shutdown.exe /r /t 0");//needs fixing
                     break;
                 }
             }
@@ -311,7 +366,6 @@ int main()
         std::wcout << L"\n " << timing << time_diff << endl;
 #endif // DEBUG
         std::wcout << std::endl << std::endl << std::endl;
-        verbose_current = false;
     }
     return 0;
 }
@@ -410,7 +464,65 @@ void printWarning(wstring warn) {
     std::wcout << wstring(startpoint, ' ') << header_topline << endl;
 }
 
+bool read_user_intput(OPERATION* op) {
+    char input[4] = {};
+    std::cin.get(input, 3);
+    if (cin.fail()) {
+        cin.clear();
+    }
+    std::cin.ignore(INT16_MAX, '\n');
+    if (cin.fail()) {
+        cin.clear();
+    }
+    switch (input[0]) {
+    case '1':
+        op->mode = SIMPLE_REPAIR;
+        break;
+    case '2':
+        op->mode = DEFAULT_REPAIR;
+        break;
+    case '3':
+        op->mode = EXT_REPAIR;
+        break;
+    case 'h':
+    case '?':
+        op->mode = HELP;
+        break;
+    case '+':
+        op->mode = VERBOSE_ON;
+        break;
+    case '-':
+        op->mode = VERBOSE_OFF;
+        break;
+    default:
+        op->mode = NO_OP;
+        break;
+    }
+    switch (input[1]) {
+    case '+':
+        if (op->mode<SIMPLE_REPAIR || op->mode>EXT_REPAIR) {
+            return false;
+        }
+        op->verbose = VERBOSE;
+        break;
+    case '-':
+        if (op->mode<SIMPLE_REPAIR || op->mode>EXT_REPAIR) {
+            return false;
+        }
+        op->verbose = SILENT;
+        break;
+    case 0:
+        op->verbose = DEFAULT;
+        break;
+    default:
+        return false;
+    }
+    if (input[2] != 0) {
+        return false;
+    }
 
+    return true;
+}
 
 void print_help() {
     wstring batch_path;
@@ -433,6 +545,5 @@ void print_help() {
     wchar_t help_text[MAX_LOCALIZED_STRING_SIZE];
     swprintf(help_text, MAX_LOCALIZED_STRING_SIZE, help_text_fmt, batch_path.c_str());
     std::wcout << endl << endl << help_text << L" ";
-    cin.get(); // wait for input before returning
-    std::wcout << endl << endl;
+
 }
