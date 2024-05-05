@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <PathCch.h>
 #include <string>
+#include <time.h>
 #include "resource.h"
 #include "localization.h"
 
@@ -161,6 +162,9 @@ int main()
 #endif
     }
 
+    // set time zone
+    _tzset();
+
     // set the path env var to windows defender path
     // system32 is searched by default so no need to include in path
 
@@ -251,11 +255,6 @@ int main()
             verbose_current = verbose;
         }
 
-#ifdef DEBUG
-        const clock_t start_time = clock();
-#endif // DEBUG
-
-
         switch (op.mode)
         {
         case SIMPLE_REPAIR:
@@ -272,14 +271,24 @@ int main()
             break;
         }
         counter = 1;
+        time_t repair_start_time,repair_end_time;
+        time(&repair_start_time);
+
+        wchar_t repair_time_str[MAX_LOCALIZED_STRING_SIZE];
+        wchar_t start_time_str[MAX_LOCALIZED_STRING_SIZE];
+        wchar_t end_time_str[MAX_LOCALIZED_STRING_SIZE];
+        wchar_t done[MAX_LOCALIZED_STRING_SIZE];
         for (int i = 0; i < total; i++)
         {
             if (0 == i) {
                 std::wcout << endl << L" " << in_progress_note << endl;
             }
+            time_t process_start_time,process_end_time;
+            time(&process_start_time);
             PROCESS_INFORMATION proc_info;
             HANDLE input = NULL, output = NULL;
             int rv = 0;
+            wchar_t timestr[16];
             if (SIMPLE_REPAIR == op.mode)
             {
                 rv = start_process(simpleRepair[i],&proc_info,&input,&output);
@@ -301,12 +310,19 @@ int main()
                 FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), error_buffer, 1024, NULL);
                 std::wcout << L"Error: " << error_buffer<<endl;
             }
+            else if (0 == rv) {
+                _wstrtime_s(timestr);
+                swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, counter, total);
+                std::wcout << L"\r " << blank_line << L"\r " << done;
+                if (verbose_current) {
+                    swprintf(start_time_str, MAX_LOCALIZED_STRING_SIZE, process_start_time_fmt, timestr);
+                    std::wcout << L" " << start_time_str;
+                }
+            }
             if (i == total-1) {
                 wchar_t confirmation[] = {reboot_confirms[0],'\r','\n','\0'};
                 DWORD written = 0;
-                //std::wcout << L"Confirmation: " << confirmation << endl;
                 WriteFile(input, confirmation, sizeof(confirmation), &written, NULL);
-                //std::wcout << L"bytes written " << written << " of " << sizeof(confirmation) << endl;
             }
             if (verbose_current && output && rv == 0) {
                 char buffer[512] = {};
@@ -335,9 +351,16 @@ int main()
             if(output)
                 CloseHandle(output);
             wait_for_process(&proc_info);
+            time(&process_end_time);
+            _wstrtime_s(timestr);
             wchar_t done[MAX_LOCALIZED_STRING_SIZE];
             swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++, total);
             std::wcout << L"\r " << blank_line << L"\r " << done;
+            if (verbose_current) {
+                long long diff_sec = process_end_time - process_start_time;
+                swprintf(end_time_str, MAX_LOCALIZED_STRING_SIZE, process_end_time_fmt, timestr, diff_sec);
+                std::wcout << L" " << end_time_str << endl;
+            }
         }
         if (DEFAULT_REPAIR == op.mode || EXT_REPAIR == op.mode) {
             std::wcout << std::endl<<std::endl<< L" " << reboot_query;
@@ -353,18 +376,18 @@ int main()
                     }
                 }
                 if (reboot) {
-                    system("C:\\Windows\\System32\\shutdown.exe /r /t 0");//needs fixing
+                    system("C:\\Windows\\System32\\shutdown.exe /r /t 0");
                     break;
                 }
             }
             std::wcout << std::endl << L" " << reboot_planned << endl;
         }
-#ifdef DEBUG
-        clock_t time_diff = clock() - start_time;
-        wchar_t timing[MAX_LOCALIZED_STRING_SIZE];
-        swprintf(timing, MAX_LOCALIZED_STRING_SIZE, exec_time_fmt, time_diff);
-        std::wcout << L"\n " << timing << time_diff << endl;
-#endif // DEBUG
+        if (verbose_current) {
+            time(&repair_end_time);
+            long long diff_sec = repair_end_time - repair_start_time;
+            swprintf(repair_time_str, MAX_LOCALIZED_STRING_SIZE, repair_time_fmt, diff_sec);
+            std::wcout << L" " << repair_time_str << endl;
+        }
         std::wcout << std::endl << std::endl << std::endl;
     }
     return 0;
@@ -432,9 +455,6 @@ int start_process(wstring command, PROCESS_INFORMATION * proc_info, HANDLE * sub
         CloseHandle(subprocess_in_read);
     }
 
-    wchar_t done[MAX_LOCALIZED_STRING_SIZE];
-    swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, counter,total);
-    std::wcout << L"\r " << blank_line << L"\r " << done;
     return 0;
 }
 

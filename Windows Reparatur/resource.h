@@ -24,6 +24,9 @@
 #define EXECUTION_TIME_FORMAT_STRING    119
 #define HELP_TEXT_FMT                   120
 #define PENDING_HELP_TEXT               121
+#define PROCESS_START_TIME_FMT          122
+#define PROCESS_END_TIME_FMT            123
+#define REPAIR_TIME_FMT                 124
 #define CONSOLE_CODEPAGE                1000
 
 // Next default values for new objects

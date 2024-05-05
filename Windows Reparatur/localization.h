@@ -22,6 +22,9 @@ extern wchar_t reboot_planned[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t exec_time_fmt[MAX_LOCALIZED_STRING_SIZE];
 extern wchar_t help_text_fmt[MAX_LOCALIZED_STRING_SIZE];
 extern wchar_t pending_help_text[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t process_start_time_fmt[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t process_end_time_fmt[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t repair_time_fmt[MAX_LOCALIZED_STRING_SIZE];
 
 
 extern int load_localized_strings();
