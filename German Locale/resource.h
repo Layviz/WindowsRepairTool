@@ -24,6 +24,9 @@
 #define HELP_TEXT                       120
 #define HELP_TEXT_FMT                   120
 #define PENDING_HELP_TEXT               121
+#define PROCESS_START_TIME_FMT          122
+#define PROCESS_END_TIME_FMT            123
+#define REPAIR_TIME_FMT                 124
 #define ERROR_SESSION                   201
 #define ERROR_CONNECTION                202
 #define ERROR_REQUEST                   203

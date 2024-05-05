@@ -24,6 +24,9 @@ wchar_t reboot_planned[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t exec_time_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t help_text_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t pending_help_text[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t process_start_time_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t process_end_time_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t repair_time_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
 
 void load_stings(HINSTANCE source) {
     LoadString(source, MUTEX_WARN, mutex_warn, MAX_LOCALIZED_STRING_SIZE);
@@ -46,6 +49,9 @@ void load_stings(HINSTANCE source) {
     LoadString(source, EXECUTION_TIME_FORMAT_STRING, exec_time_fmt, MAX_LOCALIZED_STRING_SIZE);
     LoadString(source, HELP_TEXT_FMT, help_text_fmt, MAX_LOCALIZED_STRING_SIZE);
     LoadString(source, PENDING_HELP_TEXT, pending_help_text, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, PROCESS_START_TIME_FMT, process_start_time_fmt, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, PROCESS_END_TIME_FMT, process_end_time_fmt, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, REPAIR_TIME_FMT, repair_time_fmt, MAX_LOCALIZED_STRING_SIZE);
 }
 
 int load_localized_strings() {
