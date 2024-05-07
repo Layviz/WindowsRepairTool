@@ -598,9 +598,14 @@ void print_help() {
         batch_path = L"NOT FOUND";// unlikely but just in case
     }
     else if (S_OK == PathCchRemoveFileSpec(wrt_path, MAX_PATH)) {
-        wchar_t batch_dir[] = L"Batch scripts";
-        if (S_OK == PathCchAppend(wrt_path, MAX_PATH, batch_dir)) {
-            batch_path = wstring(wrt_path);
+        if (S_OK == PathCchRemoveFileSpec(wrt_path, MAX_PATH)) {
+            wchar_t batch_dir[] = L"Batch scripts";
+            if (S_OK == PathCchAppend(wrt_path, MAX_PATH, batch_dir)) {
+                batch_path = wstring(wrt_path);
+            }
+            else {
+                batch_path = L"NOT FOUND";// unlikely but just in case
+            }
         }
         else {
             batch_path = L"NOT FOUND";// unlikely but just in case

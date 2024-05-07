@@ -11,6 +11,7 @@
 #include "localization.h"
 #include <locale> 
 #include <codecvt>
+#include <PathCch.h>
 
 #pragma comment(lib, "winhttp.lib")
 
@@ -254,13 +255,16 @@ int download_installer(string *downloaded_file) {
 string get_exe_dir() {
     TCHAR buffer[MAX_PATH] = { 0 };
     GetModuleFileName(NULL, buffer, MAX_PATH);
-    std::wstring::size_type pos = std::wstring(buffer).find_last_of(L"\\/");
-    wstring temp = std::wstring(buffer).substr(0, pos);
+    if (S_OK == PathCchRemoveFileSpec(buffer, MAX_PATH)) {
+        if (S_OK == PathCchRemoveFileSpec(buffer, MAX_PATH)) {
 
-    using convert_typeX = std::codecvt_utf8<wchar_t>;
-    std::wstring_convert<convert_typeX, wchar_t> converterX;
+            using convert_typeX = std::codecvt_utf8<wchar_t>;
+            std::wstring_convert<convert_typeX, wchar_t> converterX;
 
-    return converterX.to_bytes(temp);
+            return converterX.to_bytes(buffer);
+        }
+    }
+    return "";
 }
 
 int installation(string installer_file) {
@@ -278,7 +282,7 @@ int installation(string installer_file) {
     cmd.append("\" /passive");
     cmd.append(" && start \"\" \"");
     cmd.append(install_dir);
-    cmd.append("\\WRTLauncher.exe\"\"");
+    cmd.append("\\Binaries\\WRTLauncher.exe\"\"");
     wcout << endl << L" " << installer_start << endl;
 
     system(cmd.c_str());
@@ -339,7 +343,7 @@ int main()
         }
     }
     CloseHandle(mutex);
-    int wrt = system("WRT.exe");
+    int wrt = system("Binaries\\WRT.exe");
     if (wrt < 0) {
         char errorbuffer[94];
         strerror_s(errorbuffer, 0);

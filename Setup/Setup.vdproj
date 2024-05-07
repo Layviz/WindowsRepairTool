@@ -291,7 +291,7 @@
             "SourcePath" = "8:..\\Windows Reparatur\\schraubenschlussel.ico"
             "TargetName" = "8:schraubenschlussel.ico"
             "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Folder" = "8:_25C2695A356B4DC18B0DBEADF7EB0BD8"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -331,7 +331,7 @@
             "SourcePath" = "8:VCRUNTIME140_1.dll"
             "TargetName" = "8:VCRUNTIME140_1.dll"
             "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Folder" = "8:_BE52AF72E8B64E28BC915CCEE639999C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -391,7 +391,7 @@
             "SourcePath" = "8:MSVCP140.dll"
             "TargetName" = "8:MSVCP140.dll"
             "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Folder" = "8:_BE52AF72E8B64E28BC915CCEE639999C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -431,7 +431,7 @@
             "SourcePath" = "8:VCRUNTIME140.dll"
             "TargetName" = "8:VCRUNTIME140.dll"
             "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Folder" = "8:_BE52AF72E8B64E28BC915CCEE639999C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -642,6 +642,28 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_25C2695A356B4DC18B0DBEADF7EB0BD8"
+                    {
+                    "Name" = "8:Icons"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_95F9F007523C49E6A93EBF04D96E2325"
+                        "Folders"
+                        {
+                        }
+                    }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_BE52AF72E8B64E28BC915CCEE639999C"
+                    {
+                    "Name" = "8:Binaries"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_4C169F2ADD8943FCBE8274C7EC8DBED1"
+                        "Folders"
+                        {
+                        }
+                    }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_C091BDC930BD468ABA5BBFBCD624B476"
                     {
                     "Name" = "8:Batch scripts"
@@ -705,7 +727,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Windows Reparatur Tool"
         "ProductCode" = "8:{C4DA8B01-4175-4F0E-888B-FFEAE726598B}"
-        "PackageCode" = "8:{59CFCA1C-1F21-4DA2-9164-5557F9C35EB4}"
+        "PackageCode" = "8:{F8ED9D59-5EA5-490C-A85B-772A2623B087}"
         "UpgradeCode" = "8:{8D3699D3-4446-4F6B-8C17-60450715FD92}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1285,7 +1307,7 @@
             "SourcePath" = "8:..\\x64\\Release\\WRTLauncher.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Folder" = "8:_BE52AF72E8B64E28BC915CCEE639999C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1313,7 +1335,7 @@
             "SourcePath" = "8:..\\x64\\Release\\WRT.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Folder" = "8:_BE52AF72E8B64E28BC915CCEE639999C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
