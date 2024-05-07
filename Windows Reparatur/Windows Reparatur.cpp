@@ -33,6 +33,7 @@ int total;
 int counter;
 int start_process(wstring command, PROCESS_INFORMATION* proc_info,HANDLE * input,HANDLE * output);
 void wait_for_process(PROCESS_INFORMATION* proc_info);
+void create_time_str(wchar_t* buffer, size_t size, long long sec);
 void printWarning(wstring warn);
 void print_help();
 bool read_user_intput(OPERATION* op);
@@ -277,6 +278,7 @@ int main()
         wchar_t repair_time_str[MAX_LOCALIZED_STRING_SIZE];
         wchar_t start_time_str[MAX_LOCALIZED_STRING_SIZE];
         wchar_t end_time_str[MAX_LOCALIZED_STRING_SIZE];
+        wchar_t time_buffer[MAX_LOCALIZED_STRING_SIZE];
         wchar_t done[MAX_LOCALIZED_STRING_SIZE];
         for (int i = 0; i < total; i++)
         {
@@ -353,12 +355,12 @@ int main()
             wait_for_process(&proc_info);
             time(&process_end_time);
             _wstrtime_s(timestr);
-            wchar_t done[MAX_LOCALIZED_STRING_SIZE];
             swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++, total);
             std::wcout << L"\r " << blank_line << L"\r " << done;
             if (verbose_current) {
                 long long diff_sec = process_end_time - process_start_time;
-                swprintf(end_time_str, MAX_LOCALIZED_STRING_SIZE, process_end_time_fmt, timestr, diff_sec);
+                create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
+                swprintf(end_time_str, MAX_LOCALIZED_STRING_SIZE, process_end_time_fmt, timestr, time_buffer);
                 std::wcout << L" " << end_time_str << endl;
             }
         }
@@ -385,12 +387,40 @@ int main()
         if (verbose_current) {
             time(&repair_end_time);
             long long diff_sec = repair_end_time - repair_start_time;
-            swprintf(repair_time_str, MAX_LOCALIZED_STRING_SIZE, repair_time_fmt, diff_sec);
+            create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
+            swprintf(repair_time_str, MAX_LOCALIZED_STRING_SIZE, repair_time_fmt, time_buffer);
             std::wcout << L" " << repair_time_str << endl;
         }
         std::wcout << std::endl << std::endl << std::endl;
     }
     return 0;
+}
+
+void create_time_str(wchar_t* buffer, size_t size, long long sec) {
+    ZeroMemory(buffer, size);
+    wchar_t unit_buffer[MAX_LOCALIZED_STRING_SIZE] = {};
+    if (sec >= 86400) {
+        long long days = sec / 86400;
+        swprintf(unit_buffer, sizeof(unit_buffer), L" %lld %s", days, days_str);
+        wcscat_s(buffer, size, unit_buffer);
+        sec %= 86400;
+    }
+    if (sec >= 3600) {
+        long long hours = sec / 3600;
+        swprintf(unit_buffer, sizeof(unit_buffer), L" %lld %s", hours, hours_str);
+        wcscat_s(buffer, size, unit_buffer);
+        sec %= 3600;
+    }
+    if (sec >= 60) {
+        long long minutes = sec / 60;
+        swprintf(unit_buffer, sizeof(unit_buffer), L" %lld %s", minutes, minutes_str);
+        wcscat_s(buffer, size, unit_buffer);
+        sec %= 60;
+    }
+    if (sec > 0) {
+        swprintf(unit_buffer, sizeof(unit_buffer), L" %lld %s", sec, seconds_str);
+        wcscat_s(buffer, size, unit_buffer);
+    }
 }
 
 int start_process(wstring command, PROCESS_INFORMATION * proc_info, HANDLE * subprocess_in_write_ptr, HANDLE * subprocess_out_read_ptr) {
