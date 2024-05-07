@@ -39,7 +39,7 @@ void print_help();
 bool read_user_intput(OPERATION* op);
 wstring blank_line(80, L' '); //80 spaces should be enough to overwrite everthing
 bool verbose = false;   //verbose for all runs
-bool stop = false;
+bool stop = false, running = false;
 BOOL WINAPI CtrlHandler(DWORD fdwCtrlType);
 
 
@@ -283,6 +283,7 @@ int main()
         wchar_t end_time_str[MAX_LOCALIZED_STRING_SIZE];
         wchar_t time_buffer[MAX_LOCALIZED_STRING_SIZE];
         wchar_t done[MAX_LOCALIZED_STRING_SIZE];
+        running = true;
         for (int i = 0; i < total; i++)
         {
             if (0 == i) {
@@ -369,6 +370,7 @@ int main()
             if (stop)
                 break;
         }
+        running = false;
         if (DEFAULT_REPAIR == op.mode || EXT_REPAIR == op.mode) {
             std::wcout << std::endl<<std::endl<< L" " << reboot_query;
             std::cin.get(input, 3);
@@ -429,9 +431,12 @@ void create_time_str(wchar_t* buffer, size_t size, long long sec) {
 }
 
 BOOL WINAPI CtrlHandler(DWORD fdwCtrlType) {
-    std::wcout << endl << L" " << abort_msg << endl;
-    stop = true;
-    return TRUE;
+    if (running) {
+        std::wcout << endl << L" " << abort_msg << endl;
+        stop = true;
+        return TRUE;
+    }
+    return FALSE;
 }
 
 
