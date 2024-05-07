@@ -27,6 +27,10 @@
 #define PROCESS_START_TIME_FMT          122
 #define PROCESS_END_TIME_FMT            123
 #define REPAIR_TIME_FMT                 124
+#define SECONDS_STR                     125
+#define MINUTES_STR                     126
+#define HOUR_STR                        127
+#define DAYS_STR                        128
 #define ERROR_SESSION                   201
 #define ERROR_CONNECTION                202
 #define ERROR_REQUEST                   203
