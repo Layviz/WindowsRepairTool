@@ -42,7 +42,7 @@ int check_for_updates() {
     }
     if (connection) {
         // api request um das latest release zu bekommen
-        request = WinHttpOpenRequest(connection, L"GET", L"repos/Layviz/WindowsReparaturTool/releases/latest", 0, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES, WINHTTP_FLAG_SECURE);
+        request = WinHttpOpenRequest(connection, L"GET", L"repos/Layviz/WindowsRepairTool/releases/latest", 0, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES, WINHTTP_FLAG_SECURE);
     }
     else {
         wcerr << L" " << error_connection << endl;
