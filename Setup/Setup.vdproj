@@ -51,20 +51,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1965ED765B41E9B518E49BD4C348B557"
-        "OwnerKey" = "8:_0865DAED43C548B08A5756BDC3A6E4D7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1965ED765B41E9B518E49BD4C348B557"
+        "MsmKey" = "8:_19BD7F01267136B49CC1C4869BC7BFA5"
         "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1965ED765B41E9B518E49BD4C348B557"
-        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -99,19 +87,37 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_599330EEEDFAFA74706AD892857C6326"
+        "MsmKey" = "8:_63D24FE93123D6A98E0532A1D515D9C8"
         "OwnerKey" = "8:_0865DAED43C548B08A5756BDC3A6E4D7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_599330EEEDFAFA74706AD892857C6326"
+        "MsmKey" = "8:_63D24FE93123D6A98E0532A1D515D9C8"
         "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_599330EEEDFAFA74706AD892857C6326"
+        "MsmKey" = "8:_63D24FE93123D6A98E0532A1D515D9C8"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8156D63A781D75CBA0469654392AF406"
+        "OwnerKey" = "8:_0865DAED43C548B08A5756BDC3A6E4D7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8156D63A781D75CBA0469654392AF406"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8156D63A781D75CBA0469654392AF406"
         "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -340,10 +346,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1965ED765B41E9B518E49BD4C348B557"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_19BD7F01267136B49CC1C4869BC7BFA5"
             {
-            "SourcePath" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
+            "SourcePath" = "8:api-ms-win-crt-time-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-time-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
@@ -420,7 +426,7 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_599330EEEDFAFA74706AD892857C6326"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_63D24FE93123D6A98E0532A1D515D9C8"
             {
             "SourcePath" = "8:VCRUNTIME140.dll"
             "TargetName" = "8:VCRUNTIME140.dll"
@@ -437,6 +443,26 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8156D63A781D75CBA0469654392AF406"
+            {
+            "SourcePath" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -679,7 +705,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Windows Reparatur Tool"
         "ProductCode" = "8:{C4DA8B01-4175-4F0E-888B-FFEAE726598B}"
-        "PackageCode" = "8:{98F1B16C-F491-4A71-A689-CA455FD4703E}"
+        "PackageCode" = "8:{59CFCA1C-1F21-4DA2-9164-5557F9C35EB4}"
         "UpgradeCode" = "8:{8D3699D3-4446-4F6B-8C17-60450715FD92}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
