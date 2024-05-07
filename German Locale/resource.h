@@ -31,6 +31,7 @@
 #define MINUTES_STR                     126
 #define HOUR_STR                        127
 #define DAYS_STR                        128
+#define ABORT_MSG                       129
 #define ERROR_SESSION                   201
 #define ERROR_CONNECTION                202
 #define ERROR_REQUEST                   203

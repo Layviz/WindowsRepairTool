@@ -39,6 +39,9 @@ void print_help();
 bool read_user_intput(OPERATION* op);
 wstring blank_line(80, L' '); //80 spaces should be enough to overwrite everthing
 bool verbose = false;   //verbose for all runs
+bool stop = false;
+BOOL WINAPI CtrlHandler(DWORD fdwCtrlType);
+
 
 int main()
 {
@@ -145,7 +148,7 @@ int main()
         }
     }
 
-    if (SetConsoleCtrlHandler( NULL, TRUE)) {
+    if (SetConsoleCtrlHandler( CtrlHandler, TRUE)) {
         ;
     }
     else {
@@ -190,7 +193,7 @@ int main()
     *  MAIN LOOP  *
     *             *
     *-------------*/
-    while (true) {
+    while (!stop) {
         OPERATION op = {};
         bool r;
 
@@ -363,6 +366,8 @@ int main()
                 swprintf(end_time_str, MAX_LOCALIZED_STRING_SIZE, process_end_time_fmt, timestr, time_buffer);
                 std::wcout << L" " << end_time_str << endl;
             }
+            if (stop)
+                break;
         }
         if (DEFAULT_REPAIR == op.mode || EXT_REPAIR == op.mode) {
             std::wcout << std::endl<<std::endl<< L" " << reboot_query;
@@ -423,6 +428,13 @@ void create_time_str(wchar_t* buffer, size_t size, long long sec) {
     }
 }
 
+BOOL WINAPI CtrlHandler(DWORD fdwCtrlType) {
+    std::wcout << endl << L" " << abort_msg << endl;
+    stop = true;
+    return TRUE;
+}
+
+
 int start_process(wstring command, PROCESS_INFORMATION * proc_info, HANDLE * subprocess_in_write_ptr, HANDLE * subprocess_out_read_ptr) {
 #ifdef DEBUG
     std::wcout << std::endl << L"Command: " << command << endl;
@@ -470,7 +482,7 @@ int start_process(wstring command, PROCESS_INFORMATION * proc_info, HANDLE * sub
         NULL,
         NULL,
         TRUE,
-        HIGH_PRIORITY_CLASS,
+        HIGH_PRIORITY_CLASS | CREATE_NEW_PROCESS_GROUP,
         NULL,
         NULL,
         &start_info,

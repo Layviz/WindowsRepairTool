@@ -29,6 +29,6 @@ extern wchar_t seconds_str[MAX_LOCALIZED_STRING_SIZE];
 extern wchar_t minutes_str[MAX_LOCALIZED_STRING_SIZE];
 extern wchar_t hours_str[MAX_LOCALIZED_STRING_SIZE];
 extern wchar_t days_str[MAX_LOCALIZED_STRING_SIZE];
-
+extern wchar_t abort_msg[MAX_LOCALIZED_STRING_SIZE];
 
 extern int load_localized_strings();

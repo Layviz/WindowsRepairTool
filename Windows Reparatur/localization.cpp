@@ -31,6 +31,7 @@ wchar_t seconds_str[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t minutes_str[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t hours_str[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t days_str[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t abort_msg[MAX_LOCALIZED_STRING_SIZE] = {};
 
 void load_stings(HINSTANCE source) {
     LoadString(source, MUTEX_WARN, mutex_warn, MAX_LOCALIZED_STRING_SIZE);
@@ -60,6 +61,7 @@ void load_stings(HINSTANCE source) {
     LoadString(source, MINUTES_STR, minutes_str, MAX_LOCALIZED_STRING_SIZE);
     LoadString(source, HOUR_STR, hours_str, MAX_LOCALIZED_STRING_SIZE);
     LoadString(source, DAYS_STR, days_str, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, ABORT_MSG, abort_msg, MAX_LOCALIZED_STRING_SIZE);
 }
 
 int load_localized_strings() {

@@ -119,6 +119,7 @@ END
 STRINGTABLE
 BEGIN
     DAYS_STR                "Tage"
+    ABORT_MSG               "Die Reparatur wird nach diesem Prozess beendet."
 END
 
 #endif    // Deutsch (Deutschland) resources

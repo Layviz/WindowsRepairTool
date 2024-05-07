@@ -31,6 +31,7 @@
 #define MINUTES_STR                     126
 #define HOUR_STR                        127
 #define DAYS_STR                        128
+#define ABORT_MSG                       129
 #define CONSOLE_CODEPAGE                1000
 
 // Next default values for new objects
