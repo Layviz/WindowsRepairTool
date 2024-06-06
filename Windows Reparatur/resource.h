@@ -23,8 +23,10 @@
 #define REBOOT_PLANNED                  118
 #define EXECUTION_TIME_FORMAT_STRING    119
 #define HELP_TEXT_FMT                   120
+#define IDI_ICON2                       120
 #define PENDING_HELP_TEXT               121
 #define PROCESS_START_TIME_FMT          122
+#define IDI_ICON3                       122
 #define PROCESS_END_TIME_FMT            123
 #define REPAIR_TIME_FMT                 124
 #define SECONDS_STR                     125
@@ -38,7 +40,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        120
+#define _APS_NEXT_RESOURCE_VALUE        123
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101

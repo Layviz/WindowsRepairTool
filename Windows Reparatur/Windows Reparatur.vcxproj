@@ -151,18 +151,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="localization.cpp" />
+    <ClCompile Include="terminal_interface.cpp" />
     <ClCompile Include="Windows Reparatur.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\version.h" />
     <ClInclude Include="localization.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="terminal_interface.h" />
+    <ClInclude Include="wrt_types.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Windows Reparatur.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="schraubenschlussel.ico" />
+    <Image Include="..\wrench.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

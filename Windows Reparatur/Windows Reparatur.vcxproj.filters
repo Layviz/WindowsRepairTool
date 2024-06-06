@@ -21,6 +21,9 @@
     <ClCompile Include="localization.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="terminal_interface.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -32,6 +35,12 @@
     <ClInclude Include="localization.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="terminal_interface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="wrt_types.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Windows Reparatur.rc">
@@ -39,7 +48,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="schraubenschlussel.ico">
+    <Image Include="..\wrench.ico">
       <Filter>Ressourcendateien</Filter>
     </Image>
   </ItemGroup>
