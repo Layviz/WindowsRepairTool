@@ -42,7 +42,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Windows Reparatur\schraubenschlussel.ico">
+    <Image Include="..\wrench.ico">
       <Filter>Ressourcendateien</Filter>
     </Image>
   </ItemGroup>

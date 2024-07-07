@@ -4,6 +4,7 @@
 //
 #define MUTEX_WARN                      102
 #define IDI_ICON1                       102
+#define IDI_ICON2                       104
 #define ERROR_SESSION                   201
 #define ERROR_CONNECTION                202
 #define ERROR_REQUEST                   203

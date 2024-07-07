@@ -5,29 +5,10 @@
 #include <time.h>
 #include "resource.h"
 #include "localization.h"
+#include "wrt_types.h"
 
 using namespace std;
 
-typedef enum {
-    NO_OP = 0,
-    SIMPLE_REPAIR = 1,
-    DEFAULT_REPAIR = 2,
-    EXT_REPAIR = 3,
-    HELP = 4,
-    VERBOSE_ON = 5,
-    VERBOSE_OFF = 6,
-}OPTION;
-
-typedef enum {
-    DEFAULT,
-    VERBOSE,
-    SILENT
-}VEROBOSITY;
-
-typedef struct {
-    OPTION mode;
-    VEROBOSITY verbose;
-}OPERATION;
 
 int total;
 int counter;
@@ -54,11 +35,11 @@ int main()
         L"defrag C: /o /h",
         L"sfc /scannow",
         L"mpcmdrun.exe -Scan -ScanType 1",
-        L"sfc /scannow",
+        L"chkdsk C: /scan /perf /i",
         L"dism /online /cleanup-image /CheckHealth",
         L"Dism /Online /Cleanup-Image /ScanHealth",
         L"Dism /Online /Cleanup-Image /RestoreHealth",
-        L"chkdsk C: /scan /perf /i",
+        L"chkdsk C: /scan /perf",
         L"sfc /scannow",
         L"defrag C: /o /h"
     };
@@ -66,7 +47,7 @@ int main()
         L"defrag C: /o /h",
         L"sfc /scannow",
         L"mpcmdrun.exe -Scan -ScanType 2",
-        L"sfc /scannow",
+        L"chkdsk C: /scan /perf",
         L"dism /online /cleanup-image /CheckHealth",
         L"Dism /Online /Cleanup-Image /ScanHealth",
         L"Dism /Online /Cleanup-Image /RestoreHealth",
@@ -77,6 +58,7 @@ int main()
 
     wstring extendedRepair[] = {
         L"defrag C: /o /h",
+        L"chkdsk C: /scan /perf /i",
         L"sfc /scannow",
         L"chkdsk C: /f /x /spotfix /sdcleanup"
     };
@@ -148,19 +130,13 @@ int main()
         }
     }
 
-    if (SetConsoleCtrlHandler( CtrlHandler, TRUE)) {
-        ;
-    }
-    else {
+    if (!SetConsoleCtrlHandler( CtrlHandler, TRUE)) {
 #ifdef DEBUG
         printf("handler not registred\n");
 #endif
     }
 
-    if (DeleteMenu(GetSystemMenu(GetConsoleWindow(), FALSE), SC_CLOSE, MF_BYCOMMAND)) {
-        ;
-    }
-    else {
+    if (!DeleteMenu(GetSystemMenu(GetConsoleWindow(), FALSE), SC_CLOSE, MF_BYCOMMAND)) {
 #ifdef DEBUG
         printf("close button not removed\n");
 #endif
@@ -186,6 +162,13 @@ int main()
 
     wstring header_warning = startup_warn;
     printWarning(header_warning);
+
+    wchar_t repair_time_str[MAX_LOCALIZED_STRING_SIZE];
+    wchar_t start_time_str[MAX_LOCALIZED_STRING_SIZE];
+    wchar_t end_time_str[MAX_LOCALIZED_STRING_SIZE];
+    wchar_t time_buffer[MAX_LOCALIZED_STRING_SIZE];
+    wchar_t done[MAX_LOCALIZED_STRING_SIZE];
+    wchar_t* add;
 
     std::wcout << endl << endl << endl;
     /*-------------
@@ -278,11 +261,6 @@ int main()
         time_t repair_start_time,repair_end_time;
         time(&repair_start_time);
 
-        wchar_t repair_time_str[MAX_LOCALIZED_STRING_SIZE];
-        wchar_t start_time_str[MAX_LOCALIZED_STRING_SIZE];
-        wchar_t end_time_str[MAX_LOCALIZED_STRING_SIZE];
-        wchar_t time_buffer[MAX_LOCALIZED_STRING_SIZE];
-        wchar_t done[MAX_LOCALIZED_STRING_SIZE];
         running = true;
         for (int i = 0; i < total; i++)
         {
@@ -386,7 +364,7 @@ int main()
                 }
                 if (reboot) {
                     system("C:\\Windows\\System32\\shutdown.exe /r /t 0");
-                    break;
+                    return 0;
                 }
             }
             std::wcout << std::endl << L" " << reboot_planned << endl;

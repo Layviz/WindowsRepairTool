@@ -148,7 +148,7 @@
     <ResourceCompile Include="WRTLauncher.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Windows Reparatur\schraubenschlussel.ico" />
+    <Image Include="..\wrench.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -53,7 +53,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "F:\\cpp\\WindowsReparaturTool\\Windows Reparatur\\schraubenschlussel.ico"
+IDI_ICON2               ICON                    "F:\\cpp\\WindowsReparaturTool\\wrench.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
