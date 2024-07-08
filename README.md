@@ -13,8 +13,8 @@ Das "Windows Reparatur Tool" (WRT) ist für eine erleichterte Bedienung gedacht,
 - chkdsk C: /scan /perf /f /r /x /b
 - chkdsk C: /f /x /spotfix /sdcleanup
 
-Zu beachten ist, dass die System-Partition den Laufwerksbuchstaben "C:" haben muss. Sonst ist das Programm nicht kompatibel.
+Zu beachten ist, dass die System-Partition den Laufwerksbuchstaben "C:" haben muss, Win 10 Oder 11 als x64 sein muss. Sonst ist das Programm nicht kompatibel.
 
 ## Download Link zum Tool:
 
-[Neuste WRT Version](https://github.com/Layviz/WindowsReparaturTool/releases/download/v1.2.4/WRT_Installer-Version1.2.4.msi)
+[Neuste WRT Version](https://github.com/Layviz/WindowsReparaturTool/releases/download/v1.4.0/WRT_Installer-Version1.4.0.msi)
