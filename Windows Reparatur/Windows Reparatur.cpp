@@ -638,4 +638,7 @@ void sfc_output_fix(char* buffer, DWORD size) {
             write++;
         }
     }
+    if (write < buffer + size) {
+        *write = 0;
+    }
 }
