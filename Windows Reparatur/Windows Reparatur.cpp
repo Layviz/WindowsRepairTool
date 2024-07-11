@@ -22,6 +22,7 @@ wstring blank_line(80, L' '); //80 spaces should be enough to overwrite everthin
 bool verbose = false;   //verbose for all runs
 bool stop = false, running = false;
 BOOL WINAPI CtrlHandler(DWORD fdwCtrlType);
+int get_console_height();
 
 
 int main()
@@ -99,7 +100,7 @@ int main()
     // test for pending.xml
     GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml");
     if (INVALID_FILE_ATTRIBUTES != GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml") && GetLastError() != ERROR_FILE_NOT_FOUND) {
-    // fragen ob man trotzdem reparieren will
+     // fragen ob man trotzdem reparieren will
         std::wcout << L" " << pending_query << endl << endl;
         std::wcout << L" " << pending_option1 << endl;
         std::wcout << L" " << pending_option2 << endl;
@@ -117,13 +118,20 @@ int main()
             }
 
         } while ('h' == input[0]);
-
+        int height;
         switch (auswahl)
         {
         case 1:
             system("shutdown /r /t 0");
             return 0;
         case 2:
+            //disabled for now 
+            /*
+             height = get_console_height();
+            for (int i = 0; i < height; i++) {
+                wcout << endl;
+            }
+            */
             break;
         default:
             return 0;
@@ -507,6 +515,12 @@ void printWarning(wstring warn) {
     std::wcout << wstring(startpoint, ' ') << header_centralline << endl;
     std::wcout << wstring(startpoint, ' ') << header_padline << endl;
     std::wcout << wstring(startpoint, ' ') << header_topline << endl;
+}
+
+int get_console_height() {
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    return csbi.srWindow.Bottom - csbi.srWindow.Top;
 }
 
 bool read_user_intput(OPERATION* op) {
