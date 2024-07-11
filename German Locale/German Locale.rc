@@ -87,11 +87,11 @@ END
 
 STRINGTABLE
 BEGIN
-    ERROR_SESSION           "Konnte nicht auf Updates prüfen: Session nicht erstellt."
-    ERROR_CONNECTION        "Konnte nicht auf Updates prüfen: Connection nicht erstellt."
-    ERROR_REQUEST           "Konnte nicht auf Updates prüfen: Request nicht gesendet."
-    ERROR_MEMORY            "Konnte nicht auf Updates prüfen: Kein Speicher!"
-    ERROR_READ              "Konnte nicht auf Updates prüfen: Fehler beim Lesen"
+    ERROR_SESSION           "Konnte nicht auf Updates prüfen, versuche es später erneut (Fehlercode: 0x0001)"
+    ERROR_CONNECTION        "Konnte nicht auf Updates prüfen, versuche es später erneut (Fehlercode: 0x0002)"
+    ERROR_REQUEST           "Konnte nicht auf Updates prüfen: Keine Verbing zum Server möglich. (Fehlercode: 0x0003)"
+    ERROR_MEMORY            "Konnte nicht auf Updates prüfen: Kein verfügbarer Arbeitsspeicher! (Fehlercode: 0x0004)"
+    ERROR_READ              "Konnte nicht auf Updates prüfen: Verbindung zum Server abgebrochen (Fehlercode: 0x0005)"
     VERSION_FOUND_FORMAT    "Neue Version %i.%i.%i gefunden.\n Derzeitige Version ist %i.%i.%i"
     VERSION_UP_TO_DATE      "Derzeitige Version ist aktuell."
 END
@@ -109,6 +109,7 @@ BEGIN
     INSTALL_MODE3           "3. Windows Reperatur Tool beenden."
     ERROR_WRT               "Fehler beim Starten von WRT: "
     ERROR_UPDATE            "Konnte Update nicht herunterladen."
+    ERROR_RECEIVE           "Konnte nicht auf Updates prüfen: Verbindung zum Server abgebrochen (Fehlercode: 0x0006)"
 END
 
 STRINGTABLE

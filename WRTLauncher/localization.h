@@ -21,5 +21,6 @@ extern wchar_t install_mode2[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t install_mode3[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t error_wrt[MAX_LOCALIZED_STRING_SIZE];
 extern wchar_t error_update[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t error_receive[MAX_LOCALIZED_STRING_SIZE];
 
 extern int load_localized_strings();

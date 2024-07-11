@@ -53,7 +53,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON2               ICON                    "F:\\cpp\\WindowsReparaturTool\\wrench.ico"
+IDI_ICON2               ICON                    "..\\wrench.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -63,11 +63,11 @@ IDI_ICON2               ICON                    "F:\\cpp\\WindowsReparaturTool\\
 
 STRINGTABLE
 BEGIN
-    ERROR_SESSION           "Could not check for updates: session not created."
-    ERROR_CONNECTION        "Could not check for updates: connection not created."
-    ERROR_REQUEST           "Could not check for updates: request not send."
-    ERROR_MEMORY            "Could not check for updates: no memory!"
-    ERROR_READ              "Could not check for updates: error on read"
+    ERROR_SESSION           "Could not check for updates. Please try again later. (error code: 0x0001)"
+    ERROR_CONNECTION        "Could not check for updates. Please try again later. (error code: 0x0002)"
+    ERROR_REQUEST           "Could not check for updates: no connection to server. (error code: 0x0003)"
+    ERROR_MEMORY            "Could not check for updates: no available memory! (error code: 0x0004)"
+    ERROR_READ              "Could not check for updates: connection to server lost (error code: 0x0005)"
     VERSION_FOUND_FORMAT    "Found new version %i.%i.%i\n Current version is %i.%i.%i"
     VERSION_UP_TO_DATE      "Current version is up to date."
 END
@@ -85,6 +85,7 @@ BEGIN
     INSTALL_MODE3           "3. Quit Windows Repair Tool."
     ERROR_WRT               "Error while starting WRT: "
     ERROR_UPDATE            "Could not download update."
+    ERROR_RECEIVE           "Could not check for updates: connection to server lost (error code: 0x0006)"
 END
 
 STRINGTABLE

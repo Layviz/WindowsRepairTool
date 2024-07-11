@@ -157,6 +157,7 @@ int check_for_updates() {
             wcerr << version_unknown << endl << endl;
         }
     }
+    wcerr << error_receive << endl;
     return -1;
 }
 
@@ -250,6 +251,8 @@ int download_installer(string *downloaded_file) {
         *downloaded_file = file_name;
         return 0;
     }
+    wcerr << error_receive << endl;
+    return -1;
 }
 
 string get_exe_dir() {

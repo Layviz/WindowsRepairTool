@@ -23,6 +23,7 @@ wchar_t install_mode2[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t install_mode3[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t error_wrt[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t error_update[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t error_receive[MAX_LOCALIZED_STRING_SIZE] = {};
 
 void load_stings(HINSTANCE source) {
     LoadString(source, MUTEX_WARN, mutex_warn, MAX_LOCALIZED_STRING_SIZE);
@@ -44,6 +45,7 @@ void load_stings(HINSTANCE source) {
     LoadString(source, INSTALL_MODE3, install_mode3, MAX_LOCALIZED_STRING_SIZE);
     LoadString(source, ERROR_WRT, error_wrt, MAX_LOCALIZED_STRING_SIZE);
     LoadString(source, ERROR_UPDATE, error_update, MAX_LOCALIZED_STRING_SIZE);
+    LoadString(source, ERROR_RECEIVE, error_receive, MAX_LOCALIZED_STRING_SIZE);
 }
 
 int load_localized_strings() {
