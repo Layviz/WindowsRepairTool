@@ -23,7 +23,8 @@ bool verbose = false;   //verbose for all runs
 bool stop = false, running = false;
 BOOL WINAPI CtrlHandler(DWORD fdwCtrlType);
 int get_console_height();
-
+void dism_progress_bar_fix(char* buffer, DWORD size);
+void sfc_output_fix(char* buffer, DWORD size);
 
 int main()
 {
@@ -38,8 +39,8 @@ int main()
         L"mpcmdrun.exe -Scan -ScanType 1",
         L"chkdsk C: /scan /perf /i",
         L"dism /online /cleanup-image /CheckHealth",
-        L"Dism /Online /Cleanup-Image /ScanHealth",
-        L"Dism /Online /Cleanup-Image /RestoreHealth",
+        L"dism /Online /Cleanup-Image /ScanHealth",
+        L"dism /Online /Cleanup-Image /RestoreHealth",
         L"chkdsk C: /scan /perf",
         L"sfc /scannow",
         L"defrag C: /o /h"
@@ -50,8 +51,8 @@ int main()
         L"mpcmdrun.exe -Scan -ScanType 2",
         L"chkdsk C: /scan /perf",
         L"dism /online /cleanup-image /CheckHealth",
-        L"Dism /Online /Cleanup-Image /ScanHealth",
-        L"Dism /Online /Cleanup-Image /RestoreHealth",
+        L"dism /Online /Cleanup-Image /ScanHealth",
+        L"dism /Online /Cleanup-Image /RestoreHealth",
         L"sfc /scannow",
         L"defrag /c /o /h /m",
         L"chkdsk C: /scan /perf /f /r /x /b"
@@ -281,17 +282,21 @@ int main()
             HANDLE input = NULL, output = NULL;
             int rv = 0;
             wchar_t timestr[16];
+            wstring command;
             if (SIMPLE_REPAIR == op.mode)
             {
                 rv = start_process(simpleRepair[i],&proc_info,&input,&output);
+                command = simpleRepair[i];
             }
             else if (DEFAULT_REPAIR == op.mode)
             {
                 rv = start_process(defaultRepair[i], &proc_info, &input, &output);
+                command = defaultRepair[i];
             }
             else if (EXT_REPAIR == op.mode)
             {
                 rv = start_process(extendedRepair[i], &proc_info, &input, &output);
+                command = extendedRepair[i];
             }
             if (rv <= -10) {
                 std::wcout << endl << L"ERROR on creating pipes for subprocess" << endl;
@@ -324,8 +329,11 @@ int main()
                 do {
                     success = ReadFile(output, buffer, 512, &read, NULL);
                     if (success) {
-                        if (read < 512) {
-                            cout << " ";
+                        if (command.substr(0,4)==L"dism") {
+                            dism_progress_bar_fix(buffer, read);
+                        }
+                        else if (command.substr(0, 3) == L"sfc") {
+                            sfc_output_fix(buffer, read);
                         }
                         cout << buffer;
                     }
@@ -610,4 +618,24 @@ void print_help() {
     swprintf(help_text, MAX_LOCALIZED_STRING_SIZE, help_text_fmt, batch_path.c_str());
     std::wcout << endl << endl << help_text << L" ";
 
+}
+
+void dism_progress_bar_fix(char* buffer, DWORD size) {
+    char* pos;
+    while (pos = strstr(buffer, "] \r\n")) {
+        if(!strstr(buffer,"100.0%"))
+            *(pos + 3) = '\r';
+        buffer = pos + 4;
+    }
+}
+
+void sfc_output_fix(char* buffer, DWORD size) {
+    char* read = buffer, * write = buffer;
+    for (DWORD i = 0; i < size; i++) {
+        read = buffer + i;
+        if (*read) {
+            *write = *read;
+            write++;
+        }
+    }
 }
