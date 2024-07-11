@@ -342,6 +342,7 @@ int main()
             }
         }
     }
+    wcout << endl << endl << endl;
     CloseHandle(mutex);
     int wrt = system("Binaries\\WRT.exe");
     if (wrt < 0) {
