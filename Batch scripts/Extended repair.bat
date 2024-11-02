@@ -1,3 +1,4 @@
+cleanmgr /sagerun:153
 defrag C: /o /h
 chkdsk C: /scan /perf /i
 sfc /scannow

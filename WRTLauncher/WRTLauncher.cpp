@@ -109,47 +109,22 @@ int check_for_updates() {
             int major = stoi(major_str);
             int minor = stoi(minor_str);
             int patch = stoi(patch_str);
+            unsigned int version = VERSION(major, minor, patch);
 
-            // Versionen vergleichen mit der über Makro eingestellten lokalen Version
-            int cmp;
-            if (major > VERSION_MAJOR) {
-                cmp = 1;
-            }
-            else if (major < VERSION_MAJOR) {
-                cmp = -1;
-            }
-            else { //major == VERSION_MAJOR
-                if (minor > VERSION_MINOR) {
-                    cmp = 1;
-                }
-                else if (minor < VERSION_MINOR) {
-                    cmp = -1;
-                }
-                else {
-                    if (patch > VERSION_PATCH) {
-                        cmp = 1;
-                    }
-                    else if (patch < VERSION_PATCH) {
-                        cmp = -1;
-                    }
-                    else {
-                        cmp = 0;
-                    }
-                }
-            }
             // entsprechende Antwort ausgeben
-            if (1 == cmp) {
+            if (CURRENT_VERSION < version) {
+                wprintf(L"%i < %i\r\n", CURRENT_VERSION, version);
                 wchar_t version_found_str[1024] = {};
                 swprintf(version_found_str, 1024, version_found_fmt, major,minor,patch, VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
                 wcout << L" " << version_found_str << endl;
                 return 1;
             }
-            else if (0 == cmp) {
+            else if (CURRENT_VERSION == version) {
                 wcout << L" " << version_up_to_date << endl;
                 return 0;
             }
             else {
-                wcout << L" " << version_ahead << endl << endl;
+                wcout << L" " << version_ahead << endl;
                 return 0;
             }
         }
@@ -273,7 +248,7 @@ string get_exe_dir() {
 int installation(string installer_file) {
     string install_dir = get_exe_dir();
     
-    string cmd = "start \"WRT Update\" cmd /C \"C:\\Windows\\System32\\msiexec.exe /x ";
+    string cmd = "start \"WRT Update\" /MIN /HIGH cmd /C \"C:\\Windows\\System32\\msiexec.exe /x ";
     cmd.append(PRODUCT_CODE);
     cmd.append(" /passive");
 
@@ -283,13 +258,24 @@ int installation(string installer_file) {
     cmd.append(" TARGETDIR=\"");
     cmd.append(install_dir);
     cmd.append("\" /passive");
-    cmd.append(" && start \"\" \"");
+    cmd.append(" && start \"\" /MIN /HIGH \"");
     cmd.append(install_dir);
     cmd.append("\\Binaries\\WRTLauncher.exe\"\"");
     wcout << endl << L" " << installer_start << endl;
 
     system(cmd.c_str());
     return 0;
+}
+
+void cleanup_msi_files() {
+    string install_dir = get_exe_dir();
+    string cmd = "DEL / F / Q \"";
+    cmd.append(install_dir);
+    cmd.append("\\*.msi\" 2> nul");
+#if DEBUG
+    cout << cmd << endl;
+#endif
+    system(cmd.c_str());
 }
 
 int main()
@@ -345,7 +331,7 @@ int main()
             }
         }
     }
-    wcout << endl << endl << endl;
+    cleanup_msi_files();
     CloseHandle(mutex);
     int wrt = system("Binaries\\WRT.exe");
     if (wrt < 0) {

@@ -43,6 +43,7 @@ int main()
         L"dism /Online /Cleanup-Image /RestoreHealth",
         L"chkdsk C: /scan /perf",
         L"sfc /scannow",
+        L"cleanmgr /sagerun:151",
         L"defrag C: /o /h"
     };
     wstring defaultRepair[] = {
@@ -55,10 +56,12 @@ int main()
         L"dism /Online /Cleanup-Image /RestoreHealth",
         L"sfc /scannow",
         L"defrag /c /o /h /m",
+        L"cleanmgr /sagerun:152",
         L"chkdsk C: /scan /perf /f /r /x /b"
     };
 
     wstring extendedRepair[] = {
+        L"cleanmgr /sagerun:153",
         L"defrag C: /o /h",
         L"chkdsk C: /scan /perf /i",
         L"sfc /scannow",
@@ -133,11 +136,14 @@ int main()
                 wcout << endl;
             }
             */
+            std::wcout << endl;
             break;
         default:
             return 0;
         }
     }
+
+    std::wcout << endl << endl;
 
     if (!SetConsoleCtrlHandler( CtrlHandler, TRUE)) {
 #ifdef DEBUG

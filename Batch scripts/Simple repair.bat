@@ -7,4 +7,5 @@ Dism /Online /Cleanup-Image /ScanHealth
 Dism /Online /Cleanup-Image /RestoreHealth
 chkdsk C: /scan /perf
 sfc /scannow
+cleanmgr /sagerun:151
 defrag C: /o /h
