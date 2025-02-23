@@ -365,11 +365,12 @@ int main()
                 long long diff_sec = process_end_time - process_start_time;
                 create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
                 swprintf(end_time_str, MAX_LOCALIZED_STRING_SIZE, process_end_time_fmt, timestr, time_buffer);
-                std::wcout << L" " << end_time_str << endl;
+                std::wcout << L" " << end_time_str << endl << endl;
             }
             if (stop)
                 break;
         }
+        time(&repair_end_time);
         running = false;
         if (DEFAULT_REPAIR == op.mode || EXT_REPAIR == op.mode) {
             std::wcout << std::endl<<std::endl<< L" " << reboot_query;
@@ -392,7 +393,6 @@ int main()
             std::wcout << std::endl << L" " << reboot_planned << endl;
         }
         if (verbose_current) {
-            time(&repair_end_time);
             long long diff_sec = repair_end_time - repair_start_time;
             create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
             swprintf(repair_time_str, MAX_LOCALIZED_STRING_SIZE, repair_time_fmt, time_buffer);
