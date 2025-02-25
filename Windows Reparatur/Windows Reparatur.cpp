@@ -372,6 +372,12 @@ int main()
         }
         time(&repair_end_time);
         running = false;
+        if (verbose_current) {
+            long long diff_sec = repair_end_time - repair_start_time;
+            create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
+            swprintf(repair_time_str, MAX_LOCALIZED_STRING_SIZE, repair_time_fmt, time_buffer);
+            std::wcout << L" " << repair_time_str << endl;
+        }
         if (DEFAULT_REPAIR == op.mode || EXT_REPAIR == op.mode) {
             std::wcout << std::endl<<std::endl<< L" " << reboot_query;
             std::cin.get(input, 3);
@@ -391,12 +397,6 @@ int main()
                 }
             }
             std::wcout << std::endl << L" " << reboot_planned << endl;
-        }
-        if (verbose_current) {
-            long long diff_sec = repair_end_time - repair_start_time;
-            create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
-            swprintf(repair_time_str, MAX_LOCALIZED_STRING_SIZE, repair_time_fmt, time_buffer);
-            std::wcout << L" " << repair_time_str << endl;
         }
         std::wcout << std::endl << std::endl << std::endl;
     }
