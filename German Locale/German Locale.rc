@@ -77,8 +77,8 @@ BEGIN
     EXECUTION_TIME_FORMAT_STRING "Diese Ausführung dauerte %l Ticks."
     HELP_TEXT_FMT           " Reparaturmodi\n\n   ""Einfache Reparatur""\n    \n      Die Einfache Reparatur braucht wenige Minuten und ist in den meisten Fällen ausreichend um Fehler zu beheben.\n    \n   ""Standard Reparatur""\n    \n      Die Standard Reparatur ist ausführlicher und braucht mehrere Stunden, sie prüft das ganze System auf Viren\n      und prüft nach dem System Neustart die System-Partition vollständig auf Fehler und versucht diese zu beheben.\n    \n   ""Erweiterte Reparatur""\n    \n      Die Erweiterte Reparatur ist nach der Standard Reparatur empfehlenswert,\n      da diese noch auf andere Weise versucht Beschädigungen der System-Partiton zu erkennen und zu beheben.\n    \n Prozessausgabe\n\n     Für erweiterte Prozessausgabe ""+"" an den gewählten Modus anhängen (z.B. ""1+"").\n     Für dauerhaftes Einschalten der Prozessausgabe nur ""+"" ohne Modus eingeben.\n\n     Zum deaktivieren der Prozessausgabe nur ""-"" ohne Modus eingeben.\n     (Die Prozessausgabe ist Standardmäßig deaktiviert.)\n\n\n Es liegen in ""%s"" Batch Dateien,\n die ausgeführt werden können, um manuell Reparatur Modi auszuführen ohne das ""WRT"" starten zu müssen.\n (Das ""WRT"" führt die Reparatur Modi effizenter und schneller aus.)\n"
     PENDING_HELP_TEXT       " Es steht ein System Neustart für die Installation von Updates aus.\n\n\n Optionen\n\n   ""System neustarten""\n\n     Nach dem Neustart können Reparaturen vollständig durchgeführt werden.\n\n   ""Trotzdem ausführen""\n\n     WRT führt ohne System Neustart nur eine verkürzte Reparatur durch.\n"
-    PROCESS_START_TIME_FMT  "um %s"
-    PROCESS_END_TIME_FMT    "um %s (Dauer:%s)"
+    PROCESS_START_TIME_FMT  "um %s Uhr"
+    PROCESS_END_TIME_FMT    "um %s Uhr (Dauer:%s)"
     REPAIR_TIME_FMT         "Die Reparatur dauerte%s."
     SECONDS_STR             "Sekunden"
     MINUTES_STR             "Minuten"
@@ -87,11 +87,11 @@ END
 
 STRINGTABLE
 BEGIN
-    ERROR_SESSION           "Konnte nicht auf Updates prüfen: Session nicht erstellt."
-    ERROR_CONNECTION        "Konnte nicht auf Updates prüfen: Connection nicht erstellt."
-    ERROR_REQUEST           "Konnte nicht auf Updates prüfen: Request nicht gesendet."
-    ERROR_MEMORY            "Konnte nicht auf Updates prüfen: Kein Speicher!"
-    ERROR_READ              "Konnte nicht auf Updates prüfen: Fehler beim Lesen"
+    ERROR_SESSION           "Konnte nicht auf Updates prüfen, versuche es später erneut (Fehlercode: 0x0001)"
+    ERROR_CONNECTION        "Konnte nicht auf Updates prüfen, versuche es später erneut (Fehlercode: 0x0002)"
+    ERROR_REQUEST           "Konnte nicht auf Updates prüfen: Keine Verbing zum Server möglich. (Fehlercode: 0x0003)"
+    ERROR_MEMORY            "Konnte nicht auf Updates prüfen: Kein verfügbarer Arbeitsspeicher! (Fehlercode: 0x0004)"
+    ERROR_READ              "Konnte nicht auf Updates prüfen: Verbindung zum Server abgebrochen (Fehlercode: 0x0005)"
     VERSION_FOUND_FORMAT    "Neue Version %i.%i.%i gefunden.\n Derzeitige Version ist %i.%i.%i"
     VERSION_UP_TO_DATE      "Derzeitige Version ist aktuell."
 END
@@ -109,6 +109,7 @@ BEGIN
     INSTALL_MODE3           "3. Windows Reperatur Tool beenden."
     ERROR_WRT               "Fehler beim Starten von WRT: "
     ERROR_UPDATE            "Konnte Update nicht herunterladen."
+    ERROR_RECEIVE           "Konnte nicht auf Updates prüfen: Verbindung zum Server abgebrochen (Fehlercode: 0x0006)"
 END
 
 STRINGTABLE

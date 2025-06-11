@@ -5,29 +5,10 @@
 #include <time.h>
 #include "resource.h"
 #include "localization.h"
+#include "wrt_types.h"
 
 using namespace std;
 
-typedef enum {
-    NO_OP = 0,
-    SIMPLE_REPAIR = 1,
-    DEFAULT_REPAIR = 2,
-    EXT_REPAIR = 3,
-    HELP = 4,
-    VERBOSE_ON = 5,
-    VERBOSE_OFF = 6,
-}OPTION;
-
-typedef enum {
-    DEFAULT,
-    VERBOSE,
-    SILENT
-}VEROBOSITY;
-
-typedef struct {
-    OPTION mode;
-    VEROBOSITY verbose;
-}OPERATION;
 
 int total;
 int counter;
@@ -41,7 +22,9 @@ wstring blank_line(80, L' '); //80 spaces should be enough to overwrite everthin
 bool verbose = false;   //verbose for all runs
 bool stop = false, running = false;
 BOOL WINAPI CtrlHandler(DWORD fdwCtrlType);
-
+int get_console_height();
+void dism_progress_bar_fix(char* buffer, DWORD size);
+void sfc_output_fix(char* buffer, DWORD size);
 
 int main()
 {
@@ -54,29 +37,33 @@ int main()
         L"defrag C: /o /h",
         L"sfc /scannow",
         L"mpcmdrun.exe -Scan -ScanType 1",
-        L"sfc /scannow",
-        L"dism /online /cleanup-image /CheckHealth",
-        L"Dism /Online /Cleanup-Image /ScanHealth",
-        L"Dism /Online /Cleanup-Image /RestoreHealth",
         L"chkdsk C: /scan /perf /i",
+        L"dism /online /cleanup-image /CheckHealth",
+        L"dism /Online /Cleanup-Image /ScanHealth",
+        L"dism /Online /Cleanup-Image /RestoreHealth",
+        L"chkdsk C: /scan /perf",
         L"sfc /scannow",
+        L"cleanmgr /sagerun:151",
         L"defrag C: /o /h"
     };
     wstring defaultRepair[] = {
         L"defrag C: /o /h",
         L"sfc /scannow",
         L"mpcmdrun.exe -Scan -ScanType 2",
-        L"sfc /scannow",
+        L"chkdsk C: /scan /perf",
         L"dism /online /cleanup-image /CheckHealth",
-        L"Dism /Online /Cleanup-Image /ScanHealth",
-        L"Dism /Online /Cleanup-Image /RestoreHealth",
+        L"dism /Online /Cleanup-Image /ScanHealth",
+        L"dism /Online /Cleanup-Image /RestoreHealth",
         L"sfc /scannow",
         L"defrag /c /o /h /m",
+        L"cleanmgr /sagerun:152",
         L"chkdsk C: /scan /perf /f /r /x /b"
     };
 
     wstring extendedRepair[] = {
+        L"cleanmgr /sagerun:153",
         L"defrag C: /o /h",
+        L"chkdsk C: /scan /perf /i",
         L"sfc /scannow",
         L"chkdsk C: /f /x /spotfix /sdcleanup"
     };
@@ -117,7 +104,7 @@ int main()
     // test for pending.xml
     GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml");
     if (INVALID_FILE_ATTRIBUTES != GetFileAttributes(L"C:\\Windows\\WinSxS\\pending.xml") && GetLastError() != ERROR_FILE_NOT_FOUND) {
-    // fragen ob man trotzdem reparieren will
+     // fragen ob man trotzdem reparieren will
         std::wcout << L" " << pending_query << endl << endl;
         std::wcout << L" " << pending_option1 << endl;
         std::wcout << L" " << pending_option2 << endl;
@@ -135,32 +122,36 @@ int main()
             }
 
         } while ('h' == input[0]);
-
+        int height;
         switch (auswahl)
         {
         case 1:
             system("shutdown /r /t 0");
             return 0;
         case 2:
+            //disabled for now 
+            /*
+             height = get_console_height();
+            for (int i = 0; i < height; i++) {
+                wcout << endl;
+            }
+            */
+            std::wcout << endl;
             break;
         default:
             return 0;
         }
     }
 
-    if (SetConsoleCtrlHandler( CtrlHandler, TRUE)) {
-        ;
-    }
-    else {
+    std::wcout << endl << endl;
+
+    if (!SetConsoleCtrlHandler( CtrlHandler, TRUE)) {
 #ifdef DEBUG
         printf("handler not registred\n");
 #endif
     }
 
-    if (DeleteMenu(GetSystemMenu(GetConsoleWindow(), FALSE), SC_CLOSE, MF_BYCOMMAND)) {
-        ;
-    }
-    else {
+    if (!DeleteMenu(GetSystemMenu(GetConsoleWindow(), FALSE), SC_CLOSE, MF_BYCOMMAND)) {
 #ifdef DEBUG
         printf("close button not removed\n");
 #endif
@@ -186,6 +177,13 @@ int main()
 
     wstring header_warning = startup_warn;
     printWarning(header_warning);
+
+    wchar_t repair_time_str[MAX_LOCALIZED_STRING_SIZE];
+    wchar_t start_time_str[MAX_LOCALIZED_STRING_SIZE];
+    wchar_t end_time_str[MAX_LOCALIZED_STRING_SIZE];
+    wchar_t time_buffer[MAX_LOCALIZED_STRING_SIZE];
+    wchar_t done[MAX_LOCALIZED_STRING_SIZE];
+    wchar_t* add;
 
     std::wcout << endl << endl << endl;
     /*-------------
@@ -278,11 +276,6 @@ int main()
         time_t repair_start_time,repair_end_time;
         time(&repair_start_time);
 
-        wchar_t repair_time_str[MAX_LOCALIZED_STRING_SIZE];
-        wchar_t start_time_str[MAX_LOCALIZED_STRING_SIZE];
-        wchar_t end_time_str[MAX_LOCALIZED_STRING_SIZE];
-        wchar_t time_buffer[MAX_LOCALIZED_STRING_SIZE];
-        wchar_t done[MAX_LOCALIZED_STRING_SIZE];
         running = true;
         for (int i = 0; i < total; i++)
         {
@@ -295,17 +288,21 @@ int main()
             HANDLE input = NULL, output = NULL;
             int rv = 0;
             wchar_t timestr[16];
+            wstring command;
             if (SIMPLE_REPAIR == op.mode)
             {
                 rv = start_process(simpleRepair[i],&proc_info,&input,&output);
+                command = simpleRepair[i];
             }
             else if (DEFAULT_REPAIR == op.mode)
             {
                 rv = start_process(defaultRepair[i], &proc_info, &input, &output);
+                command = defaultRepair[i];
             }
             else if (EXT_REPAIR == op.mode)
             {
                 rv = start_process(extendedRepair[i], &proc_info, &input, &output);
+                command = extendedRepair[i];
             }
             if (rv <= -10) {
                 std::wcout << endl << L"ERROR on creating pipes for subprocess" << endl;
@@ -338,8 +335,11 @@ int main()
                 do {
                     success = ReadFile(output, buffer, 512, &read, NULL);
                     if (success) {
-                        if (read < 512) {
-                            cout << " ";
+                        if (command.substr(0,4)==L"dism") {
+                            dism_progress_bar_fix(buffer, read);
+                        }
+                        else if (command.substr(0, 3) == L"sfc") {
+                            sfc_output_fix(buffer, read);
                         }
                         cout << buffer;
                     }
@@ -365,12 +365,19 @@ int main()
                 long long diff_sec = process_end_time - process_start_time;
                 create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
                 swprintf(end_time_str, MAX_LOCALIZED_STRING_SIZE, process_end_time_fmt, timestr, time_buffer);
-                std::wcout << L" " << end_time_str << endl;
+                std::wcout << L" " << end_time_str << endl << endl;
             }
             if (stop)
                 break;
         }
+        time(&repair_end_time);
         running = false;
+        if (verbose_current) {
+            long long diff_sec = repair_end_time - repair_start_time;
+            create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
+            swprintf(repair_time_str, MAX_LOCALIZED_STRING_SIZE, repair_time_fmt, time_buffer);
+            std::wcout << L" " << repair_time_str << endl;
+        }
         if (DEFAULT_REPAIR == op.mode || EXT_REPAIR == op.mode) {
             std::wcout << std::endl<<std::endl<< L" " << reboot_query;
             std::cin.get(input, 3);
@@ -386,17 +393,10 @@ int main()
                 }
                 if (reboot) {
                     system("C:\\Windows\\System32\\shutdown.exe /r /t 0");
-                    break;
+                    return 0;
                 }
             }
             std::wcout << std::endl << L" " << reboot_planned << endl;
-        }
-        if (verbose_current) {
-            time(&repair_end_time);
-            long long diff_sec = repair_end_time - repair_start_time;
-            create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
-            swprintf(repair_time_str, MAX_LOCALIZED_STRING_SIZE, repair_time_fmt, time_buffer);
-            std::wcout << L" " << repair_time_str << endl;
         }
         std::wcout << std::endl << std::endl << std::endl;
     }
@@ -531,6 +531,12 @@ void printWarning(wstring warn) {
     std::wcout << wstring(startpoint, ' ') << header_topline << endl;
 }
 
+int get_console_height() {
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    return csbi.srWindow.Bottom - csbi.srWindow.Top;
+}
+
 bool read_user_intput(OPERATION* op) {
     char input[4] = {};
     std::cin.get(input, 3);
@@ -618,4 +624,27 @@ void print_help() {
     swprintf(help_text, MAX_LOCALIZED_STRING_SIZE, help_text_fmt, batch_path.c_str());
     std::wcout << endl << endl << help_text << L" ";
 
+}
+
+void dism_progress_bar_fix(char* buffer, DWORD size) {
+    char* pos;
+    while (pos = strstr(buffer, "] \r\n")) {
+        if(!strstr(buffer,"100.0%"))
+            *(pos + 3) = '\r';
+        buffer = pos + 4;
+    }
+}
+
+void sfc_output_fix(char* buffer, DWORD size) {
+    char* read = buffer, * write = buffer;
+    for (DWORD i = 0; i < size; i++) {
+        read = buffer + i;
+        if (*read) {
+            *write = *read;
+            write++;
+        }
+    }
+    if (write < buffer + size) {
+        *write = 0;
+    }
 }

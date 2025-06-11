@@ -15,43 +15,19 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_069AB6CC237342D98F3E4C3C46B5811E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0865DAED43C548B08A5756BDC3A6E4D7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_0CD3A9ADBA74E0DC2DFFE36830CBC416"
+        "MsmKey" = "8:_250228466359D396358B96E949B2A775"
         "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_0CD3A9ADBA74E0DC2DFFE36830CBC416"
-        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_120200F487C4BA56BAF476F7F27DEC66"
-        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_120200F487C4BA56BAF476F7F27DEC66"
-        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_19BD7F01267136B49CC1C4869BC7BFA5"
+        "MsmKey" = "8:_250228466359D396358B96E949B2A775"
         "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -63,25 +39,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3A75F3B7E6A416D6041BB28019DFB704"
+        "MsmKey" = "8:_532EC60C7B7634B8781E190B8CBB3EC4"
         "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3A75F3B7E6A416D6041BB28019DFB704"
+        "MsmKey" = "8:_532EC60C7B7634B8781E190B8CBB3EC4"
         "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_425D8AFFD28E2F1F31873B6A68F2968F"
+        "MsmKey" = "8:_53FBB56CA272DB018D0E81E2540A9C8E"
         "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_425D8AFFD28E2F1F31873B6A68F2968F"
+        "MsmKey" = "8:_53FBB56CA272DB018D0E81E2540A9C8E"
         "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -105,6 +81,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_702079A557B37C017B3EFAB80CB547B0"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_77A4A5D6485B84D237896CA8B7227541"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_77A4A5D6485B84D237896CA8B7227541"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8156D63A781D75CBA0469654392AF406"
         "OwnerKey" = "8:_0865DAED43C548B08A5756BDC3A6E4D7"
         "MsmSig" = "8:_UNDEFINED"
@@ -123,13 +117,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_829067F4333BF896FA363C50E078650E"
+        "MsmKey" = "8:_83DA71C39371426ABCF13B6B7B23AD90"
         "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_829067F4333BF896FA363C50E078650E"
+        "MsmKey" = "8:_83DA71C39371426ABCF13B6B7B23AD90"
         "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -141,13 +135,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_985D526E36F7FA8F74EB82127625933E"
+        "MsmKey" = "8:_9740FF3CC948C40F5DB1D761850EE48F"
         "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_985D526E36F7FA8F74EB82127625933E"
+        "MsmKey" = "8:_9740FF3CC948C40F5DB1D761850EE48F"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_98D57F68B1A974C0DB2B49EC72C3426D"
         "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -159,13 +159,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A4126A0BFF027D55FD229648C3A68342"
-        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmKey" = "8:_B96D7F9AEED24E44B759EF8FC7F6F166"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A46593549B23BAAC5733439CDE23AD97"
+        "MsmKey" = "8:_CEAC296692806CB1A0D8FB04D975C337"
         "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -177,25 +177,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_EB834982F2B6417EC94FEFEF4458A792"
+        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EB834982F2B6417EC94FEFEF4458A792"
+        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F5E1A3F526D12FD08D8E42400A853E39"
-        "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F8E68A90AD945BC69B8BB12E76F9D665"
-        "OwnerKey" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F8E68A90AD945BC69B8BB12E76F9D665"
+        "MsmKey" = "8:_F87907FF75041C200345C1C4B8300348"
         "OwnerKey" = "8:_F3121B2D6D9D4E509FB39DFC989DD93F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -286,47 +286,7 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_069AB6CC237342D98F3E4C3C46B5811E"
-            {
-            "SourcePath" = "8:..\\Windows Reparatur\\schraubenschlussel.ico"
-            "TargetName" = "8:schraubenschlussel.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_25C2695A356B4DC18B0DBEADF7EB0BD8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0CD3A9ADBA74E0DC2DFFE36830CBC416"
-            {
-            "SourcePath" = "8:api-ms-win-crt-locale-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-locale-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_120200F487C4BA56BAF476F7F27DEC66"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_250228466359D396358B96E949B2A775"
             {
             "SourcePath" = "8:VCRUNTIME140_1.dll"
             "TargetName" = "8:VCRUNTIME140_1.dll"
@@ -343,26 +303,6 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_19BD7F01267136B49CC1C4869BC7BFA5"
-            {
-            "SourcePath" = "8:api-ms-win-crt-time-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-time-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -386,12 +326,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A75F3B7E6A416D6041BB28019DFB704"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_532EC60C7B7634B8781E190B8CBB3EC4"
             {
-            "SourcePath" = "8:MSVCP140.dll"
-            "TargetName" = "8:MSVCP140.dll"
+            "SourcePath" = "8:api-ms-win-crt-heap-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-heap-l1-1-0.dll"
             "Tag" = "8:"
-            "Folder" = "8:_BE52AF72E8B64E28BC915CCEE639999C"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -402,14 +342,14 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_425D8AFFD28E2F1F31873B6A68F2968F"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_53FBB56CA272DB018D0E81E2540A9C8E"
             {
-            "SourcePath" = "8:api-ms-win-crt-heap-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-heap-l1-1-0.dll"
+            "SourcePath" = "8:api-ms-win-crt-convert-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-convert-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
@@ -446,6 +386,46 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_702079A557B37C017B3EFAB80CB547B0"
+            {
+            "SourcePath" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_77A4A5D6485B84D237896CA8B7227541"
+            {
+            "SourcePath" = "8:MSVCP140.dll"
+            "TargetName" = "8:MSVCP140.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_BE52AF72E8B64E28BC915CCEE639999C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8156D63A781D75CBA0469654392AF406"
             {
             "SourcePath" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
@@ -466,10 +446,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_829067F4333BF896FA363C50E078650E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_83DA71C39371426ABCF13B6B7B23AD90"
             {
-            "SourcePath" = "8:api-ms-win-crt-convert-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-convert-l1-1-0.dll"
+            "SourcePath" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
@@ -506,10 +486,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_985D526E36F7FA8F74EB82127625933E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9740FF3CC948C40F5DB1D761850EE48F"
             {
-            "SourcePath" = "8:api-ms-win-crt-math-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-math-l1-1-0.dll"
+            "SourcePath" = "8:api-ms-win-crt-locale-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-locale-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
@@ -526,30 +506,50 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A4126A0BFF027D55FD229648C3A68342"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_98D57F68B1A974C0DB2B49EC72C3426D"
+            {
+            "SourcePath" = "8:api-ms-win-crt-string-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-string-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B96D7F9AEED24E44B759EF8FC7F6F166"
+            {
+            "SourcePath" = "8:..\\wrench.ico"
+            "TargetName" = "8:wrench.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_25C2695A356B4DC18B0DBEADF7EB0BD8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CEAC296692806CB1A0D8FB04D975C337"
             {
             "SourcePath" = "8:WINHTTP.dll"
             "TargetName" = "8:WINHTTP.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A46593549B23BAAC5733439CDE23AD97"
-            {
-            "SourcePath" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
@@ -586,10 +586,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F5E1A3F526D12FD08D8E42400A853E39"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EB834982F2B6417EC94FEFEF4458A792"
             {
-            "SourcePath" = "8:api-ms-win-crt-string-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-string-l1-1-0.dll"
+            "SourcePath" = "8:api-ms-win-crt-math-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-math-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
@@ -606,10 +606,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F8E68A90AD945BC69B8BB12E76F9D665"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F87907FF75041C200345C1C4B8300348"
             {
-            "SourcePath" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
+            "SourcePath" = "8:api-ms-win-crt-time-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-time-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
             "Condition" = "8:"
@@ -726,15 +726,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Windows Repair Tool"
-        "ProductCode" = "8:{C4DA8B01-4175-4F0E-888B-FFEAE726598B}"
-        "PackageCode" = "8:{CD2821BA-99F6-47CA-ACC8-822DD41EFA96}"
+        "ProductCode" = "8:{DB908C82-3958-407D-AE82-24AD999A1980}"
+        "PackageCode" = "8:{07215C0D-A663-4F88-A010-6F7C6C893A0C}"
         "UpgradeCode" = "8:{8D3699D3-4446-4F6B-8C17-60450715FD92}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.4.0"
+        "ProductVersion" = "8:1.4.3"
         "Manufacturer" = "8:Layviz"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -744,7 +744,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:A tool for automated Windows repairs"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_069AB6CC237342D98F3E4C3C46B5811E"
+        "ARPPRODUCTICON" = "8:_B96D7F9AEED24E44B759EF8FC7F6F166"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -777,6 +777,798 @@
                             "Transitive" = "11:FALSE"
                                 "Keys"
                                 {
+                                }
+                                "Values"
+                                {
+                                }
+                            }
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_F5287936BE6E4AA39BE650BF5E13E649"
+                            {
+                            "Name" = "8:Microsoft"
+                            "Condition" = "8:"
+                            "AlwaysCreate" = "11:FALSE"
+                            "DeleteAtUninstall" = "11:FALSE"
+                            "Transitive" = "11:FALSE"
+                                "Keys"
+                                {
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_7B3306D249484D9BBF47C91BDA0A3B74"
+                                    {
+                                    "Name" = "8:Windows"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_D21D7362CF45443A98222D6DAE567453"
+                                            {
+                                            "Name" = "8:CurrentVersion"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_9451A16FF23F49BDA08D1A2D87FAC457"
+                                                    {
+                                                    "Name" = "8:Explorer"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_EAEB8A52388C49F58EDE39CC7E605A1A"
+                                                            {
+                                                            "Name" = "8:VolumeCaches"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_01EB3DB89D7C4A22BBD2FF0A69D46B4B"
+                                                                    {
+                                                                    "Name" = "8:Old ChkDsk Files"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_070EDF65040D48B4ACF17B9C9003882D"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_563C04D1687040EF94EBD25A4FCE9926"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_8C23C1EFDD814F908E7B7D03DB0C9A74"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_036D70E2FCC4453CB9D9674FB984D290"
+                                                                    {
+                                                                    "Name" = "8:Downloaded Program Files"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_1ACFF8B41C724936ACFF98B043B7C1CA"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_E1502B2A41AA476E9ABBF26A29B2E29C"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_F6187B58443E49F8A0E711617E50C155"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_06109A8A43ED4A729BD9EE707705B4FE"
+                                                                    {
+                                                                    "Name" = "8:Diagnostic Data Viewer database files"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_06B7F000497241E989AA80469F85ABBC"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_6A2F1CCA734D46899EF8DB4B39EEB9B9"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_C3151315034A4B65994DCAC20FB3EFF2"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_0D2486E43A8D4CAEB226E95510358625"
+                                                                    {
+                                                                    "Name" = "8:Thumbnail Cache"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_0D4CE94DE6C14FE686066669B09CE44E"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_3CFF9FCE05FD41ABAF5450949906714C"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_6B18518C9F594ECB81A9E5F8F1E7F91D"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_16BF090097CE45668C2A8B55900C5845"
+                                                                    {
+                                                                    "Name" = "8:Recycle Bin"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_23D20C7597014198AF19C2115EE4FFE3"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_6A7A6882ECEE4A4FB8D973DCC82D07E7"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_DF569358D0994A1A9BA9B0A0BE99DF6A"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_2CD1D908728A4937910251A359CF21DB"
+                                                                    {
+                                                                    "Name" = "8:Language Pack"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_0142D2A49E094E6F9B9FBF5E9498A7FB"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_2FA74FE1B2E04B819DA7AE201352A667"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_6AA0E3F8D9F0447C99A4A4A9BC1D49AE"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_58C08B6E5C00456DA3C0E46BA7349D1E"
+                                                                    {
+                                                                    "Name" = "8:RetailDemo Offline Content"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_624278FFA7BB440982CB0A0E9A0DE4F0"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_6D2660C175924374ABA334A1586F14C6"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_D7F92638873D412CA916DE262B07A1F4"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_6FCCCB5AA4834B68B6D4D05C588D1F42"
+                                                                    {
+                                                                    "Name" = "8:Active Setup Temp Folders"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_030B2A4C38AF4B388673EBF0CC80C36E"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_83A9D287FCD24CCCB26207B3BCC4EA3F"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_EBDADD148E1D4FAF8787CEE42DC80BEB"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_76018281664345C19CB53223FB0587E0"
+                                                                    {
+                                                                    "Name" = "8:Delivery Optimization Files"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_56FE8B619EA64976A9BDCF925057C48E"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_7376FDE6FF394E158CDC6874A701783F"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_951EFE4B42B2404283EEB832501BCED9"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_77B288CE033441589CDE1159D3CC54BC"
+                                                                    {
+                                                                    "Name" = "8:Internet Cache Files"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_0A65254714BF45E588FCBE85BFFA2A0E"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_818928004B6B43368D8A1C570B3FB764"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_B9A8B0425165486188D329F23D218419"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_7F8C200E16574AEEB579FD3195128180"
+                                                                    {
+                                                                    "Name" = "8:User file versions"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_2D89626DA2B440728B5A718C6C5C7536"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_472E6AC39C294B8BB4966792502ACD3D"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_4790A921CD4741E2BA5502B8B8F74230"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_A384CB03343D4EAE94F38262A1D107BF"
+                                                                    {
+                                                                    "Name" = "8:Windows Defender"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_4320EAB29E454EFB9FD2297F3F2324E8"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_5894E631357D42098B81558DF2B3AE3A"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_E8530C837D5F43858047737897BB0C0A"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_A3EDAE89A07D4286B2C9AE1D6707DC77"
+                                                                    {
+                                                                    "Name" = "8:Temporary Files"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_CAECCB80E43A42CBA171980A28FF3E34"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_DB9684DCAB884AEB80D4DA167B90B407"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_EF7F88AA732A4F0BA1082093C6F60FAC"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_B0C23300C9ED4A8084E78DFCCA10F55B"
+                                                                    {
+                                                                    "Name" = "8:Setup Log Files"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_8A01D38A0656426282AC24A999695229"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_9BC68982614C47D791EEBDA29C8AEC0D"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_C290426588474FBD83776B7A14560631"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_B64202D823A94C7C85C84A87EEEA4A5E"
+                                                                    {
+                                                                    "Name" = "8:System error minidump files"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_77EBC71EA6E94D4392EE263B5D500F54"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_9B788C1EACED46A6899D8DF3C0030BCD"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_AAD5C04BB88548F7B1F75F06D760A02A"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_CBF35C545B7A40ADAF9F90DDF0E9C203"
+                                                                    {
+                                                                    "Name" = "8:Update Cleanup"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_33720FD9E2C84909AD4AA1A9213BDD6E"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_51B87120F86D479CAC1367BB3FE058C2"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_6A2F46B1C200417E8086ED081715841D"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_EBD55410320B4073AD7650A94026A7F3"
+                                                                    {
+                                                                    "Name" = "8:System error memory dump files"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_2CFF002AAFF743E0B796540C4990175E"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_9CF9B5252F344B49895F01FC45813BC0"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_E4002AC1536945919F3855C8CC90F3EE"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_ED7AFB3B33D24492BBFC7D3CEE25284F"
+                                                                    {
+                                                                    "Name" = "8:Windows Error Reporting Files"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_1259874730524FC882ACB905C7F70C90"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_93BE4DA325F54681B06EDB0AD389FCD4"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_EAD7AC27CDCE46ACBF1AE38BDE14D50D"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_FD4866C7A9DC4136835F0392C32BB347"
+                                                                    {
+                                                                    "Name" = "8:D3D Shader Cache"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_21CEFA96EA5C4AB980102B95D94DD18E"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0153"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_48D9A226671340BEB3496AFBDF90EF3D"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0152"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:2"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_7E2994CD344148CFB3B009718734E735"
+                                                                            {
+                                                                            "Name" = "8:StateFlags0151"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:0"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
                                 }
                                 "Values"
                                 {
@@ -849,7 +1641,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_226A2DC4D1864D48930AA4D000C1FAE9"
             {
-            "Name" = "8:Windows Reperatur Tool"
+            "Name" = "8:Windows Repair Tool"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -858,7 +1650,7 @@
             "Target" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
             "Folder" = "8:_65434660D6EA46B3A0AE4903EA406BC0"
             "WorkingFolder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Icon" = "8:_069AB6CC237342D98F3E4C3C46B5811E"
+            "Icon" = "8:_B96D7F9AEED24E44B759EF8FC7F6F166"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4FE7B7563DB14AD6A2E743FD7063C8F6"
@@ -872,7 +1664,7 @@
             "Target" = "8:_A3FB229D44084467B181BE7AAAC7EBBD"
             "Folder" = "8:_D4F5D23323AE4A9783320EFF6FC6EECC"
             "WorkingFolder" = "8:_2471C24E5C4144EAA83CA98F5F39BEBB"
-            "Icon" = "8:_069AB6CC237342D98F3E4C3C46B5811E"
+            "Icon" = "8:_B96D7F9AEED24E44B759EF8FC7F6F166"
             "Feature" = "8:"
             }
         }
