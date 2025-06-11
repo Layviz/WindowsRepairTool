@@ -2,7 +2,10 @@
 #include <Windows.h>
 #include <PathCch.h>
 #include <string>
+#include <io.h>
+#include <fcntl.h>
 #include <time.h>
+#include <chrono>
 #include "resource.h"
 #include "localization.h"
 #include "wrt_types.h"
@@ -25,9 +28,22 @@ BOOL WINAPI CtrlHandler(DWORD fdwCtrlType);
 int get_console_height();
 void dism_progress_bar_fix(char* buffer, DWORD size);
 void sfc_output_fix(char* buffer, DWORD size);
+int setup_virt_console();
+void show_logo();
 
 int main()
 {
+    BOOL virtual_console = setup_virt_console();
+    if (!virtual_console) {
+        std::wcout << L" Error on setting up virtual Console!" << endl;
+    }
+    else {
+        /*std::wcout << L"\x1b[31mColours \x1b[32mare \x1b[33mnow \x1b[34menabled!\x1b[0m" << endl;
+        Sleep(3000);
+        std::wcout << L"\x1b[2J\x1b[0;0H";*/
+        show_logo();
+    }
+
     if (!SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS)) {
         // ignore this, not much to do about it
     }
@@ -524,11 +540,13 @@ void printWarning(wstring warn) {
 
     size_t startpoint = (columns - header_centralline.size()) / 2;
 
+    std::wcout << L"\x1b[93m";
     std::wcout << wstring(startpoint, ' ') << header_topline << endl;
     std::wcout << wstring(startpoint, ' ') << header_padline << endl;
     std::wcout << wstring(startpoint, ' ') << header_centralline << endl;
     std::wcout << wstring(startpoint, ' ') << header_padline << endl;
     std::wcout << wstring(startpoint, ' ') << header_topline << endl;
+    std::wcout << L"\x1b[0m";
 }
 
 int get_console_height() {
@@ -647,4 +665,113 @@ void sfc_output_fix(char* buffer, DWORD size) {
     if (write < buffer + size) {
         *write = 0;
     }
+}
+
+int setup_virt_console() {
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hOut == INVALID_HANDLE_VALUE)
+        return 0;
+    DWORD mode = 0;
+    if (!GetConsoleMode(hOut, &mode)) {
+        return 0;
+    }
+    mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+
+    CONSOLE_FONT_INFOEX cfi;
+    cfi.cbSize = sizeof(cfi);
+    cfi.nFont = 0;
+    cfi.dwFontSize.X = 0;
+    cfi.dwFontSize.Y = 18;
+    cfi.FontFamily = FF_DONTCARE;
+    cfi.FontWeight = FW_NORMAL;
+    wcscpy_s(cfi.FaceName, L"Cascadia Code");
+    SetCurrentConsoleFontEx(hOut, FALSE, &cfi);
+
+    return SetConsoleMode(hOut, mode);
+}
+
+bool gay_mode() {
+    using namespace std::chrono;
+    zoned_time local_time{ current_zone(), system_clock::now() };
+    year_month_day datum{ floor<days>(local_time.get_local_time()) };
+    return datum.month() == June;
+}
+
+/*
+
+"                                               __    __"
+"__                __  ______    ___________   ///    \\\\\\"
+"\\\\\\      __      /// ||||||\\\\  |≣≣≣≣≣≣≣≣| (\\\\\\____///"
+" \\\\\\    //\\\\    ///  |||__)||)      |||       ◥≣≣≣▩◤"
+"  \\\\\\  ///\\\\\\  ///   ||||||//       |||        ////‾"
+"   \\\\\\////\\\\\\\\///    |||  \\\\\\       |||       ////"
+"    \\\\\\//  \\\\///     |||   \\\\\\      |||      ////"
+"     \\\\/    \\//      |||    \\\\\\     |||     ////"
+"      ‾      ‾        ‾      ‾‾      ‾      \\≣/"
+
+*/
+
+void show_logo() {
+    DWORD wait = 70, final_wait = 1200;
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    int columns, rows;
+
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+    rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+    wstring space = wstring(columns / 2 - 28, ' ');
+
+    _setmode(_fileno(stdout), _O_U16TEXT);
+    wprintf(L"\x1b[?25l");
+    wprintf(space.c_str());
+    if (gay_mode()) wprintf(L"\x1b[38;2;239;57;52m");
+    wprintf(L"                                               __   __\n");
+    fflush(stdout);
+    Sleep(wait);
+    wprintf(space.c_str());
+    wprintf(L"__                __  ______    ___________   ///   \\\\\\\n");
+    fflush(stdout);
+    Sleep(wait);
+    wprintf(space.c_str());
+    wprintf(L"\\\\\\      __      /// ||||||\\\\  |\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263|  \\\\\\___///\n");
+    fflush(stdout);
+    Sleep(wait);
+    if (gay_mode()) wprintf(L"\x1b[38;2;244;121;51m");
+    wprintf(space.c_str());
+    wprintf(L" \\\\\\    //\\\\    ///  |||__)||)      |||        \u25e5\u25a9\u2263\u2263\u2263\u25a9\u25e4\n");
+    fflush(stdout);
+    Sleep(wait);
+    if (gay_mode()) wprintf(L"\x1b[38;2;244;235;59m");
+    wprintf(space.c_str());
+    wprintf(L"  \\\\\\  ///\\\\\\  ///   ||||||//       |||        ////\u203e\n");
+    fflush(stdout);
+    Sleep(wait);
+    if (gay_mode()) wprintf(L"\x1b[38;2;95;187;70m");
+    wprintf(space.c_str());
+    wprintf(L"   \\\\\\////\\\\\\\\///    |||  \\\\\\       |||       ////\n");
+    fflush(stdout);
+    Sleep(wait);
+    if (gay_mode()) wprintf(L"\x1b[34m");
+    wprintf(space.c_str());
+    wprintf(L"    \\\\\\//  \\\\///     |||   \\\\\\      |||      ////\n");
+    fflush(stdout);
+    Sleep(wait);
+    if (gay_mode()) wprintf(L"\x1b[38;2;198;42;138m");
+    wprintf(space.c_str());
+    wprintf(L"     \\\\/    \\//      |||    \\\\\\     |||     ////\n");
+    fflush(stdout);
+    Sleep(wait);
+    wprintf(space.c_str());
+    wprintf(L"      \u203e      \u203e        \u203e      \u203e\u203e      \u203e      \\\u2263/\n");
+    fflush(stdout);
+    Sleep(final_wait);
+
+
+    for (int i = 1; i < 10; i++)
+    {
+        wprintf(L"\x1b[%d;1H\x1b[2K", i);
+        Sleep(wait);
+    }
+    
+    wprintf(L"\x1b[1;1H\x1b[?25h");
 }
