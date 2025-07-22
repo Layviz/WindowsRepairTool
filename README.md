@@ -18,7 +18,7 @@ Please note that the system partition must have the drive letter "C:". Otherwise
 
 ## Download Link for the tool:
 
-[Newest WRT version](https://github.com/Layviz/WindowsReparaturTool/releases/download/v1.4.0/WRT_Installer-Version1.4.0.msi)
+[Newest WRT version](https://github.com/Layviz/WindowsRepairTool/releases/download/v1.4.3/WRT_Installer-Version1.4.3.msi)
 
 
 # Windows Reparatur Tool
@@ -55,4 +55,4 @@ Zu beachten ist, dass die System-Partition den Laufwerksbuchstaben "C:" haben mu
 
 ## Download Link zum Tool:
 
-[Neuste WRT Version](https://github.com/Layviz/WindowsReparaturTool/releases/download/v1.2.4/WRT_Installer-Version1.2.4.msi)
+[Neuste WRT Version](https://github.com/Layviz/WindowsRepairTool/releases/download/v1.4.3/WRT_Installer-Version1.4.3.msi)
