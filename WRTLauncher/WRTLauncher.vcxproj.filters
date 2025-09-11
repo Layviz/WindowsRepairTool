@@ -35,6 +35,9 @@
     <ClInclude Include="localization.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="..\WinTermbox.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WRTLauncher.rc">

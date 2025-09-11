@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\version.h" />
+    <ClInclude Include="..\WinTermbox.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="localization.h" />
     <ClInclude Include="resource.h" />

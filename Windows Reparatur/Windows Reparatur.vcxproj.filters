@@ -35,6 +35,9 @@
     <ClInclude Include="wrt_types.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="..\WinTermbox.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Windows Reparatur.rc">

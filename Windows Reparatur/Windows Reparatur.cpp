@@ -10,6 +10,9 @@
 #include "localization.h"
 #include "wrt_types.h"
 
+#define WINTERMBOX_IMPL
+#include "../WinTermbox.h"
+
 using namespace std;
 
 
@@ -17,7 +20,7 @@ int total;
 int counter;
 int start_process(wstring command, PROCESS_INFORMATION* proc_info,HANDLE * input,HANDLE * output);
 void wait_for_process(PROCESS_INFORMATION* proc_info);
-void create_time_str(wchar_t* buffer, size_t size, long long sec);
+void create_time_str(std::wstring& buffer, long long sec);
 void printWarning(wstring warn);
 void print_help();
 bool read_user_intput(OPERATION* op);
@@ -38,9 +41,6 @@ int main()
         std::wcout << L" Error on setting up virtual Console!" << endl;
     }
     else {
-        /*std::wcout << L"\x1b[31mColours \x1b[32mare \x1b[33mnow \x1b[34menabled!\x1b[0m" << endl;
-        Sleep(3000);
-        std::wcout << L"\x1b[2J\x1b[0;0H";*/
         show_logo();
     }
 
@@ -194,11 +194,16 @@ int main()
     wstring header_warning = startup_warn;
     printWarning(header_warning);
 
-    wchar_t repair_time_str[MAX_LOCALIZED_STRING_SIZE];
-    wchar_t start_time_str[MAX_LOCALIZED_STRING_SIZE];
-    wchar_t end_time_str[MAX_LOCALIZED_STRING_SIZE];
-    wchar_t time_buffer[MAX_LOCALIZED_STRING_SIZE];
-    wchar_t done[MAX_LOCALIZED_STRING_SIZE];
+    wstring repair_time_str;
+    repair_time_str.resize(MAX_LOCALIZED_STRING_SIZE);
+    wstring start_time_str;
+    start_time_str.resize(MAX_LOCALIZED_STRING_SIZE);
+    wstring end_time_str;
+    end_time_str.resize(MAX_LOCALIZED_STRING_SIZE);
+    wstring time_buffer;
+    time_buffer.resize(MAX_LOCALIZED_STRING_SIZE);
+    wstring done;
+    done.resize(MAX_LOCALIZED_STRING_SIZE);
     wchar_t* add;
 
     std::wcout << endl << endl << endl;
@@ -269,6 +274,7 @@ int main()
             break;
         case SILENT:
             verbose_current = false;
+            break;
         default:
             verbose_current = verbose;
         }
@@ -331,10 +337,10 @@ int main()
             }
             else if (0 == rv) {
                 _wstrtime_s(timestr);
-                swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, counter, total);
+                swprintf(&done[0], MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, counter, total);
                 std::wcout << L"\r " << blank_line << L"\r " << done;
                 if (verbose_current) {
-                    swprintf(start_time_str, MAX_LOCALIZED_STRING_SIZE, process_start_time_fmt, timestr);
+                    swprintf(&start_time_str[0], MAX_LOCALIZED_STRING_SIZE, process_start_time_fmt, timestr);
                     std::wcout << L" " << start_time_str;
                 }
             }
@@ -357,14 +363,17 @@ int main()
                         else if (command.substr(0, 3) == L"sfc") {
                             sfc_output_fix(buffer, read);
                         }
-                        cout << buffer;
+                        std::string narrow(buffer, read);
+                        std::wstring wide = std::wstring(narrow.begin(), narrow.end());
+                        std::wcout << wide;
+
                     }
                     else {
 #ifdef DEBUG
                         std::wcout << "error on read" << endl;
 #endif
                     }
-                    memset(buffer, 0, 512);
+                    ZeroMemory(buffer, sizeof(buffer));
                 } while (success);
                 std::wcout << endl << endl;
             }
@@ -375,13 +384,14 @@ int main()
             wait_for_process(&proc_info);
             time(&process_end_time);
             _wstrtime_s(timestr);
-            swprintf(done, MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++, total);
+            swprintf(&done[0], MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++, total);
             std::wcout << L"\r " << blank_line << L"\r " << done;
             if (verbose_current) {
                 long long diff_sec = process_end_time - process_start_time;
-                create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
-                swprintf(end_time_str, MAX_LOCALIZED_STRING_SIZE, process_end_time_fmt, timestr, time_buffer);
-                std::wcout << L" " << end_time_str << endl << endl;
+                create_time_str(time_buffer, diff_sec);
+                swprintf(&end_time_str[0], MAX_LOCALIZED_STRING_SIZE, process_end_time_fmt, timestr, time_buffer.c_str());
+                wprintf(L" %s\n\n", end_time_str.c_str());
+                
             }
             if (stop)
                 break;
@@ -390,8 +400,8 @@ int main()
         running = false;
         if (verbose_current) {
             long long diff_sec = repair_end_time - repair_start_time;
-            create_time_str(time_buffer, MAX_LOCALIZED_STRING_SIZE, diff_sec);
-            swprintf(repair_time_str, MAX_LOCALIZED_STRING_SIZE, repair_time_fmt, time_buffer);
+            create_time_str(time_buffer, diff_sec);
+            swprintf(&repair_time_str[0], MAX_LOCALIZED_STRING_SIZE, repair_time_fmt, time_buffer.c_str());
             std::wcout << L" " << repair_time_str << endl;
         }
         if (DEFAULT_REPAIR == op.mode || EXT_REPAIR == op.mode) {
@@ -419,30 +429,26 @@ int main()
     return 0;
 }
 
-void create_time_str(wchar_t* buffer, size_t size, long long sec) {
-    ZeroMemory(buffer, size);
-    wchar_t unit_buffer[MAX_LOCALIZED_STRING_SIZE] = {};
+void create_time_str(std::wstring& buffer, long long sec) {
+    buffer.clear();
+
     if (sec >= 86400) {
         long long days = sec / 86400;
-        swprintf(unit_buffer, sizeof(unit_buffer), L" %lld %s", days, days_str);
-        wcscat_s(buffer, size, unit_buffer);
+        buffer += L" " + std::to_wstring(days) + L" " + days_str;
         sec %= 86400;
     }
     if (sec >= 3600) {
         long long hours = sec / 3600;
-        swprintf(unit_buffer, sizeof(unit_buffer), L" %lld %s", hours, hours_str);
-        wcscat_s(buffer, size, unit_buffer);
+        buffer += L" " + std::to_wstring(hours) + L" " + hours_str;
         sec %= 3600;
     }
     if (sec >= 60) {
         long long minutes = sec / 60;
-        swprintf(unit_buffer, sizeof(unit_buffer), L" %lld %s", minutes, minutes_str);
-        wcscat_s(buffer, size, unit_buffer);
+        buffer += L" " + std::to_wstring(minutes) + L" " + minutes_str;
         sec %= 60;
     }
     if (sec > 0) {
-        swprintf(unit_buffer, sizeof(unit_buffer), L" %lld %s", sec, seconds_str);
-        wcscat_s(buffer, size, unit_buffer);
+        buffer += L" " + std::to_wstring(sec) + L" " + seconds_str;
     }
 }
 
@@ -671,11 +677,6 @@ int setup_virt_console() {
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     if (hOut == INVALID_HANDLE_VALUE)
         return 0;
-    DWORD mode = 0;
-    if (!GetConsoleMode(hOut, &mode)) {
-        return 0;
-    }
-    mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
 
     CONSOLE_FONT_INFOEX cfi;
     cfi.cbSize = sizeof(cfi);
@@ -687,7 +688,7 @@ int setup_virt_console() {
     wcscpy_s(cfi.FaceName, L"Cascadia Code");
     SetCurrentConsoleFontEx(hOut, FALSE, &cfi);
 
-    return SetConsoleMode(hOut, mode);
+    return wtb_init();
 }
 
 bool gay_mode() {
@@ -713,65 +714,61 @@ bool gay_mode() {
 
 void show_logo() {
     DWORD wait = 70, final_wait = 1200;
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    /*CONSOLE_SCREEN_BUFFER_INFO csbi;
     int columns, rows;
 
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
     rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-    wstring space = wstring(columns / 2 - 28, ' ');
+    wstring space = wstring(columns / 2 - 28, ' ');*/
 
+    
     _setmode(_fileno(stdout), _O_U16TEXT);
-    wprintf(L"\x1b[?25l");
-    wprintf(space.c_str());
-    if (gay_mode()) wprintf(L"\x1b[38;2;239;57;52m");
-    wprintf(L"                                               __   __\n");
+
+	wtb_clear();
+    wtb_set_cursor_visible(WTB_CURSOR_VISIBILITY_OFF);
+    
+    if (gay_mode()) wtb_set_custom_foreground_color(239, 57, 52);;
+    wprintf(L"                                                __   __\n");
     fflush(stdout);
     Sleep(wait);
-    wprintf(space.c_str());
-    wprintf(L"__                __  ______    ___________   ///   \\\\\\\n");
+    wprintf(L" __                __  ______    ___________   ///   \\\\\\\n");
     fflush(stdout);
     Sleep(wait);
-    wprintf(space.c_str());
-    wprintf(L"\\\\\\      __      /// ||||||\\\\  |\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263|  \\\\\\___///\n");
+    wprintf(L" \\\\\\      __      /// ||||||\\\\  |\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263|  \\\\\\___///\n");
     fflush(stdout);
     Sleep(wait);
-    if (gay_mode()) wprintf(L"\x1b[38;2;244;121;51m");
-    wprintf(space.c_str());
-    wprintf(L" \\\\\\    //\\\\    ///  |||__)||)      |||        \u25e5\u25a9\u2263\u2263\u2263\u25a9\u25e4\n");
+    if (gay_mode()) wtb_set_custom_foreground_color(244, 121, 51);
+    wprintf(L"  \\\\\\    //\\\\    ///  |||__)||)      |||        \u25e5\u25a9\u2263\u2263\u2263\u25a9\u25e4\n");
     fflush(stdout);
     Sleep(wait);
-    if (gay_mode()) wprintf(L"\x1b[38;2;244;235;59m");
-    wprintf(space.c_str());
-    wprintf(L"  \\\\\\  ///\\\\\\  ///   ||||||//       |||        ////\u203e\n");
+    if (gay_mode()) wtb_set_custom_foreground_color(244, 235, 59);
+    wprintf(L"   \\\\\\  ///\\\\\\  ///   ||||||//       |||        ////\u203e\n");
     fflush(stdout);
     Sleep(wait);
-    if (gay_mode()) wprintf(L"\x1b[38;2;95;187;70m");
-    wprintf(space.c_str());
-    wprintf(L"   \\\\\\////\\\\\\\\///    |||  \\\\\\       |||       ////\n");
+    if (gay_mode()) wtb_set_custom_foreground_color(95, 187, 70);
+    wprintf(L"    \\\\\\////\\\\\\\\///    |||  \\\\\\       |||       ////\n");
     fflush(stdout);
     Sleep(wait);
-    if (gay_mode()) wprintf(L"\x1b[34m");
-    wprintf(space.c_str());
-    wprintf(L"    \\\\\\//  \\\\///     |||   \\\\\\      |||      ////\n");
+    if (gay_mode()) wtb_set_color(WTB_COLOR_BLUE, WTB_COLOR_DEFAULT);
+    wprintf(L"     \\\\\\//  \\\\///     |||   \\\\\\      |||      ////\n");
     fflush(stdout);
     Sleep(wait);
-    if (gay_mode()) wprintf(L"\x1b[38;2;198;42;138m");
-    wprintf(space.c_str());
-    wprintf(L"     \\\\/    \\//      |||    \\\\\\     |||     ////\n");
+    if (gay_mode()) wtb_set_custom_foreground_color(198, 42, 138);
+    wprintf(L"      \\\\/    \\//      |||    \\\\\\     |||     ////\n");
     fflush(stdout);
     Sleep(wait);
-    wprintf(space.c_str());
-    wprintf(L"      \u203e      \u203e        \u203e      \u203e\u203e      \u203e      \\\u2263/\n");
+    wprintf(L"       \u203e      \u203e        \u203e      \u203e\u203e      \u203e      \\\u2263/\n");
     fflush(stdout);
     Sleep(final_wait);
 
 
-    for (int i = 1; i < 10; i++)
+    for (int i = 0; i < 11; i++)
     {
-        wprintf(L"\x1b[%d;1H\x1b[2K", i);
+        wtb_clear_line(i);
         Sleep(wait);
     }
-    
-    wprintf(L"\x1b[1;1H\x1b[?25h");
+    wtb_set_color(WTB_COLOR_DEFAULT, WTB_COLOR_DEFAULT);
+	wtb_clear();
+	wtb_set_cursor_visible(WTB_CURSOR_VISIBILITY_ON);
 }
