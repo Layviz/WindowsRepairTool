@@ -24,7 +24,6 @@ void create_time_str(std::wstring& buffer, long long sec);
 void printWarning(wstring warn);
 void print_help();
 bool read_user_intput(OPERATION* op);
-wstring blank_line(80, L' '); //80 spaces should be enough to overwrite everthing
 bool verbose = false;   //verbose for all runs
 bool stop = false, running = false;
 BOOL WINAPI CtrlHandler(DWORD fdwCtrlType);
@@ -338,7 +337,8 @@ int main()
             else if (0 == rv) {
                 _wstrtime_s(timestr);
                 swprintf(&done[0], MAX_LOCALIZED_STRING_SIZE, progress_started_fmt, counter, total);
-                std::wcout << L"\r " << blank_line << L"\r " << done;
+                wtb_clear_current_line();
+                std::wcout << L" " << done;
                 if (verbose_current) {
                     swprintf(&start_time_str[0], MAX_LOCALIZED_STRING_SIZE, process_start_time_fmt, timestr);
                     std::wcout << L" " << start_time_str;
@@ -385,7 +385,8 @@ int main()
             time(&process_end_time);
             _wstrtime_s(timestr);
             swprintf(&done[0], MAX_LOCALIZED_STRING_SIZE, progress_done_fmt, counter++, total);
-            std::wcout << L"\r " << blank_line << L"\r " << done;
+			wtb_clear_current_line();
+            std::wcout << L" " << done;
             if (verbose_current) {
                 long long diff_sec = process_end_time - process_start_time;
                 create_time_str(time_buffer, diff_sec);
@@ -447,7 +448,7 @@ void create_time_str(std::wstring& buffer, long long sec) {
         buffer += L" " + std::to_wstring(minutes) + L" " + minutes_str;
         sec %= 60;
     }
-    if (sec > 0) {
+    if (sec >= 0) {
         buffer += L" " + std::to_wstring(sec) + L" " + seconds_str;
     }
 }
@@ -714,14 +715,15 @@ bool gay_mode() {
 
 void show_logo() {
     DWORD wait = 70, final_wait = 1200;
-    /*CONSOLE_SCREEN_BUFFER_INFO csbi;
-    int columns, rows;
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    int columns;
 
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
-    rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-    wstring space = wstring(columns / 2 - 28, ' ');*/
 
+	const int logo_width = 58;
+
+	int left_padding = (columns - logo_width) / 2;
     
     _setmode(_fileno(stdout), _O_U16TEXT);
 
@@ -729,35 +731,44 @@ void show_logo() {
     wtb_set_cursor_visible(WTB_CURSOR_VISIBILITY_OFF);
     
     if (gay_mode()) wtb_set_custom_foreground_color(239, 57, 52);;
+	wprintf(wstring(left_padding,L' ').c_str());
     wprintf(L"                                                __   __\n");
     fflush(stdout);
     Sleep(wait);
+    wprintf(wstring(left_padding, L' ').c_str());
     wprintf(L" __                __  ______    ___________   ///   \\\\\\\n");
     fflush(stdout);
     Sleep(wait);
+    wprintf(wstring(left_padding, L' ').c_str());
     wprintf(L" \\\\\\      __      /// ||||||\\\\  |\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263\u2263|  \\\\\\___///\n");
     fflush(stdout);
     Sleep(wait);
+    wprintf(wstring(left_padding, L' ').c_str());
     if (gay_mode()) wtb_set_custom_foreground_color(244, 121, 51);
     wprintf(L"  \\\\\\    //\\\\    ///  |||__)||)      |||        \u25e5\u25a9\u2263\u2263\u2263\u25a9\u25e4\n");
     fflush(stdout);
     Sleep(wait);
+    wprintf(wstring(left_padding, L' ').c_str());
     if (gay_mode()) wtb_set_custom_foreground_color(244, 235, 59);
     wprintf(L"   \\\\\\  ///\\\\\\  ///   ||||||//       |||        ////\u203e\n");
     fflush(stdout);
     Sleep(wait);
+    wprintf(wstring(left_padding, L' ').c_str());
     if (gay_mode()) wtb_set_custom_foreground_color(95, 187, 70);
     wprintf(L"    \\\\\\////\\\\\\\\///    |||  \\\\\\       |||       ////\n");
     fflush(stdout);
     Sleep(wait);
+    wprintf(wstring(left_padding, L' ').c_str());
     if (gay_mode()) wtb_set_color(WTB_COLOR_BLUE, WTB_COLOR_DEFAULT);
     wprintf(L"     \\\\\\//  \\\\///     |||   \\\\\\      |||      ////\n");
     fflush(stdout);
     Sleep(wait);
+    wprintf(wstring(left_padding, L' ').c_str());
     if (gay_mode()) wtb_set_custom_foreground_color(198, 42, 138);
     wprintf(L"      \\\\/    \\//      |||    \\\\\\     |||     ////\n");
     fflush(stdout);
     Sleep(wait);
+    wprintf(wstring(left_padding, L' ').c_str());
     wprintf(L"       \u203e      \u203e        \u203e      \u203e\u203e      \u203e      \\\u2263/\n");
     fflush(stdout);
     Sleep(final_wait);

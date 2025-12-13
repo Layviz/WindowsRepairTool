@@ -84,6 +84,12 @@ extern "C" WINTERMBOX_API int wtb_init(void);
 extern "C" WINTERMBOX_API int wtb_clear(void);
 
 /**
+ * @brief Clears the current line and moves the cursor to the beginning of the line.
+ * @return 1 on success, 0 when wtb is not initalized.
+ */
+extern "C" WINTERMBOX_API int wtb_clear_current_line();
+
+/**
  * @brief Clears the given line (y coordinate) and moves the cursor to the beginning of the line.
  * @param y The y coordinate (0-based).
  * @return 1 on success, 0 when wtb is not initalized.
@@ -194,6 +200,14 @@ int wtb_clear(void) {
         return 0;
     }
     wprintf(L"\x1b[2J\x1b[H");
+    return 1;
+}
+
+int wtb_clear_current_line() {
+    if (!is_intialized) {
+        return 0;
+    }
+    wprintf(L"\x1b[2K\x1b[1G");
     return 1;
 }
 
