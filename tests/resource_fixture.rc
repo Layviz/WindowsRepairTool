@@ -1,0 +1,5 @@
+#include <windows.h>
+STRINGTABLE
+BEGIN
+    9001 "fixture localization"
+END

@@ -24,6 +24,11 @@
 #define ERROR_WRT                       217
 #define ERROR_UPDATE                    218
 #define ERROR_RECEIVE                   219
+#define LAUNCHER_APP_LOCK_ERROR_FMT     220
+#define NEW_VERSION_FMT                 221
+#define INSTALLING_FMT                  222
+#define UPDATE_REBOOT_FMT               223
+#define UPDATE_MANUAL_HINT              224
 #define CONSOLE_CODEPAGE                1000
 
 // Next default values for new objects

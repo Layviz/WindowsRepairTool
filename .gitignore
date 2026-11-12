@@ -348,3 +348,12 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# CMake out-of-source builds
+/build/
+/build-*/
+
+# Nix build outputs and optional direnv state
+/result
+/result-*
+/.direnv/

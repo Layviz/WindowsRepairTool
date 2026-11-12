@@ -22,5 +22,10 @@ extern wchar_t install_mode3[MAX_LOCALIZED_STRING_SIZE] ;
 extern wchar_t error_wrt[MAX_LOCALIZED_STRING_SIZE];
 extern wchar_t error_update[MAX_LOCALIZED_STRING_SIZE];
 extern wchar_t error_receive[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t launcher_app_lock_error_fmt[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t new_version_fmt[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t installing_fmt[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t update_reboot_fmt[MAX_LOCALIZED_STRING_SIZE];
+extern wchar_t update_manual_hint[MAX_LOCALIZED_STRING_SIZE];
 
 extern int load_localized_strings();

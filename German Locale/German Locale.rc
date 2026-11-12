@@ -75,7 +75,7 @@ BEGIN
     REBOOT_CONFIRMS         "Jj"
     REBOOT_PLANNED          "Beim nächsten Start des Systems wird die Reparatur abgeschlossen."
     EXECUTION_TIME_FORMAT_STRING "Diese Ausführung dauerte %l Ticks."
-    HELP_TEXT_FMT           " Reparaturmodi\n\n   ""Einfache Reparatur""\n    \n      Die Einfache Reparatur braucht wenige Minuten und ist in den meisten Fällen ausreichend um Fehler zu beheben.\n    \n   ""Standard Reparatur""\n    \n      Die Standard Reparatur ist ausführlicher und braucht mehrere Stunden, sie prüft das ganze System auf Viren\n      und prüft nach dem System Neustart die System-Partition vollständig auf Fehler und versucht diese zu beheben.\n    \n   ""Erweiterte Reparatur""\n    \n      Die Erweiterte Reparatur ist nach der Standard Reparatur empfehlenswert,\n      da diese noch auf andere Weise versucht Beschädigungen der System-Partiton zu erkennen und zu beheben.\n    \n Prozessausgabe\n\n     Für erweiterte Prozessausgabe ""+"" an den gewählten Modus anhängen (z.B. ""1+"").\n     Für dauerhaftes Einschalten der Prozessausgabe nur ""+"" ohne Modus eingeben.\n\n     Zum deaktivieren der Prozessausgabe nur ""-"" ohne Modus eingeben.\n     (Die Prozessausgabe ist Standardmäßig deaktiviert.)\n\n\n Es liegen in ""%s"" Batch Dateien,\n die ausgeführt werden können, um manuell Reparatur Modi auszuführen ohne das ""WRT"" starten zu müssen.\n (Das ""WRT"" führt die Reparatur Modi effizenter und schneller aus.)\n"
+    HELP_TEXT_FMT           " Reparaturmodi\n\n   ""Einfache Reparatur""\n    \n      Die Einfache Reparatur braucht wenige Minuten und ist in den meisten Fällen ausreichend um Fehler zu beheben.\n    \n   ""Standard Reparatur""\n    \n      Die Standard Reparatur ist ausführlicher und braucht mehrere Stunden, sie prüft das ganze System auf Viren\n      und prüft nach dem System Neustart die System-Partition vollständig auf Fehler und versucht diese zu beheben.\n    \n   ""Erweiterte Reparatur""\n    \n      Die Erweiterte Reparatur ist nach der Standard Reparatur empfehlenswert,\n      da diese noch auf andere Weise versucht Beschädigungen der System-Partiton zu erkennen und zu beheben.\n    \n Prozessausgabe\n\n     Für erweiterte Prozessausgabe ""+"" an den gewählten Modus anhängen (z.B. ""1+"").\n     Für dauerhaftes Einschalten der Prozessausgabe nur ""+"" ohne Modus eingeben.\n\n     Zum deaktivieren der Prozessausgabe nur ""-"" ohne Modus eingeben.\n     (Die Prozessausgabe ist Standardmäßig deaktiviert.)\n"
     PENDING_HELP_TEXT       " Es steht ein System Neustart für die Installation von Updates aus.\n\n\n Optionen\n\n   ""System neustarten""\n\n     Nach dem Neustart können Reparaturen vollständig durchgeführt werden.\n\n   ""Trotzdem ausführen""\n\n     WRT führt ohne System Neustart nur eine verkürzte Reparatur durch.\n"
     PROCESS_START_TIME_FMT  "um %s Uhr"
     PROCESS_END_TIME_FMT    "um %s Uhr (Dauer:%s)"
@@ -121,6 +121,36 @@ STRINGTABLE
 BEGIN
     DAYS_STR                "Tage"
     ABORT_MSG               "Die Reparatur wird nach diesem Prozess beendet."
+END
+
+STRINGTABLE
+BEGIN
+    APP_LOCK_ERROR_FMT      "Anwendungs-Sperre konnte nicht erstellt werden: Windows-Fehler %lu."
+    PENDING_CHECK_ERROR_FMT "Ausstehende Windows-Wartung konnte nicht geprüft werden: Windows-Fehler %lu."
+    DISM_SKIPPED_NOTE       "DISM-Schritte werden übersprungen, bis Windows neu gestartet wurde."
+    INVALID_SELECTION       "Ungültige Auswahl."
+    USAGE_TEXT              "Verwendung: WRT.exe [1|2|3][+|-]"
+    STEP_STATUS_FMT         "(%lu/%lu) %ls %ls"
+    STEP_PROGRESS_FMT       "(%lu/%lu) %ls %lu%%"
+    STEP_DONE_FMT           "Schritt abgeschlossen (Exit-Code %lu)."
+    STEP_FAILED_FMT         "Schritt fehlgeschlagen (Windows-Fehler %lu, Exit-Code %lu)."
+    STEP_SKIPPED_FMT        "Schritt %lu/%lu übersprungen."
+    SUMMARY_FMT             "Dauer: %lu %ls. Fehlgeschlagen: %lu. Übersprungen: %lu."
+    REBOOT_HINT             "Ein Neustart kann erforderlich sein. Eine Offline-Prüfung läuft nur, wenn Windows die Planung bestätigt hat."
+    CONFIRM_HINT            " [y/j = ja, alles andere = nein] "
+    CONFIRM_CLEANUP         "Die optionale Bereinigung kann temporäre Dateien dauerhaft löschen und im Standard-/Erweiterten Modus den Papierkorb aller Laufwerke leeren. Bereinigung ausführen?"
+    CONFIRM_SURFACE_SCAN    "Die optionale vollständige Oberflächenprüfung setzt die Liste der fehlerhaften Cluster zurück, kann viele Stunden dauern und einen Neustart erfordern. Wichtige Daten vorher sichern. Ausführen?"
+    CONFIRM_OFFLINE_REPAIR  "Die optionale Offline-Disk-Reparatur kann einen Neustart erfordern. Wichtige Daten vorher sichern. Ausführen?"
+    HELP_BATCH_HINT         "Batch-Skripte in ""%ls"" sind Verknüpfungen zu WRT.exe und erfordern die installierten Programmdateien. Bereinigung und Offline-Fehlerprüfung erfordern eine separate Bestätigung."
+END
+
+STRINGTABLE
+BEGIN
+    LAUNCHER_APP_LOCK_ERROR_FMT "Anwendungs-Sperre konnte nicht erstellt werden: Windows-Fehler %lu."
+    NEW_VERSION_FMT             "Neue Version: %lu.%lu.%lu"
+    INSTALLING_FMT              "Installiere verifiziertes Update (keine separate Deinstallation)."
+    UPDATE_REBOOT_FMT           "Update installiert; Windows erfordert einen Neustart (Exit-Code %lu)."
+    UPDATE_MANUAL_HINT          "Die bestehende Installation wurde nicht explizit deinstalliert. Automatische Updates erfordern eine vertrauenswürdige Signatur mit dem Signaturzertifikat des Launchers.\nFür unsignierte Builds installiere ein Release manuell von https://github.com/Layviz/WindowsRepairTool/releases ."
 END
 
 #endif    // Deutsch (Deutschland) resources

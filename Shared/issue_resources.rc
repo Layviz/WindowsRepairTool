@@ -1,0 +1,45 @@
+#pragma code_page(65001)
+#include <winres.h>
+#include "issue_resources.h"
+
+#ifdef WRT_RESOURCE_GERMAN
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+STRINGTABLE
+BEGIN
+    ISSUE_PLATFORM_ERROR  "WRT benötigt Windows 10/11 x64 auf einem x64-System. Wine wird nicht unterstützt. Es wurden keine Reparaturen gestartet."
+    ISSUE_INSTANCE_BUSY   "WRT oder das Update läuft bereits. Beende die erste Instanz und wähle Wiederholen, oder schließe dieses Fenster mit Abbrechen. Laufende Reparaturen werden nicht beendet."
+    ISSUE_BATCH_ERROR     "Fehlende Batch-Verknüpfungen konnten nicht wiederhergestellt werden (Windows-Fehler %lu). Reparaturen sind weiterhin verfügbar."
+    ISSUE_MANUAL_DOWNLOAD "Neuester Installer (manueller Download): %ls"
+    ISSUE_MANUAL_OPTION   "4. Installer manuell herunterladen (Link anzeigen)."
+    ISSUE_CURRENT_VERSION "Installierte Version: %lu.%lu.%lu"
+    ISSUE_MODE_SIMPLE     "1. Einfache Reparatur    (Dauert einige Minuten; ein Neustart kann erforderlich sein.)"
+    ISSUE_STEP_TIME       "%ls: Dauer %ls %ls."
+    ISSUE_SFC_REBOOT      "SFC oder Windows meldet einen ausstehenden Neustart. Bitte Windows neu starten, um Reparaturen abzuschließen."
+    ISSUE_NOTIFY_STARTED  "Reparatur gestartet. Den Computer nicht ausschalten."
+    ISSUE_NOTIFY_DONE     "Reparatur beendet. Details und mögliche Neustarthinweise stehen im WRT-Fenster."
+    ISSUE_NOTIFY_FAILED   "Reparatur mit Fehlern oder Abbruch beendet. Bitte die Details im WRT-Fenster prüfen."
+    ISSUE_HELP            "Reparaturmodi\n\n1: Einfache Reparatur. Dauert einige Minuten, bei großen Laufwerken auch länger.\n2: Standard-Reparatur mit vollständiger Virenprüfung und optionaler Oberflächenprüfung. Kann mehrere Stunden dauern.\n3: Erweiterte Reparatur mit optionaler Offline-Datenträgerreparatur.\n\nVor Datenträgerreparaturen wichtige Daten sichern. Bereinigung und Offline-Prüfungen müssen separat bestätigt werden. Ein Neustart kann in jedem Modus erforderlich sein.\n\nAusgabe: 1+ / 2+ / 3+ zeigt Prozessdetails; ein angehängtes - blendet sie aus.\n+ oder - allein ändert den Standard. h oder ? zeigt diese Hilfe. Andere Eingaben beenden WRT.\n\nMicrosoft-Dokumentation: https://learn.microsoft.com/windows-server/administration/windows-commands/sfc\nhttps://learn.microsoft.com/windows-hardware/manufacture/desktop/repair-a-windows-image"
+    ISSUE_UPDATE_HINT     "Automatische Updates benötigen einen vertrauenswürdig signierten Launcher und Installer mit demselben Zertifikat. Bei Fehlern bleibt die installierte Reparaturfunktion verfügbar."
+    ISSUE_STEP_STARTED    "Gestartet: %ls"
+END
+#else
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STRINGTABLE
+BEGIN
+    ISSUE_PLATFORM_ERROR  "WRT requires Windows 10/11 x64 on an x64 system. Wine is not supported. No repairs were started."
+    ISSUE_INSTANCE_BUSY   "WRT or its update is already running. Close the first instance and choose Retry, or close this window with Cancel. Active repairs will not be terminated."
+    ISSUE_BATCH_ERROR     "Could not restore missing batch shortcuts (Windows error %lu). Repairs are still available."
+    ISSUE_MANUAL_DOWNLOAD "Latest installer (manual download): %ls"
+    ISSUE_MANUAL_OPTION   "4. Download the installer manually (show link)."
+    ISSUE_CURRENT_VERSION "Installed version: %lu.%lu.%lu"
+    ISSUE_MODE_SIMPLE     "1. Simple repair    (Takes several minutes; a restart may be required.)"
+    ISSUE_STEP_TIME       "%ls: duration %ls %ls."
+    ISSUE_SFC_REBOOT      "SFC or Windows reports a pending restart. Please restart Windows to complete repairs."
+    ISSUE_NOTIFY_STARTED  "Repair started. Do not turn off the computer."
+    ISSUE_NOTIFY_DONE     "Repair finished. See the WRT window for details and any restart instructions."
+    ISSUE_NOTIFY_FAILED   "Repair finished with errors or was stopped. Please check the details in the WRT window."
+    ISSUE_HELP            "Repair modes\n\n1: Simple repair. Takes several minutes, or longer on large drives.\n2: Standard repair with a full virus scan and an optional surface scan. May take several hours.\n3: Extended repair with optional offline disk repair.\n\nBack up important data before disk repairs. Cleanup and offline checks require separate confirmation. Any mode may require a restart.\n\nOutput: 1+ / 2+ / 3+ shows process details; append - to hide them.\n+ or - alone changes the default. h or ? shows this help. Other input exits WRT.\n\nMicrosoft documentation: https://learn.microsoft.com/windows-server/administration/windows-commands/sfc\nhttps://learn.microsoft.com/windows-hardware/manufacture/desktop/repair-a-windows-image"
+    ISSUE_UPDATE_HINT     "Automatic updates require a trusted launcher and installer signed with the same certificate. If an update fails, the installed repair tool remains available."
+    ISSUE_STEP_STARTED    "Started: %ls"
+END
+#endif
