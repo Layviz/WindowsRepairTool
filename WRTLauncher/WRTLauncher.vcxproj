@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WRTLauncher.rc" />
+    <ResourceCompile Include="..\Shared\issue_resources.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\wrench.ico" />

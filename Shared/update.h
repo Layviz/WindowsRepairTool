@@ -11,6 +11,11 @@ struct release_asset {
     std::uint64_t size = 0;
 };
 
+inline std::string manual_installer_url(const std::optional<release_asset>& asset) {
+    return asset ? "https://github.com" + asset->request_path :
+        "https://github.com/Layviz/WindowsRepairTool/releases/latest";
+}
+
 inline bool safe_msi_name(std::string_view name) {
     if (name.size() <= 4 || name.size() > 128 || name.substr(name.size() - 4) != ".msi")
         return false;

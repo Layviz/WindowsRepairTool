@@ -93,6 +93,15 @@ BEGIN
     MUTEX_WARN              "Another instance of this application is already running. Application will close."
 END
 
+STRINGTABLE
+BEGIN
+    LAUNCHER_APP_LOCK_ERROR_FMT "Cannot create application lock: Windows error %lu."
+    NEW_VERSION_FMT             "New version: %lu.%lu.%lu"
+    INSTALLING_FMT              "Installing verified update (no separate uninstall)."
+    UPDATE_REBOOT_FMT           "Update installed; Windows requires a restart (exit code %lu)."
+    UPDATE_MANUAL_HINT          "The existing installation was not explicitly uninstalled. Automatic updates require a trusted signature using the launcher's signing certificate.\nFor unsigned builds, install a release manually from https://github.com/Layviz/WindowsRepairTool/releases ."
+END
+
 #endif    // Deutsch (Deutschland) resources
 /////////////////////////////////////////////////////////////////////////////
 

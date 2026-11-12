@@ -7,6 +7,8 @@
 #include <shlobj.h>
 #include <filesystem>
 #include <clocale>
+#include <cwchar>
+#include <fstream>
 #include <stdexcept>
 #include "core.h"
 
@@ -82,12 +84,17 @@ inline std::wstring command_line(const std::filesystem::path& executable, const 
 }
 
 inline process_result run_attached(const std::filesystem::path& executable,
-    const std::wstring& arguments, const std::filesystem::path& directory = {}) {
+    const std::wstring& arguments, const std::filesystem::path& directory = {},
+    bool minimized = false) {
     process_result result;
     if (!executable.is_absolute()) { result.error = ERROR_BAD_PATHNAME; return result; }
     auto command = command_line(executable, arguments);
     STARTUPINFOW startup{};
     startup.cb = sizeof(startup);
+    if (minimized) {
+        startup.dwFlags |= STARTF_USESHOWWINDOW;
+        startup.wShowWindow = SW_SHOWMINNOACTIVE;
+    }
     PROCESS_INFORMATION process{};
     if (!CreateProcessW(executable.c_str(), command.data(), nullptr, nullptr, FALSE, CREATE_NEW_PROCESS_GROUP,
         nullptr, directory.empty() ? nullptr : directory.c_str(), &startup, &process)) {
@@ -213,6 +220,88 @@ inline int load_language(void (*load_strings)(HINSTANCE), UINT codepage_id) {
 inline void load_string(HINSTANCE source, UINT id, wchar_t* buffer, int capacity) {
     if (!LoadStringW(source, id, buffer, capacity))
         LoadStringW(GetModuleHandleW(nullptr), id, buffer, capacity);
+}
+
+// Text as UTF-8 bytes, for log files and any other byte-oriented sink.
+inline std::string utf8(std::wstring_view text) {
+    if (text.empty()) return {};
+    const int size = WideCharToMultiByte(CP_UTF8, 0, text.data(), static_cast<int>(text.size()),
+        nullptr, 0, nullptr, nullptr);
+    if (size <= 0) return {};
+    std::string result(static_cast<std::size_t>(size), '\0');
+    if (!WideCharToMultiByte(CP_UTF8, 0, text.data(), static_cast<int>(text.size()),
+        result.data(), size, nullptr, nullptr)) return {};
+    return result;
+}
+
+inline std::wstring timestamp() {
+    SYSTEMTIME time{};
+    GetLocalTime(&time);
+    wchar_t buffer[24] = {};
+    if (std::swprintf(buffer, 24, L"%04u-%02u-%02u %02u:%02u:%02u",
+        static_cast<unsigned>(time.wYear), static_cast<unsigned>(time.wMonth),
+        static_cast<unsigned>(time.wDay), static_cast<unsigned>(time.wHour),
+        static_cast<unsigned>(time.wMinute), static_cast<unsigned>(time.wSecond)) < 0)
+        return {};
+    return buffer;
+}
+
+// Append-only session log. Logging is strictly best-effort: a directory or
+// file that cannot be created or opened disables the logger instead of
+// throwing, so logging can never interfere with a repair.
+class step_logger {
+public:
+    step_logger() = default;
+    explicit step_logger(const std::filesystem::path& file) {
+        std::error_code error;
+        std::filesystem::create_directories(file.parent_path(), error);
+        stream_.open(file, std::ios::out | std::ios::app | std::ios::binary);
+    }
+    // std::ofstream's bool conversion is unreliable across runtimes (MSVCRT
+    // reports a default-constructed stream as good), so check is_open().
+    bool active() const { return stream_.is_open(); }
+    // One timestamped line of text.
+    void line(std::wstring_view text) {
+        if (!stream_.is_open()) return;
+        std::string bytes = "[";
+        bytes += utf8(timestamp());
+        bytes += "] ";
+        bytes += utf8(text);
+        bytes += '\n';
+        write(bytes);
+    }
+    // Verbatim diagnostic output (already UTF-8); a missing trailing newline
+    // is added so consecutive dumps stay on separate lines.
+    void dump(std::string_view text) {
+        if (!stream_.is_open() || text.empty()) return;
+        std::string bytes(text);
+        if (bytes.back() != '\n') bytes += '\n';
+        write(bytes);
+    }
+private:
+    void write(const std::string& bytes) {
+        if (!stream_.is_open()) return;
+        stream_ << bytes;
+        stream_.flush();
+    }
+    std::ofstream stream_;
+};
+
+// %ProgramData%\WRT\logs, created on demand. Empty when the profile folders
+// are unavailable; never throws — logging is optional.
+inline std::optional<std::filesystem::path> program_data_logs_dir() {
+    PWSTR folder = nullptr;
+    if (FAILED(SHGetKnownFolderPath(FOLDERID_ProgramData, 0, nullptr, &folder))) return std::nullopt;
+    std::optional<std::filesystem::path> result;
+    try {
+        std::filesystem::path directory = std::filesystem::path(folder) / L"WRT" / L"logs";
+        std::error_code error;
+        std::filesystem::create_directories(directory, error);
+        if (!error) result = directory;
+    } catch (...) {
+    }
+    CoTaskMemFree(folder);
+    return result;
 }
 
 } // namespace wrt

@@ -2,6 +2,7 @@
 #include "update.h"
 #include <cstring>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 
 #define CHECK(condition) do { if (!(condition)) throw std::runtime_error( \
@@ -235,6 +236,55 @@ const std::vector<std::pair<std::string, std::function<void()>>> cases = {
     {"installer_exit", [] {
         for (auto code : {0u, 3010u, 1641u}) CHECK(successful_install_exit(code));
         for (auto code : {1u, 1603u, 1618u}) CHECK(!successful_install_exit(code));
+    }},
+    {"format", [] {
+        CHECK(format(L"").empty());
+        CHECK(format(L"(2/11) sfc.exe /scannow") == L"(2/11) sfc.exe /scannow");
+        CHECK(format(L"%lu", {7u}) == L"7");
+        CHECK((format(L"(%lu/%lu) %ls %ls", {2, 11, L"sfc.exe", L"/scannow"}) == L"(2/11) sfc.exe /scannow"));
+        CHECK((format(L"%lu.%lu.%lu", {1, 24, 7}) == L"1.24.7"));
+        CHECK((format(L"%lu%%", {62}) == L"62%"));
+        CHECK(format(L"100%% done") == L"100% done");
+        CHECK((format(L"%ls%ls", {L"a", L"b"}) == L"ab"));
+        CHECK((format(L"%ls!", {std::wstring(L"path")}) == L"path!")); // std::wstring arguments.
+        CHECK((format(L"%lu \u00e4\u00f6\u00fc", {3}) == L"3 \u00e4\u00f6\u00fc"));
+        CHECK((format(L"%lu %lu", {7}) == L"7 %lu"));  // Exhausted arguments stay visible.
+        CHECK(format(L"%ls", {1}) == L"%ls");          // Wrong argument type stays visible.
+        CHECK(format(L"%x", {1}) == L"%x");
+        CHECK(format(L"%l", {1}) == L"%l");
+        CHECK(format(L"%", {}) == L"%");
+    }},
+    {"progress", [] {
+        CHECK(!parse_progress(""));
+        CHECK(!parse_progress("abc"));
+        CHECK(!parse_progress("62"));
+        CHECK(!parse_progress("62.3"));
+        CHECK(parse_progress("62%") == 62u);
+        CHECK(parse_progress("62.3%") == 62u);
+        CHECK(parse_progress("  100%") == 100u);
+        CHECK(parse_progress("Verification 62% complete.") == 62u);
+        CHECK(parse_progress("  0.0%") == 0u);
+        CHECK(parse_progress("62,3%") == 62u);          // German decimal mark.
+        CHECK(parse_progress("62.35%") == 62u);         // Extra decimals are truncated, never glued.
+        // Three decimals never occur in real tool output; the token degrades
+        // to "no value" instead of misreading digits as a separate percentage.
+        CHECK(!parse_progress("62.356%"));
+        CHECK(parse_progress("62.3% then 63%") == 63u); // Last token wins.
+        CHECK(parse_progress("63% then 62.3%") == 62u);
+        CHECK(parse_progress("62.3%\r\n") == 62u);
+        CHECK(parse_progress("(62%)") == 62u);
+        for (const auto input : {"x3%", "0x3%", ".5%", "1,234%", "101%", "500%",
+            "999999999%", "1001%", "62.3.4%", "6x2%"}) CHECK(!parse_progress(input));
+    }},
+    {"redraw", [] {
+        std::wostringstream out;
+        std::size_t width = 0;
+        redraw_line(out, L"abc", width);
+        CHECK(out.str() == L"\rabc" && width == 3);
+        redraw_line(out, L"de", width); // A shorter line must fully cover its predecessor.
+        CHECK(out.str() == L"\rabc\rde " && width == 3);
+        redraw_line(out, L"longer line", width);
+        CHECK(out.str() == L"\rabc\rde \rlonger line" && width == 11);
     }}
 };
 } // namespace

@@ -24,6 +24,11 @@ wchar_t install_mode3[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t error_wrt[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t error_update[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t error_receive[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t launcher_app_lock_error_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t new_version_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t installing_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t update_reboot_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t update_manual_hint[MAX_LOCALIZED_STRING_SIZE] = {};
 
 void load_stings(HINSTANCE source) {
     wrt::load_string(source, MUTEX_WARN, mutex_warn, MAX_LOCALIZED_STRING_SIZE);
@@ -46,6 +51,11 @@ void load_stings(HINSTANCE source) {
     wrt::load_string(source, ERROR_WRT, error_wrt, MAX_LOCALIZED_STRING_SIZE);
     wrt::load_string(source, ERROR_UPDATE, error_update, MAX_LOCALIZED_STRING_SIZE);
     wrt::load_string(source, ERROR_RECEIVE, error_receive, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, LAUNCHER_APP_LOCK_ERROR_FMT, launcher_app_lock_error_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, NEW_VERSION_FMT, new_version_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, INSTALLING_FMT, installing_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, UPDATE_REBOOT_FMT, update_reboot_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, UPDATE_MANUAL_HINT, update_manual_hint, MAX_LOCALIZED_STRING_SIZE);
 }
 
 int load_localized_strings() {

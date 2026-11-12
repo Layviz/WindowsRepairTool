@@ -32,6 +32,23 @@
 #define HOUR_STR                        127
 #define DAYS_STR                        128
 #define ABORT_MSG                       129
+#define APP_LOCK_ERROR_FMT              130
+#define PENDING_CHECK_ERROR_FMT         131
+#define DISM_SKIPPED_NOTE               132
+#define INVALID_SELECTION               133
+#define USAGE_TEXT                      134
+#define STEP_STATUS_FMT                 135
+#define STEP_PROGRESS_FMT               136
+#define STEP_DONE_FMT                   137
+#define STEP_FAILED_FMT                 138
+#define STEP_SKIPPED_FMT                139
+#define SUMMARY_FMT                     140
+#define REBOOT_HINT                     141
+#define CONFIRM_HINT                    142
+#define CONFIRM_CLEANUP                 143
+#define CONFIRM_SURFACE_SCAN            144
+#define CONFIRM_OFFLINE_REPAIR          145
+#define HELP_BATCH_HINT                 146
 #define CONSOLE_CODEPAGE                1000
 
 // Next default values for new objects

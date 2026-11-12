@@ -32,6 +32,23 @@ wchar_t minutes_str[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t hours_str[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t days_str[MAX_LOCALIZED_STRING_SIZE] = {};
 wchar_t abort_msg[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t app_lock_error_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t pending_check_error_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t dism_skipped_note[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t invalid_selection[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t usage_text[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t step_status_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t step_progress_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t step_done_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t step_failed_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t step_skipped_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t summary_fmt[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t reboot_hint[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t confirm_hint[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t confirm_cleanup[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t confirm_surface_scan[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t confirm_offline_repair[MAX_LOCALIZED_STRING_SIZE] = {};
+wchar_t help_batch_hint[MAX_LOCALIZED_STRING_SIZE] = {};
 
 void load_stings(HINSTANCE source) {
     wrt::load_string(source, MUTEX_WARN, mutex_warn, MAX_LOCALIZED_STRING_SIZE);
@@ -62,6 +79,23 @@ void load_stings(HINSTANCE source) {
     wrt::load_string(source, HOUR_STR, hours_str, MAX_LOCALIZED_STRING_SIZE);
     wrt::load_string(source, DAYS_STR, days_str, MAX_LOCALIZED_STRING_SIZE);
     wrt::load_string(source, ABORT_MSG, abort_msg, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, APP_LOCK_ERROR_FMT, app_lock_error_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, PENDING_CHECK_ERROR_FMT, pending_check_error_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, DISM_SKIPPED_NOTE, dism_skipped_note, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, INVALID_SELECTION, invalid_selection, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, USAGE_TEXT, usage_text, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, STEP_STATUS_FMT, step_status_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, STEP_PROGRESS_FMT, step_progress_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, STEP_DONE_FMT, step_done_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, STEP_FAILED_FMT, step_failed_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, STEP_SKIPPED_FMT, step_skipped_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, SUMMARY_FMT, summary_fmt, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, REBOOT_HINT, reboot_hint, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, CONFIRM_HINT, confirm_hint, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, CONFIRM_CLEANUP, confirm_cleanup, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, CONFIRM_SURFACE_SCAN, confirm_surface_scan, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, CONFIRM_OFFLINE_REPAIR, confirm_offline_repair, MAX_LOCALIZED_STRING_SIZE);
+    wrt::load_string(source, HELP_BATCH_HINT, help_batch_hint, MAX_LOCALIZED_STRING_SIZE);
 }
 
 int load_localized_strings() {

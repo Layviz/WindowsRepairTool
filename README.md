@@ -23,6 +23,27 @@ available; MSI packaging also requires Visual Studio Installer Projects.
 - Each step reports failures/exit codes; failed silent steps show the final 8 KiB
   of output. Ctrl+C requests stopping after the active step, without forcibly
   terminating the repair process.
+- Silent steps draw one in-place status line, `(step/total) program arguments`,
+  and update it with the repair tool's progress percentage when its output
+  contains one. Verbose mode and offline CHKDSK stream to their own lines
+  instead.
+- Progress parsing retains percentages split between output chunks. Status lines
+  are clipped to the console width, and QuickEdit is disabled while WRT is open
+  so selecting text cannot pause a repair's output. Previous console modes are
+  restored on exit. Colors are enabled only on compatible console outputs.
+- Verbose steps show the executable name, start/end timestamps and elapsed
+  seconds, including durations above one second. SFC restart messages (English
+  and German) and Windows servicing/update reboot markers produce a visible
+  restart warning. Unknown localized SFC messages may not be recognized.
+- Classic console windows are centered and restored after updates. Taskbar
+  progress and desktop start/finish notifications are best-effort: Windows
+  Terminal, shell policies or notification settings may suppress them. WRT
+  never moves the Windows Terminal host window. Notifications run separately
+  from repairs; closing WRT may wait briefly for the final notification.
+- Every repair session appends to `%ProgramData%\WRT\logs\WRT.log`: timestamped
+  step lines, exit codes and the diagnostic tail of failed steps. The log is
+  best-effort — a missing or unwritable file disables it, repairs never depend
+  on it.
 - Append `+` or `-` to a mode to override verbose output (`1+`, `2-`). Enter `+` or
   `-` alone to change the default. Invalid trailing input is rejected.
 - Programs use absolute executable paths and no command shell. Language DLLs
@@ -32,6 +53,10 @@ available; MSI packaging also requires Visual Studio Installer Projects.
 The batch scripts are shortcuts to the same `WRT.exe` implementation; they are
 no longer independent copies of the repair commands. They require installed
 binaries and the same administrator permissions and confirmations.
+The launcher recreates missing shortcuts without overwriting existing scripts.
+Windows versions before 10, non-x64 systems/builds and Wine are rejected before
+updates or repairs. Starting a second instance offers Retry/Cancel rather than
+leaving another console open or terminating an active repair.
 
 ## Updates
 
@@ -42,6 +67,9 @@ launcher and MSI must be signed with the same trusted certificate.** Unsigned
 development builds still run repairs, but cannot automatically install downloads;
 use [manual releases](https://github.com/Layviz/WindowsRepairTool/releases).
 Certificate rotation currently requires a manual update.
+The launcher always prints a manual-download link: the validated MSI asset when
+available, otherwise the latest-release page. The update menu also offers an
+explicit manual-download choice. Failed automatic updates retain this link.
 
 Downloaded installers use a unique, administrator/SYSTEM-only directory under
 ProgramData. Only that download is cleaned up, never unrelated MSI files.
@@ -49,6 +77,25 @@ Updates run `msiexec /i` without a separate uninstall, keeping Windows Installer
 upgrade/rollback handling. Release maintainers must retain the MSI UpgradeCode
 and generate appropriate ProductCode/PackageCode values for new versions. Signing
 and MSI release packaging are not performed by the test workflow.
+
+Release maintainers can sign with a trusted code-signing certificate already in
+the Windows certificate store and the Windows SDK's `signtool.exe` on `PATH`:
+
+```powershell
+# Set $thumbprint to your own certificate's thumbprint; never commit private keys.
+./Setup/Sign-Release.ps1 -Thumbprint $thumbprint -Files @(
+  'x64/Release/WRT.exe', 'x64/Release/WRTLauncher.exe', 'x64/Release/de.dll')
+# Build the MSI with Visual Studio Installer Projects, then sign that MSI:
+./Setup/Sign-Release.ps1 -Thumbprint $thumbprint -Files 'Setup/Release/Setup.msi'
+```
+
+The script uses SHA-256 signatures and RFC 3161 timestamps, and verifies the
+trusted signer against the selected certificate. Use the same certificate for
+both invocations. No signing certificate is included in this repository.
+Legacy MSI upgrade compatibility (#34) still needs an installation/upgrade test
+on Windows with version 1.2.4; the shared UpgradeCode must not be changed as a
+workaround. WRT does not delete `WinSxS/pending.xml` (#32): a persistent servicing
+failure needs diagnosis/recovery, not removal of Windows' transaction state.
 
 ## Build and test
 
@@ -71,9 +118,15 @@ ctest --test-dir build --output-on-failure
 
 Tests cover input, verbosity, narrow consoles, locale mapping, Windows argument
 quoting, version parsing, bounded/chunked output, UTF-16 decoding, repair profiles,
-exit-code interpretation, asset validation and failed/partial update transfers.
+exit-code interpretation, progress parsing and in-place redraws, format strings,
+asset validation and failed/partial update transfers. Issue regressions cover
+split percentages, process durations, affirmative SFC restart messages, console
+clipping, platform checks, manual links and regenerated shortcut consistency.
 Windows tests launch only harmless fixture executables/DLLs to check binary output,
-pipe draining, EOF, process errors, quoting and DLL/CWD isolation. **Tests never run
+pipe draining, EOF, process errors, quoting, DLL/CWD isolation and session logging.
+They also verify missing-shortcut recovery, preservation of customized scripts,
+English/German issue resources and restoration of console input modes.
+**Tests never run
 repairs, download releases, invoke MSI or reboot the machine.** GitHub Actions builds
 and tests Windows Debug/Release plus Linux sanitizers.
 

@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Windows Reparatur.rc" />
+    <ResourceCompile Include="..\Shared\issue_resources.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\wrench.ico" />

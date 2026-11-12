@@ -13,6 +13,9 @@ jobs:
       - run: cmake -S . -B build -A x64
       - run: cmake --build build --config ${{ matrix.configuration }} --parallel
       - run: ctest --test-dir build -C ${{ matrix.configuration }} --output-on-failure
+      - name: Check signing script (no signing)
+        shell: pwsh
+        run: ./tests/signing_tests.ps1
       # Check the original Visual Studio projects too; MSI packaging needs the
       # separate Visual Studio Installer Projects extension and is not run here.
       - uses: microsoft/setup-msbuild@v2

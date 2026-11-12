@@ -17,6 +17,11 @@ int main() {
     for (int i = 0; i < argc; ++i) arguments.emplace_back(argv[i]);
     LocalFree(argv);
     if (arguments.size() < 2) return 100;
+    if (arguments[1] == L"--expect-minimized") {
+        STARTUPINFOW startup{};
+        GetStartupInfoW(&startup);
+        return (startup.dwFlags & STARTF_USESHOWWINDOW) && startup.wShowWindow == SW_SHOWMINNOACTIVE ? 0 : 100;
+    }
     if (arguments[1] == L"--emit") {
         std::string bytes(512, 'A');
         bytes[256] = '\0';
