@@ -1,58 +1,92 @@
 # Windows Repair Tool
 
-The "Windows Repair Tool" (WRT) is designed to make it easier for you to get your Windows up and running again. The Windows Repair Tool uses Windows programs that are designed to check Windows for errors and fix them. The following commands are used for this:
-- defrag C: /O /H
-- defrag /c /o /h /m
-- sfc /scannow
-- "%ProgramFiles%\Windows Defender\mpcmdrun.exe" -Scan -ScanType 1
-- "%ProgramFiles%\Windows Defender\mpcmdrun.exe" -Scan -ScanType 2
-- dism /online /cleanup-image /CheckHealth
-- dism /online /cleanup-image /ScanHealth
-- dism /online /cleanup-image /RestoreHealth
-- chkdsk C: /scan /perf
-- chkdsk C: /scan /perf /i
-- chkdsk C: /scan /perf /f /r /x /b
-- chkdsk C: /f /x /spotfix /sdcleanup
+A Windows 10/11 x64 console application that runs Windows' built-in repair tools.
+Build with Visual Studio 2022 (Desktop development with C++, Windows SDK) or CMake
+and a Windows C++17 toolchain. The existing solution and MSI setup project remain
+available; MSI packaging also requires Visual Studio Installer Projects.
 
-Please note that the system partition must have the drive letter "C:". Otherwise the program is not compatible.
+## Repairs and safety
 
-## Download Link for the tool:
+- Simple, Standard and Extended modes use SFC, DISM, CHKDSK, Defender and drive
+  optimization. The Windows system drive is detected instead of assuming `C:`.
+- Cleanup is optional and asks for confirmation. Standard/Extended cleanup can
+  permanently empty the Recycle Bin on **all drives** using the MSI-configured
+  `cleanmgr` profiles (151/152/153). Without those profiles, cleanup depends on the
+  machine's existing configuration; a CMake build does not import `cleanmgr.reg`.
+- Full surface scans and offline disk repair require separate confirmation.
+  Back up important data first. Offline CHKDSK uses its own console prompt; a
+  reboot check is scheduled only when Windows confirms it. Scheduling is never
+  inferred solely from the process exit code.
+- If Windows servicing is pending, the user can restart or continue with DISM
+  steps skipped. This check uses `WinSxS/pending.xml`, not every possible Windows
+  reboot indicator.
+- Each step reports failures/exit codes; failed silent steps show the final 8 KiB
+  of output. Ctrl+C requests stopping after the active step, without forcibly
+  terminating the repair process.
+- Append `+` or `-` to a mode to override verbose output (`1+`, `2-`). Enter `+` or
+  `-` alone to change the default. Invalid trailing input is rejected.
+- Programs use absolute executable paths and no command shell. Language DLLs
+  are loaded from the installation's `locale` directory **as resources**, without
+  executing DLL initialization code. Missing translations fall back to English.
 
-[Newest WRT version](https://github.com/Layviz/WindowsRepairTool/releases/download/v1.4.3/WRT_Installer-Version1.4.3.msi)
+The batch scripts are shortcuts to the same `WRT.exe` implementation; they are
+no longer independent copies of the repair commands. They require installed
+binaries and the same administrator permissions and confirmations.
 
+## Updates
 
-# Windows Reparatur Tool
+The launcher checks GitHub over HTTPS with timeouts, bounded downloads and HTTP
+status checking. It selects an unambiguous MSI asset from this repository's
+release, validates its exact byte count and checks Authenticode trust. **Both the
+launcher and MSI must be signed with the same trusted certificate.** Unsigned
+development builds still run repairs, but cannot automatically install downloads;
+use [manual releases](https://github.com/Layviz/WindowsRepairTool/releases).
+Certificate rotation currently requires a manual update.
 
-Das "Windows Reparatur Tool" (WRT) ist für eine erleichterte Bedienung gedacht, um sein Windows wieder auf Vordermann zu bringen. Das Windows Reparatur Tool nutzt Windows Programme die dafür gedacht sind, Windows auf Fehler zu überprüfen und diese zu beheben. Es werden folgende Befehle dafür genutzt:
-- defrag C: /o /h
-- defrag /c /o /h /m
-- sfc /scannow
-- "%ProgramFiles%\Windows Defender\mpcmdrun.exe" -Scan -ScanType 1
-- "%ProgramFiles%\Windows Defender\mpcmdrun.exe" -Scan -ScanType 2
-- dism /online /cleanup-image /CheckHealth
-- dism /online /cleanup-image /ScanHealth
-- dism /online /cleanup-image /RestoreHealth
-- chkdsk C: /scan /perf
-- chkdsk C: /scan /perf /i
-- chkdsk C: /scan /perf /f /r /x /b
-- chkdsk C: /f /x /spotfix /sdcleanup
-- cleanmgr /sagerun:151
-- cleanmgr /sagerun:152
-- cleanmgr /sagerun:153 
+Downloaded installers use a unique, administrator/SYSTEM-only directory under
+ProgramData. Only that download is cleaned up, never unrelated MSI files.
+Updates run `msiexec /i` without a separate uninstall, keeping Windows Installer's
+upgrade/rollback handling. Release maintainers must retain the MSI UpgradeCode
+and generate appropriate ProductCode/PackageCode values for new versions. Signing
+and MSI release packaging are not performed by the test workflow.
 
-cleanmgr nutzt durch den Setup vorab konfigurierte Datenträgerbereinigungseinstellungen. Dazu gehören:
-- Temporäre Dateien
-- Temporäre Internetdateien
-- Direct X-Shadercache
-- Dateien für die Übermittlungsoptimierung
-- Papierkorb
-- Windows-Fehlerberichte und Feedback-Diagnose
-- Temporay Setup Files
-- Microsoft Defender Antivirus
-- Miniaturansichten
+## Build and test
 
-Zu beachten ist, dass die System-Partition den Laufwerksbuchstaben "C:" haben muss, Win 10 Oder 11 als x64 sein muss. Sonst ist das Programm nicht kompatibel.
+```powershell
+cmake -S . -B build -A x64
+cmake --build build --config Release --parallel
+ctest --test-dir build -C Release --output-on-failure
+```
 
-## Download Link zum Tool:
+The CMake output layout is `build/package/Release/{Binaries,locale,Batch scripts}`.
+The Visual Studio solution's output layout is unchanged.
 
-[Neuste WRT Version](https://github.com/Layviz/WindowsRepairTool/releases/download/v1.4.3/WRT_Installer-Version1.4.3.msi)
+Portable unit tests also run on Linux, including address/undefined-behavior checks:
+
+```sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DWRT_SANITIZERS=ON
+cmake --build build --parallel
+ctest --test-dir build --output-on-failure
+```
+
+Tests cover input, verbosity, narrow consoles, locale mapping, Windows argument
+quoting, version parsing, bounded/chunked output, UTF-16 decoding, repair profiles,
+exit-code interpretation, asset validation and failed/partial update transfers.
+Windows tests launch only harmless fixture executables/DLLs to check binary output,
+pipe draining, EOF, process errors, quoting and DLL/CWD isolation. **Tests never run
+repairs, download releases, invoke MSI or reboot the machine.** GitHub Actions builds
+and tests Windows Debug/Release plus Linux sanitizers.
+
+## Deutsch
+
+Das Windows Reparatur Tool führt Windows-Bordmittel aus. Bereinigung,
+vollständige Datenträgerprüfung und Offline-Reparatur müssen separat bestätigt
+werden; die Bereinigung kann den Papierkorb aller Laufwerke unwiderruflich leeren.
+Vor Datenträgerreparaturen wichtige Daten sichern. Fehler und Exitcodes werden
+angezeigt, und das Windows-Systemlaufwerk wird automatisch erkannt.
+
+Die Batchdateien starten dieselbe Anwendung statt eigene Befehlslisten.
+Automatische Updates benötigen einen vertrauenswürdig signierten Launcher und
+Installer mit demselben Zertifikat; unsignierte Builds werden manuell aktualisiert.
+Build- und Testbefehle stehen oben. Unit-Tests und Windows-Testprogramme führen
+keine echten Reparaturen, Downloads, Installationen oder Neustarts aus.

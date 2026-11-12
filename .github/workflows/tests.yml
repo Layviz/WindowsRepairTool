@@ -1,0 +1,31 @@
+name: Build and test
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -S . -B build -A x64
+      - run: cmake --build build --config ${{ matrix.configuration }} --parallel
+      - run: ctest --test-dir build -C ${{ matrix.configuration }} --output-on-failure
+      # Check the original Visual Studio projects too; MSI packaging needs the
+      # separate Visual Studio Installer Projects extension and is not run here.
+      - uses: microsoft/setup-msbuild@v2
+      - shell: pwsh
+        run: |
+          msbuild "Windows Reparatur/Windows Reparatur.vcxproj" /p:Configuration=${{ matrix.configuration }} /p:Platform=x64
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          msbuild "WRTLauncher/WRTLauncher.vcxproj" /p:Configuration=${{ matrix.configuration }} /p:Platform=x64
+          exit $LASTEXITCODE
+  sanitizers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DWRT_SANITIZERS=ON
+      - run: cmake --build build --parallel
+      - run: ctest --test-dir build --output-on-failure

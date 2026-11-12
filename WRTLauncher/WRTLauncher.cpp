@@ -1,344 +1,76 @@
-#include <iostream>
-#include <Windows.h>
-#include <winhttp.h>
-#include "json.hpp"
-#include <sstream> 
+#include "../Shared/windows_update.h"
 #include "../version.h"
-#include <codecvt>
-#include <fstream>
-#include <errno.h>
-#include <string.h>
 #include "localization.h"
-#include <locale> 
-#include <codecvt>
-#include <PathCch.h>
-
-#pragma comment(lib, "winhttp.lib")
+#include <iostream>
 
 using namespace std;
 using json = nlohmann::json;
 
-/**
- * @brief Globale Varibale für Informationen über die aktuellste Version.
-*/
-json latest_verion_info;
-wstring blank_line(80, L' ');//80 spaces should be enough to overwrite everthing
-
-/**
- * @brief Prüft ob auf Github eine neuere Version des WRT verfügbar ist. Speichert Infos in latest_version_info.
- * @return 1 wenn eine neue Version verfügbar ist, 0 wenn die Version aktuell ist, -1 bei Fehlern
-*/
-int check_for_updates() {
-    HINTERNET session = 0, connection = 0, request = 0;
-
-    DWORD size = 0, read = 0;
-    session = WinHttpOpen(L"WRT 1.3.0", WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY, WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, NULL); // winhttp session öffnen
-    if (session) {
-        connection = WinHttpConnect(session, L"api.github.com", INTERNET_DEFAULT_HTTPS_PORT, NULL); //mit github api verbinden
-    }
-    else {
-        wcerr << L" " << error_seesion << endl;
-        return -1;
-    }
-    if (connection) {
-        // api request um das latest release zu bekommen
-        request = WinHttpOpenRequest(connection, L"GET", L"repos/Layviz/WindowsRepairTool/releases/latest", 0, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES, WINHTTP_FLAG_SECURE);
-    }
-    else {
-        wcerr << L" " << error_connection << endl;
-        return -1;
-    }
-    // request schicken
-    BOOL resp = WinHttpSendRequest(request, WINHTTP_NO_ADDITIONAL_HEADERS, 0, WINHTTP_NO_REQUEST_DATA, 0, 0, 0);
-    if (resp) {
-        resp = WinHttpReceiveResponse(request, NULL); // Antwort abwarten
-    }
-    else
-    {
-        wcerr << L" " << error_request << endl;
-        return -1;
-    }
-    if (resp) {
-        // stringstream um die komplette Antwort darin abzuspeichern
-        stringstream sstr = stringstream();
-
-        // über Schleife den stream mit Daten aus der Antwort füllen.
-        WinHttpQueryDataAvailable(request, &size);
-        while (size > 0) {
-            char* buffer = 0;
-            buffer = new char[size + 1];
-            memset(buffer, 0, size + 1);
-            if (!buffer) {
-                wcerr << L" " << error_memory << endl;
-                return -1;
-            }
-            if (!WinHttpReadData(request, buffer, size, &read)) {
-                wcerr << L" " << error_read << endl;
-                return -1;
-            }
-            sstr << buffer;
-
-            delete[] buffer;
-            WinHttpQueryDataAvailable(request, &size);
-        }
-
-        string resp_str = sstr.str();
-
-        string version_str = "";
-        try { // json parsen und Version auslesen
-            latest_verion_info = json::parse(resp_str);
-            if (latest_verion_info.contains("tag_name")) {
-                version_str = latest_verion_info["tag_name"];
-            }
-        }
-        catch (json::exception& e) {
-            cerr << "Json Exception" << endl << "message: " << e.what() << endl << "id " << e.id << endl;
-        }
-
-        if (!version_str.empty()) {
-            // Version aufspliten in Major, Minor und Patch Version
-            if ('v' == version_str[0]) {
-                version_str = version_str.substr(1);
-            }
-            size_t dot1 = version_str.find('.');
-            size_t dot2 = version_str.find('.', dot1 + 1);
-            string major_str = version_str.substr(0, dot1);
-            string minor_str = version_str.substr(dot1 + 1, dot2 - (dot1 + 1));
-            string patch_str = version_str.substr(dot2 + 1);
-
-            int major = stoi(major_str);
-            int minor = stoi(minor_str);
-            int patch = stoi(patch_str);
-            unsigned int version = VERSION(major, minor, patch);
-
-            // entsprechende Antwort ausgeben
-            if (CURRENT_VERSION < version) {
-                wprintf(L"%i < %i\r\n", CURRENT_VERSION, version);
-                wchar_t version_found_str[1024] = {};
-                swprintf(version_found_str, 1024, version_found_fmt, major,minor,patch, VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
-                wcout << L" " << version_found_str << endl;
-                return 1;
-            }
-            else if (CURRENT_VERSION == version) {
-                wcout << L" " << version_up_to_date << endl;
-                return 0;
-            }
-            else {
-                wcout << L" " << version_ahead << endl;
-                return 0;
-            }
-        }
-        else {
-            wcerr << version_unknown << endl << endl;
-        }
-    }
-    wcerr << error_receive << endl;
-    return -1;
-}
-
-/**
- * @brief Lädt den Installer für die aktuellste Verion herunter und startet den Installer
- * @return -1 bei Fehlern, 0 wenn der Installer gestartet wurde.
-*/
-int download_installer(string *downloaded_file) {
-    HINTERNET session = 0, connection = 0, request = 0;
-    DWORD size = 0, read = 0, total = 0;
-
-    session = WinHttpOpen(L"WRT 1.3.0", WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY, WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, NULL);
-    if (session) {
-        connection = WinHttpConnect(session, L"github.com", INTERNET_DEFAULT_HTTPS_PORT, NULL);
-    }
-    else {
-        wcerr << L" " << error_seesion << endl;
-        return -1;
-    }
-    string request_path;
-    string file_name;
-    try
-    {
-        string download_url;
-        auto asset = latest_verion_info["assets"][0];
-        file_name = asset["name"];
-        if (file_name.compare(file_name.length() - 4, 4, ".msi") == 0) {
-            download_url = asset["browser_download_url"];
-            size_t pos = 0;
-            for (int i = 0; i < 3; i++) {
-                pos = download_url.find('/', pos+1);
-            }
-            request_path = download_url.substr(pos);
-        }
-        else
-        {
-            wcerr << L" " << error_download_url << endl;
-            return -1;
-        }
-        
-    }
-    catch (json::exception& e) {
-        cerr << "Json Exception" << endl << "message: " << e.what() << endl << "id " << e.id << endl;
-        return -1;
-    }
-    if (connection) {
-        wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
-        wstring temp = converter.from_bytes(request_path);
-        //cout << "request " << request_path << endl;
-        request = WinHttpOpenRequest(connection, L"GET", temp.c_str(), 0, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES, WINHTTP_FLAG_SECURE);
-    }
-    else {
-        wcerr << L" "<<error_connection<<endl;
-        return -1;
-    }
-    BOOL resp = WinHttpSendRequest(request, WINHTTP_NO_ADDITIONAL_HEADERS, 0, WINHTTP_NO_REQUEST_DATA, 0, 0, 0);
-    if (resp) {
-        resp = WinHttpReceiveResponse(request, NULL);
-    }
-    else
-    {
-        wcerr << L" " << error_request << endl;
-        return -1;
-    }
-    if (resp) {
-        
-        ofstream file;
-        file.open(file_name, ios::out | ios::binary | ios::trunc);
-
-        WinHttpQueryDataAvailable(request, &size);
-        while (size > 0) {
-            char* buffer = 0;
-            buffer = new char[size + 1];
-            memset(buffer, 0, size + 1);
-            if (!buffer) {
-                wcerr << L" " << error_memory << endl;
-                return -1;
-            }
-            if (!WinHttpReadData(request, buffer, size, &read)) {
-                wcerr << L" " << error_read << endl;
-                return -1;
-            }
-            file.write(buffer, read);
-            total += read;
-            wcout << blank_line << L"\r " << total << bytes_read << L"\r";
-            delete[] buffer;
-            WinHttpQueryDataAvailable(request, &size);
-        }
-        file.close();
-
-        *downloaded_file = file_name;
-        return 0;
-    }
-    wcerr << error_receive << endl;
-    return -1;
-}
-
-string get_exe_dir() {
-    TCHAR buffer[MAX_PATH] = { 0 };
-    GetModuleFileName(NULL, buffer, MAX_PATH);
-    if (S_OK == PathCchRemoveFileSpec(buffer, MAX_PATH)) {
-        if (S_OK == PathCchRemoveFileSpec(buffer, MAX_PATH)) {
-
-            using convert_typeX = std::codecvt_utf8<wchar_t>;
-            std::wstring_convert<convert_typeX, wchar_t> converterX;
-
-            return converterX.to_bytes(buffer);
-        }
-    }
-    return "";
-}
-
-int installation(string installer_file) {
-    string install_dir = get_exe_dir();
-    
-    string cmd = "start \"WRT Update\" /MIN /HIGH cmd /C \"C:\\Windows\\System32\\msiexec.exe /x ";
-    cmd.append(PRODUCT_CODE);
-    cmd.append(" /passive");
-
-    cmd.append(" & ");
-
-    cmd.append(installer_file);
-    cmd.append(" TARGETDIR=\"");
-    cmd.append(install_dir);
-    cmd.append("\" /passive");
-    cmd.append(" && start \"\" /MIN /HIGH \"");
-    cmd.append(install_dir);
-    cmd.append("\\Binaries\\WRTLauncher.exe\"\"");
-    wcout << endl << L" " << installer_start << endl;
-
-    system(cmd.c_str());
-    return 0;
-}
-
-void cleanup_msi_files() {
-    string install_dir = get_exe_dir();
-    string cmd = "DEL / F / Q \"";
-    cmd.append(install_dir);
-    cmd.append("\\*.msi\" 2> nul");
-#if DEBUG
-    cout << cmd << endl;
-#endif
-    system(cmd.c_str());
-}
-
-int main()
-{
-    if (!SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS)) {
-        // ignore this, not much to do about it
-    }
-
+namespace {
+int run() {
     load_localized_strings();
-    //Check for mutex
-    HANDLE mutex = CreateMutex(NULL, false, L"Local\\WRT");
-    if (GetLastError() == ERROR_ALREADY_EXISTS) {
-        wcerr << L" " << mutex_warn << endl;
-        cin.get();
-        return -1;
-    }
-    int update_available = check_for_updates();
-    // abfragen, ob man jetzt updaten, später oder beenden
-    if (update_available > 0) {
-        
-        while (1) {
-            wcout << L" " << install_query << endl;
-            wcout << L" " << install_mode1 << endl;
-            wcout << L" " << install_mode2 << endl;
-            wcout << L" " << install_mode3 << endl << " ";
+    wrt::unique_handle mutex(CreateMutexW(nullptr, FALSE, L"Local\\WRT"));
+    const DWORD mutex_error = GetLastError();
+    if (!mutex) { wcerr << L"Cannot create application lock: " << mutex_error << endl; return 1; }
+    if (mutex_error == ERROR_ALREADY_EXISTS) { wcerr << mutex_warn << endl; return 1; }
+    const auto root = wrt::install_directory();
+    string response;
+    const bool received = wrt::http_get(L"api.github.com", L"/repos/Layviz/WindowsRepairTool/releases/latest",
+        [&](string_view bytes) { response.append(bytes.data(), bytes.size()); return true; }, 1024 * 1024);
+    optional<wrt::release_asset> asset;
+    if (received) {
+        const auto release = json::parse(response, nullptr, false);
+        if (release.is_object() && release.contains("tag_name") && release["tag_name"].is_string()) {
+            const auto version = wrt::parse_version(release["tag_name"].get<string>());
+            if (version && version->packed() > CURRENT_VERSION) {
+                asset = wrt::installer_asset(release);
+                if (!asset) wcerr << error_download_url << endl;
+                else wcout << L"New version: " << version->major << L"." << version->minor << L"." << version->patch << endl;
+            } else if (version) wcout << (version->packed() == CURRENT_VERSION ? version_up_to_date : version_ahead) << endl;
+            else wcerr << version_unknown << endl;
+        } else wcerr << version_unknown << endl;
+    } else wcerr << error_receive << endl;
 
-            int auswahl = 0;
-            char input[3];
-            std::cin.get(input, 3);
-            if (input[1] == 0) {
-                std::cin.ignore(INT16_MAX, '\n');
-                auswahl = input[0] - 48;
-            }
-            if (1 == auswahl) {
-                string* installer=new string;
-                download_installer(installer);
-                if (installer) {
-                    installation(*installer);
-                    return 0;
-                }
-                else {
-                    wcout << L" " << error_update << endl;
-                    char input[3];
-                    std::cin.get(input, 3);
-                    return -1;
-                }
-            }
-            else if (2 == auswahl) {
-                break;
-            }
-            else {
+    if (asset) {
+        wcout << install_query << endl << install_mode1 << endl << install_mode2 << endl << install_mode3 << endl;
+        string input;
+        if (!getline(cin, input) || input == "3") return 0;
+        if (input == "1") {
+            // Fail closed for unsigned builds before downloading anything.
+            const auto publisher = wrt::trusted_signer(wrt::module_path());
+            wrt::installer_download download;
+            wrt::process_result installed;
+            const bool success = !publisher.empty() && wrt::perform_update(
+                [&] { return download.download(*asset); },
+                [&] { return wrt::trusted_signer(download.file()) == publisher; },
+                [&] {
+                    const auto arguments = wrt::installer_arguments(download.file().wstring(), root.wstring());
+                    wcout << L"Installing verified update (no separate uninstall)." << endl;
+                    installed = wrt::run_attached(wrt::system_program(L"msiexec.exe"), arguments);
+                    return installed.completed && !installed.error && wrt::successful_install_exit(installed.exit_code);
+                });
+            if (!success) {
+                wcerr << error_update << endl
+                    << L"The existing installation was not explicitly uninstalled. Automatic updates require a trusted signature using the launcher's signing certificate."
+                    << endl << L"For unsigned builds, install a release manually from https://github.com/Layviz/WindowsRepairTool/releases ." << endl;
+                // A failed update must not prevent access to the installed repair tool.
+            } else if (installed.exit_code != 0) {
+                wcout << L"Update installed; Windows requires a restart (exit code " << installed.exit_code << L")." << endl;
                 return 0;
             }
-        }
+        } else if (input != "2") return 0;
     }
-    cleanup_msi_files();
-    CloseHandle(mutex);
-    int wrt = system("Binaries\\WRT.exe");
-    if (wrt < 0) {
-        char errorbuffer[94];
-        strerror_s(errorbuffer, 0);
-        wcerr << L" " << error_wrt << errorbuffer << endl;
-        char dummy;
-        cin.get(&dummy, 1);
+    mutex.reset();
+    const auto result = wrt::run_attached(root / L"Binaries" / L"WRT.exe", L"", root);
+    if (!result.started || !result.completed || result.error) {
+        wcerr << error_wrt << L"Windows error " << result.error << endl;
+        return 1;
     }
+    return static_cast<int>(result.exit_code);
+}
+} // namespace
+
+int main() {
+    try { return run(); }
+    catch (const exception& error) { cerr << "Launcher error: " << error.what() << endl; return 1; }
 }
