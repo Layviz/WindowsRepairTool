@@ -352,3 +352,8 @@ MigrationBackup/
 # CMake out-of-source builds
 /build/
 /build-*/
+
+# Nix build outputs and optional direnv state
+/result
+/result-*
+/.direnv/

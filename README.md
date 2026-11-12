@@ -77,6 +77,45 @@ pipe draining, EOF, process errors, quoting and DLL/CWD isolation. **Tests never
 repairs, download releases, invoke MSI or reboot the machine.** GitHub Actions builds
 and tests Windows Debug/Release plus Linux sanitizers.
 
+### Nix (Linux)
+
+The flake supports x86_64 and aarch64 Linux hosts. Its locked nixpkgs input
+provides the compiler, CMake and Ninja without machine-specific store paths.
+
+```sh
+nix develop
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DWRT_SANITIZERS=ON
+cmake --build build --parallel
+ctest --test-dir build --output-on-failure
+```
+
+Cross-compile the Windows x64 application, German locale and batch shortcuts:
+
+```sh
+nix build .#windows  # also the default: nix build
+```
+
+`result/` contains `Binaries/`, `locale/` and `Batch scripts/`, including the
+MinGW runtime DLLs next to the executables. Copy the entire directory to Windows;
+this does not create an MSI, configure cleanup profiles or sign the executables.
+MSI packaging still requires Visual Studio Installer Projects.
+
+For an interactive MinGW environment, use a separate CMake build directory:
+
+```sh
+nix develop .#windows
+cmake -S . -B build-windows -G Ninja -DCMAKE_SYSTEM_NAME=Windows \
+  -DCMAKE_CXX_COMPILER="$CXX" -DCMAKE_RC_COMPILER=x86_64-w64-mingw32-windres \
+  -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
+cmake --build build-windows --parallel
+```
+
+The interactive build writes to `build-windows/package/Release/`; unlike
+`nix build`, it does not copy the runtime DLLs into that directory.
+`nix flake check` runs the portable Release and ASan/UBSan suites and builds the
+Windows package without executing it. Leak detection alone is disabled inside
+the sandbox; no repairs, installers or reboots are run.
+
 ## Deutsch
 
 Das Windows Reparatur Tool führt Windows-Bordmittel aus. Bereinigung,
