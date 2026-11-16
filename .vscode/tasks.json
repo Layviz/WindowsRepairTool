@@ -1,0 +1,48 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "WRT: Build Debug (x64)",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}\\scripts\\build.ps1",
+                "-Configuration", "Debug"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": "$msCompile",
+            "group": { "kind": "build", "isDefault": true }
+        },
+        {
+            "label": "WRT: Build Release (x64)",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}\\scripts\\build.ps1",
+                "-Configuration", "Release"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
+            "label": "WRT: Build Installer (Release x64)",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}\\scripts\\build.ps1",
+                "-Configuration", "Release",
+                "-Installer"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        }
+    ]
+}
